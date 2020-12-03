@@ -1,28 +1,47 @@
 {
-  "name": "muhc-ui",
-  "version": "1.0.0",
-  "description": "UI for MUHC Project",
-  "main": "index.js",
-  "scripts": {
-    "test": "nightwatch"
+  "name": "pbrn-ui",
+  "version": "0.1.0",
+  "description": "UI for PBRN Project",
+  "main": "src/index.js",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.1",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.2.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.0",
+    "web-vitals": "^0.2.4",
+    "react-router-dom": "^5.2.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MUHC-DP-Project/muhc-ui.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MUHC-DP-Project/muhc-ui/issues"
-  },
-  "homepage": "https://github.com/MUHC-DP-Project/muhc-ui#readme",
   "devDependencies": {
     "chromedriver": "^87.0.0",
     "geckodriver": "^1.20.0",
     "nightwatch": "^1.5.1"
   },
-  "dependencies": {
-    "react-router-dom": "^5.2.0"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "nightwatch",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
