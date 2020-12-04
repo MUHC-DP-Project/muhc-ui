@@ -1,10 +1,11 @@
 import '../css/Home.css'
 import TableComponent from '../component/TableComponent'
+import SearchComponent from '../component/SearchComponent'
 
 function Home() {
     return (
         <div className="Home">
-            We are at home
+             <SearchComponent/> 
             <TableComponent />
 
         </div>
