@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/MUHC-DP-Project/pbrn-ui.svg?branch=main)](https://travis-ci.com/MUHC-DP-Project/pbrn-ui)
+
 # pbrn-ui
 ## Purpose 
 
