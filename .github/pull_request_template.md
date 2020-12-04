@@ -2,6 +2,10 @@
 
 <!--- Describe your changes -->
 
+## Screenshot
+
+<!--- Please put a screenshot here, it is mandatory for UI PRs --->
+
 ## Related Issue
 
 <!--- This project only accepts pull requests related to open issues -->
