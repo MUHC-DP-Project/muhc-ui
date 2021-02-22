@@ -7,7 +7,8 @@ export class App extends Component {
     return (
       <Switch>
         <Layout>       
-            <Route path="/" exact component={Home}/>         
+            <Route path="/" exact component={Home}/> 
+                    
         </Layout>
         </Switch>
       
