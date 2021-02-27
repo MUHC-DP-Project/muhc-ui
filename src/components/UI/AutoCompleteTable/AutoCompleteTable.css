@@ -1,0 +1,31 @@
+.table{
+    margin-top: 10px;
+    border-style: solid;
+    border-color: #8f8f8a;
+    min-width: 850px;
+    min-height: 150px;
+    border-width: 1px;
+    border-radius: 4px;
+    
+}
+.table-element{
+    color: white;
+    border-style: solid;
+    border-color:  #30475e;
+    border-radius: 3px;
+    margin:5px !important; 
+    display: flex;
+    text-align: center;   
+    border-radius: 16px;  
+    display: inline-block;
+    border-width: 1px;
+    background-color: #f05454;
+    
+}
+.table-element:hover{
+    background-color: #f58a8a;
+    cursor: pointer;
+}
+.table-element p{
+    margin: 2px 3px;
+}
