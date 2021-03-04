@@ -11,11 +11,13 @@ function MUI_Select({
         touched,
         error
     },
+    select_style,
     menu_list,
     ...custom
 }) {
     return (
-        <FormControl error={touched && error} variant="outlined">
+
+        <FormControl style={select_style} error={touched && error} variant="outlined">
             <InputLabel>{label}</InputLabel>
             <Select            
                 {...input}
@@ -27,7 +29,6 @@ function MUI_Select({
                         : <MenuItem key={label+item} value={item}>{item}</MenuItem>
                 })}
             </Select>
-            {/* {renderFromHelper({touched, error})} */}
         </FormControl>
     )
 }

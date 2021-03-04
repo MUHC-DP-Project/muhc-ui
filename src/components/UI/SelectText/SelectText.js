@@ -30,7 +30,9 @@ function SelectText(props) {
                         onChange={event=>setSelect(event.target.value)}/>
                 </Grid>
                 <Grid item>
-                    {text_props != null
+                    {text_props != null && (select !== null && text_props
+                                    .options
+                                    .find(elem => elem.condition === select)!=null)
                         ? <Field
                                 component={MUI_TextField}
                                 validate={props.validate}

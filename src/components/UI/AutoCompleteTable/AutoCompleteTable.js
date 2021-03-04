@@ -7,18 +7,19 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from '@material-ui/core/IconButton';
 import {v4 as uuidv4} from 'uuid';
 
-import {Field, FieldArray} from 'redux-form';
+import {Field, FieldArray,change} from 'redux-form';
 import MUI_TextField from '../MaterialUI/MUI_TextField';
 function AutoCompleteTable(props) {
     const options = props.options;
     const text_field_name=props.text_field_name;
     const autocomplete_table_name=props.autocomplete_table_name;
     const inputEl = useRef(null);
+    const formName=props.formName;
     const [value,
         setValue] = React.useState('');
     const [optionList,
         setOptionList] = React.useState([]);
-
+    
 
     function handleChange(value, fields) {
         if (!optionList.includes(value) && value !== null && value !== "") {
@@ -37,6 +38,7 @@ function AutoCompleteTable(props) {
     const createElement = ({
         fields
     }) => {
+        
         return (
             <div>
                 <Grid
@@ -72,12 +74,14 @@ function AutoCompleteTable(props) {
                         />
                     </Grid>
                 </Grid>
+                
                 <Grid
                     className="table"
                     container
                     direction="row"
                     justify="flex-start"
                     alignItems="flex-start">
+                    <div className="sub-table">
                     {fields.getAll() && fields
                         .getAll()
                         .map((item, index) => {
@@ -91,16 +95,28 @@ function AutoCompleteTable(props) {
                                 </Grid>
                             );
                         })}
+                        </div>
                 </Grid>
-            </div>
+                </div>
+               
         );
     }
 
+    function required (value, allValues, props) {
+        if(value === undefined){
+            props.dispatch(change(formName, autocomplete_table_name, []));
+        }
+        if(!value || value===undefined)
+            return undefined;
+        else if(value.length!==0)
+            return undefined;
+        return 'Required';
+    }
 
+    
     return (
         <React.Fragment >
-            <FieldArray name={autocomplete_table_name} component={createElement}/>
-            
+            <FieldArray name={autocomplete_table_name} validate={required} component={createElement}/>          
         </React.Fragment>
     )
 }

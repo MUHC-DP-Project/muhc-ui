@@ -1,20 +1,15 @@
-import React, {useState, useMemo} from 'react';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import React, {useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 
 
 //Icons
 import Fab from '@material-ui/core/Fab';
 import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
-import {v4 as uuidv4} from 'uuid';
 
-import {Field, FieldArray} from 'redux-form';
+import {Field, FieldArray,change} from 'redux-form';
 import MUI_TextField from '../MaterialUI/MUI_TextField';
 import MUI_RadioButton from '../MaterialUI/MUI_RadioButton';
+import MUI_Select from '../MaterialUI/MUI_Select'
 function MultiTextRadio(props) {
     const list = props.list;
     const radio_list = props.radio_list;
@@ -25,11 +20,13 @@ function MultiTextRadio(props) {
     const select_style=props.style_select;
     const style_text=props.style_text;
     const component_name=props.component_name;
-    console.log(component_name);
+    const select_name=props.select_name;
+    const formName=props.formName;
     const [value,
         setValue] = useState('');
     const [listOfElem,
         setListOfElem] = useState([]);
+    const [blur, setblur] = useState(false)
     function handleChange(value,fields){
         console.log(value)
         if(!listOfElem.includes(value)){
@@ -44,20 +41,18 @@ function MultiTextRadio(props) {
         fields.remove(index);
         setListOfElem(listOfElem.filter(elem=>elem!==item));
     }
-
-    const createElement = ({ fields, meta: { touched, error, submitFailed } }) => {
+    const createElement = ({ fields}) => {
         
         return (<div>
-            <FormControl style={select_style} variant="outlined">
-                <InputLabel>{props.select_label}</InputLabel>
-                <Select value={value} onChange={(event) => handleChange(event.target.value,fields) }>
-                    {list.map(item => {
-                        return item.charAt(0) === "*"
-                            ? <ListSubheader key={uuidv4()}>{item.slice(1)}</ListSubheader>
-                            : <MenuItem key={uuidv4()} value={item}>{item}</MenuItem>
-                    })}
-                </Select>
-            </FormControl>
+            <Field
+                        component={MUI_Select}
+                        select_style={select_style}
+                        menu_list={list}
+                        label={select_label}
+                        value={value}
+                        validate={props.validate}
+                        name={select_name}
+                        onChange={(event) => handleChange(event.target.value,fields) }/>
             {fields.getAll()
             &&fields.getAll().map((item,index) => {
                 return (
@@ -79,6 +74,7 @@ function MultiTextRadio(props) {
                                 name={item}
                                 label={text_label+item}
                                 style={style_text}
+                                validate={props.validate}
                                 multiline
                                 />
                         </Grid>
@@ -89,6 +85,7 @@ function MultiTextRadio(props) {
                             name={"radio"+item}
                             radio_list={radio_list}
                             label={radio_label}
+                            validate={props.validate}
                             />
                         </Grid>}
 
@@ -109,8 +106,16 @@ function MultiTextRadio(props) {
             </div>
         );
     }
-
-   
+    function required (value, allValues, props) {
+        if(value === undefined){
+            props.dispatch(change(formName, component_name, []));
+        }
+        if(!value || value===undefined)
+            return undefined;
+        else if(value.length!==0)
+            return undefined;
+        return 'Required';
+    }
     return (
         <React.Fragment>
             <Grid
@@ -120,7 +125,7 @@ function MultiTextRadio(props) {
                 alignItems="center"
                 spacing={3}>
                 <Grid item sm={12}>
-                    <FieldArray name={component_name} component={createElement}/>
+                    <FieldArray name={component_name} validate={required} component={createElement}/>
                 </Grid>
                 
 
