@@ -7,7 +7,6 @@ import MUI_TextField from '../MaterialUI/MUI_TextField';
 import {Field} from 'redux-form';
 
 function SelectText(props) {
-    console.log(props);
     const select_list = props.select_list;
     const select_props = props.select_props;
     const text_props = props.text_props;

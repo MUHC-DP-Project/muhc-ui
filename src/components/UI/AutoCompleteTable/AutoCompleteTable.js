@@ -22,7 +22,7 @@ function AutoCompleteTable(props) {
     
 
     function handleChange(value, fields) {
-        if (!optionList.includes(value) && value !== null && value !== "") {
+        if (!optionList.includes(value) && value !== null && value!==undefined && value.trim() !== "") {
             fields.push(value);
             setValue(value);
             setOptionList(optionList.concat(value))

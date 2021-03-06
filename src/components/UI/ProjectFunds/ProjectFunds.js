@@ -13,7 +13,7 @@ function ProjectFunds(props) {
     const select_props_1 = {
         select_elem: {
             menu_list: [
-                "Project has been fund", "Project has not been fund"
+                {value:"Project has been fund",id:uuidv4()}, {value:"Project has not been fund",id:uuidv4()}
             ],
             style: {
                 width: "240px",
@@ -32,7 +32,7 @@ function ProjectFunds(props) {
 
         select_elem: {
             menu_list: [
-                "Funding will be sought", "Funding will not be sought"
+                {value:"Funding will be sought",id:uuidv4()}, {value:"Funding will not be sought",id:uuidv4()}
             ],
             style: {
                 width: "240px",
