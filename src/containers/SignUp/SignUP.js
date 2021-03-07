@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import {v4 as uuidv4} from 'uuid';
 
 import {connect} from 'react-redux';
-import {reset, reduxForm, submit} from 'redux-form';
+import {reduxForm, submit, getFormValues} from 'redux-form';
 
 //pages
 import Profile from './Profile/Profile';
@@ -20,8 +20,8 @@ import Submit from './Submit/Submit';
 //CSS
 import './SignUp.css';
 import handleSubmit from './handleSubmit';
-import { columnsTotalWidthSelector } from '@material-ui/data-grid';
 
+import * as actions from '../../store/actions/index';
 function SignUP(props) {
     const step_component_list = [ < Profile />, < Research_and_interest />, < Submit />
     ]; //array of component
@@ -41,8 +41,8 @@ function SignUP(props) {
     function handleNext() {
         setActive_step(active_step + 1);
     }
-    const {invalid, handleSubmit, reset} = props;
-    console.log('props ', props);
+    const {invalid, submitting, reset} = props;
+    // console.log('props ', props);
     return (
         <Grid container direction="row" justify="center" alignItems="center">
             <Paper elevation={10} className="paper">
@@ -72,13 +72,9 @@ function SignUP(props) {
                             {active_step === step_name_list.length - 1
                                 ? <Button
                                         onClick={() => {
-                                        props.submit('signUp');
-                                        if (props.submitSucceeded) {
-                                            props.dispatch(reset('signUp'));
-                                            props
-                                                .history
-                                                .push("/");
-                                        }
+                                        console.log('values: ',props.allValues)
+                                        handleSubmit(props);                        
+                                        
                                     }}
                                         disabled={invalid}
                                         variant="contained"
@@ -106,10 +102,19 @@ function SignUP(props) {
 
 }
 
-
-export default connect()(reduxForm({
+const mapStateToProps=state=>{
+    return{
+        allValues:getFormValues('signUp')(state)
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onSuccess: (msg) => dispatch(actions.displaySuccessMessage(msg)),
+        onError: (msg) => dispatch(actions.displayErrorMessage(msg))
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
     form: 'signUp', // a unique identifier for this form
     destroyOnUnmount: false,
-    forceUnregisterOnUnmount: true,
-    onSubmit: handleSubmit,
+    forceUnregisterOnUnmount: true
 })(React.memo(SignUP)))

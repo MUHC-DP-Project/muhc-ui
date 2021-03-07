@@ -69,7 +69,6 @@ function ProjectFunds(props) {
                         : <Field component={MUI_Select}  {...select_props_2.select_elem} validate={props.validate}/>
                 }
                 </Grid>
-                {console.log(props.isFund)}
                 <Grid item sm={4}>
                     {(props.isSought === "Funding will be sought" && props.isFund === "Project has not been fund") &&  <Field component={MUI_TextField} {...text_props} placeholder={props.isFund==null?"Select an option":'Intended source of funding'} disabled={props.isFund==null} validate={props.validate}/>}
                 </Grid>

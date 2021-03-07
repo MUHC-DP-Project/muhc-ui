@@ -1,6 +1,8 @@
 import axios from '../../axios-pbrn'; //
-import { useHistory } from "react-router-dom";
-export default function handleSubmit(json_object) {
+import {reset} from 'redux-form'
+export default function handleSubmit(props) {
+    
+    const json_object=props.allValues;
     const copied_json_object = {
         ...json_object
     }
@@ -36,14 +38,18 @@ export default function handleSubmit(json_object) {
     delete copied_json_object.roleSelect;
 
 
-    axios
+    return axios
         .post('/users', copied_json_object)
         .then(response => {
-            console.log("response:", response);
-            let history = useHistory();
-            history.push("/home");
+            console.log('response: ',response);
+            props.dispatch(reset('signUp'));
+            props.onSuccess("Form Submited");
+            props
+                .history
+                .push("/");
         })
         .catch(error => {
-            console.log('error: ', error.response)
+            console.log('error: ',error);
+            props.onError("Failed to submit the form");
         })
 }

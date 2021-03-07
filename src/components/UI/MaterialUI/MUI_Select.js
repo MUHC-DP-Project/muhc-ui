@@ -24,7 +24,6 @@ function MUI_Select({
                 {...custom}
                 >
                 {menu_list.map(item => {
-                    {console.log(item)}
                     return item.value.charAt(0) === "*"
                         ? <ListSubheader key={item.id}>{item.value.slice(1)}</ListSubheader>
                         : <MenuItem key={item.id} value={item.value}>{item.value}</MenuItem>

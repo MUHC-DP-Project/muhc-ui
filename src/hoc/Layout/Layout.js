@@ -19,6 +19,7 @@ import NavItems from './NavItems';
 import styled from "styled-components";
 import Avatar from '../../components/UI/Avatar/Avatar';
 import { v4 as uuidv4 } from 'uuid';
+import WithErrorHandler from '../withErrorHandler/WithErrorHandler';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -198,6 +199,7 @@ export default function MiniDrawer(props) {
             <main className={classes.content}>
                 <div className={classes.toolbar}/> {props.children}
             </main>
+            <WithErrorHandler/>  
         </div>
     );
 }

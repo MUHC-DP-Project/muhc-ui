@@ -9,7 +9,6 @@ function CustomDataGrid(props) {
     const tableColumn=props.column;
     const tableSortModel=props.sortModel;
     const tableTitle=props.title;
-    console.log("rerender");
     return (
         <React.Fragment>
             <h1>test</h1>
