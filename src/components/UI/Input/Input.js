@@ -12,6 +12,9 @@ import { Field } from 'redux-form';
 //MUI
 import MUI_TextField from '../MaterialUI/MUI_TextField';
 import MUI_RadioButton from '../MaterialUI/MUI_RadioButton';
+
+//validator
+import validators from './validators';
 class Input extends Component {
     shouldComponentUpdate(nextProps) {
         return this.props.value !== nextProps.value;
@@ -27,7 +30,7 @@ class Input extends Component {
                 inputElement =<Field
                 component={MUI_TextField}
                 {...this.props.elementConfig}
-                validate={this.required}                 
+                validate={validators(this.props.elementConfig.validation)}                 
                 />;
                 
                 break;
@@ -37,7 +40,7 @@ class Input extends Component {
                 name={this.props.elementConfig.name}
                 radio_list={this.props.elementConfig.options}
                 label={this.props.elementConfig.radio_label}  
-                validate={this.required}        
+                validate={validators(this.props.elementConfig.validation)}                       
                 />
                 break;
             case('select_text'):
@@ -46,7 +49,8 @@ class Input extends Component {
                     select_props={this.props.elementConfig.select_elem}                    
                     text_props={this.props.elementConfig.text_elem}  
                     extra_text={this.props.elementConfig.extra_text}
-                    validate={this.required}   
+                    select_validate={validators(this.props.elementConfig.select_elem.validation)}   
+                    validators={validators}   
                     />
                 break;
             case('autocomplete_table'):

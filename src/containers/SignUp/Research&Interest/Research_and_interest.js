@@ -52,17 +52,20 @@ function Research_and_interest() {
                         inputProps: {
                             name: "inputProps_professional_occupation",
                             id: uuidv4()
-                        }
+                        },
+                        validation: ["required"],
                     },
                     text_elem: {
                         name: "profesionalOccupationTextfield",
                         options: [
                             {
                                 condition: null,
-                                placeholder: null
+                                placeholder: null,
+                                validation: [],
                             }, {
                                 condition: 'Other',
-                                placeholder: 'Other occupation'
+                                placeholder: 'Other occupation',
+                                validation: ["required"],
                             }
                         ],
                         style: {
@@ -71,9 +74,7 @@ function Research_and_interest() {
                         }
                     },
                     grid_size: 12
-                },
-                validation: {},
-                valid: true
+                }
             },
             work_status_title: {
                 elementType: "title",
@@ -107,12 +108,11 @@ function Research_and_interest() {
                         inputProps: {
                             name: "inputProps_work_status",
                             id: uuidv4()
-                        }
+                        },
+                        validation: ["required"],
                     },
                     grid_size: 12
-                },
-                validation: {},
-                valid: true
+                }
             },
 
             role_title: {
@@ -219,28 +219,30 @@ function Research_and_interest() {
                         inputProps: {
                             name: "inputProps_role",
                             id: uuidv4()
-                        }
+                        },
+                        validation: ["required"],
                     },
                     text_elem: {
                         name: "roleTextfield",
                         options: [
                             {
                                 condition: null,
-                                placeholder: null
+                                placeholder: null,
+                                validation: []
                             }, {
                                 condition: 'Other',
-                                placeholder: 'Other role'
+                                placeholder: 'Other role',
+                                validation: ["required"]
                             }
                         ],
                         style: {
                             width: "400px",
                             textAlign: "center"
-                        }
+                        },
+                        validation: ["required"],
                     },
                     grid_size: 12
-                },
-                validation: {},
-                valid: true
+                }
             },
 
             research_interests_title: {
@@ -551,10 +553,7 @@ function Research_and_interest() {
                     autocomplete_table_name: "researchInterests",
                     text_field_name: 'research_interests_text_field',
                     grid_size: 12
-                },
-                value: [],
-                validation: {},
-                valid: true
+                }
             }
         },
         formName: 'signUp'

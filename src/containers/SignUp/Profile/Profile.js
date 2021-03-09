@@ -47,12 +47,10 @@ function Profile() {
                             name: "inputProps_salutation",
                             id: uuidv4()
                         },
-                        grid_size: 2
-
+                        grid_size: 2,
+                        validation: ["required"],
                     }
-                },
-                validation: {},
-                valid: true
+                },                        
             },
             first_name: {
                 elementType: 'input',
@@ -63,14 +61,10 @@ function Profile() {
                         width: 330,
                         marginBottom: 20
                     },
-                    grid_size: 5
+                    grid_size: 5,
+                    validation: ["required"],
                 },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
+                
             },
             last_name: {
                 elementType: 'input',
@@ -81,14 +75,10 @@ function Profile() {
                         width: 330,
                         marginBottom: 20
                     },
-                    grid_size: 5
+                    grid_size: 5,
+                    validation: ["required"],
                 },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
+                
             },
             credentials_title: {
                 elementType: "title",
@@ -109,14 +99,10 @@ function Profile() {
                         width: 600,
                         marginBottom: 20
                     },
-                    grid_size: 5
+                    grid_size: 5,
+                    validation: ["required"],
                 },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
+                
             },
             gender_title: {
                 elementType: "title",
@@ -136,10 +122,9 @@ function Profile() {
                     ],
                     name: "gender",
                     radio_label: "",
-                    grid_size: 12
+                    grid_size: 12,
+                    validation: ["required"],
                 },
-                validation: {},
-                valid: true,
                 form_label: "Gender"
             },
             communication_title: {
@@ -177,20 +162,24 @@ function Profile() {
                         inputProps: {
                             name: "inputProps_communication",
                             id: uuidv4()
-                        }
+                        },
+                        validation: ["required"],
                     },
                     text_elem: {
                         name: "communicationTextfield",
                         options: [
                             {
                                 condition: 'Prefered Phone Number',
-                                placeholder: '(xxx)-xxx-xxxx'
+                                placeholder: '(xxx)-xxx-xxxx',
+                                validation: ["required","validatePhone"]
                             }, {
                                 condition: 'Prefered Email Address',
-                                placeholder: 'example@mail.mcgill.ca'
+                                placeholder: 'example@mail.mcgill.ca',
+                                validation: ["required","validateEmail"]
                             }, {
                                 condition: 'Alternative Email Address',
-                                placeholder: 'example@mail.mcgill.ca'
+                                placeholder: 'example@mail.mcgill.ca',
+                                validation: ["required","validateEmail"]
                             }
                         ],
                         style: {
@@ -198,9 +187,7 @@ function Profile() {
                         }
                     },
                     grid_size: 12
-                },
-                validation: {},
-                valid: true
+                }
             },
             principal_university_affiliation_title: {
                 elementType: "title",
@@ -246,28 +233,30 @@ function Profile() {
                         inputProps: {
                             name: "inputProps_principal_university_affiliation",
                             id: uuidv4()
-                        }
+                        },
+                        validation: ["required"],
                     },
                     text_elem: {
                         name: "principalUniversityAffiliationTextfield",
                         options: [
                             {
                                 condition: null,
-                                placeholder: null
+                                placeholder: null,
+                                validation: [],
                             }, {
                                 condition: 'Other',
-                                placeholder: 'Name'
+                                placeholder: 'Name',
+                                validation: ["required"],
                             }
                         ],
                         style: {
                             width: "400px",
                             textAlign: "center"
-                        }
+                        },
+                        
                     },
                     grid_size: 12
-                },
-                validation: {},
-                valid: true
+                }
             },
             principal_clinic_title: {
                 elementType: "title",
@@ -343,17 +332,20 @@ function Profile() {
                         inputProps: {
                             name: "inputProps_principal_clinic_select",
                             id: uuidv4()
-                        }
+                        },
+                        validation: ["required"],
                     },
                     text_elem: {
                         name: "principalClinicTextfield",
                         options: [
                             {
                                 condition: null,
-                                placeholder: null
+                                placeholder: null,
+                                validation: []
                             }, {
                                 condition: 'Other',
-                                placeholder: 'Name'
+                                placeholder: 'Name',
+                                validation: ["required"],
                             }
                         ],
                         style: {
@@ -362,9 +354,7 @@ function Profile() {
                         }
                     },
                     grid_size: 12
-                },
-                validation: {},
-                valid: true
+                }
             },
             secondary_clinic_title: {
                 elementType: "title",
@@ -440,17 +430,20 @@ function Profile() {
                         inputProps: {
                             name: "inputProps_secondary_clinic_select",
                             id: uuidv4()
-                        }
+                        },
+                        validation: ["required"],
                     },
                     text_elem: {
                         name: "secondaryClinicTextfield",
                         options: [
                             {
                                 condition: null,
-                                placeholder: null
+                                placeholder: null,
+                                validation: []
                             }, {
                                 condition: 'Other',
-                                placeholder: 'Name'
+                                placeholder: 'Name',
+                                validation: ["required"],
                             }
                         ],
                         style: {
@@ -459,9 +452,7 @@ function Profile() {
                         }
                     },
                     grid_size: 12
-                },
-                validation: {},
-                valid: true
+                }
             }
         },
         formName: 'signUp'

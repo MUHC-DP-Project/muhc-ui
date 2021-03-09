@@ -40,12 +40,11 @@ function Submit() {
                         inputProps: {
                             name: "inputProps_level_of_research",
                             id: uuidv4()
-                        }
+                        },
+                        validation: ["required"],
                     },
                     grid_size: 12
-                },
-                validation: {},
-                valid: true
+                }
             },
             motivation_for_joining_title: {
                 elementType: "title",
@@ -76,10 +75,7 @@ function Submit() {
                     autocomplete_table_name: "motivationForJoining",
                     text_field_name: 'motivation_for_joining_text_field',
                     grid_size: 12
-                },
-                value: [],
-                validation: {},
-                valid: true
+                }
             },
             found_about_us_title: {
                 elementType: "title",
@@ -109,10 +105,7 @@ function Submit() {
                     autocomplete_table_name: "foundAboutUs",
                     text_field_name: 'found_about_us_text_field',
                     grid_size: 12
-                },
-                value: [],
-                validation: {},
-                valid: true
+                }
             }
         },
         formName: 'signUp'

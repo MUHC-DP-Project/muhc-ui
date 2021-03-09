@@ -5,13 +5,18 @@ import MUI_Select from '../MaterialUI/MUI_Select'
 import MUI_TextField from '../MaterialUI/MUI_TextField';
 
 import {Field} from 'redux-form';
-
+import './SelectText.css';
 function SelectText(props) {
     const select_list = props.select_list;
     const select_props = props.select_props;
     const text_props = props.text_props;
     const extra_text = props.extra_text;
+    const select_validate=props.select_validate;
+    const validators=props.validators;
     const [select, setSelect] = useState(null);
+    const mapValidator=list=>{
+            return validators(list);
+    }
     return (
         <React.Fragment>
             {props&&<Grid //make sure the props loads
@@ -19,13 +24,14 @@ function SelectText(props) {
                 direction="row"
                 justify="flex-start"
                 alignItems="center"
+                className="item-align"
                 spacing={2}>
                 <Grid item>
                     <Field
                         component={MUI_Select}
                         menu_list={select_list}
                         {...select_props}
-                        validate={props.validate}
+                        validate={select_validate}
                         onChange={event=>setSelect(event.target.value)}/>
                 </Grid>
                 <Grid item>
@@ -34,7 +40,9 @@ function SelectText(props) {
                                     .find(elem => elem.condition === select)!=null)
                         ? <Field
                                 component={MUI_TextField}
-                                validate={props.validate}
+                                validate={mapValidator(text_props
+                                    .options
+                                    .find(elem => elem.condition === select).validation)}
                                 disabled={select === null || text_props
                                     .options
                                     .find(elem => elem.condition === select)==null}

@@ -15,8 +15,7 @@ function AutoCompleteTable(props) {
     const autocomplete_table_name=props.autocomplete_table_name;
     const inputEl = useRef(null);
     const formName=props.formName;
-    const [value,
-        setValue] = React.useState('');
+
     const [optionList,
         setOptionList] = React.useState([]);
     
@@ -24,7 +23,7 @@ function AutoCompleteTable(props) {
     function handleChange(value, fields) {
         if (!optionList.includes(value) && value !== null && value!==undefined && value.trim() !== "") {
             fields.push(value);
-            setValue(value);
+           
             setOptionList(optionList.concat(value))
         }
 
@@ -50,7 +49,6 @@ function AutoCompleteTable(props) {
                     <Grid item>
                         <Autocomplete                            
                             onChange={(event, newValue) => {
-                            setValue(newValue)
                             handleChange(newValue, fields)
                         }}
                            

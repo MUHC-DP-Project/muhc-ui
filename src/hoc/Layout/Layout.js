@@ -160,12 +160,7 @@ export default function MiniDrawer(props) {
 
 
             <StyledDrawer
-                variant="permanent"
-                classes={{ paper: classes.paper }}
-                className={clsx(classes.drawer, {
-                [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open
-            })}
+                variant="permanent"               
                 classes={{
                 paper: clsx({
                     [classes.drawerOpen]: open,

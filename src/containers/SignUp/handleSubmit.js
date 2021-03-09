@@ -1,8 +1,7 @@
 import axios from '../../axios-pbrn'; //
 import {reset} from 'redux-form'
-export default function handleSubmit(props) {
-    
-    const json_object=props.allValues;
+export default function handleSubmit(parentprops,allValues) {
+    const json_object=allValues;
     const copied_json_object = {
         ...json_object
     }
@@ -41,15 +40,13 @@ export default function handleSubmit(props) {
     return axios
         .post('/users', copied_json_object)
         .then(response => {
-            console.log('response: ',response);
-            props.dispatch(reset('signUp'));
-            props.onSuccess("Form Submited");
-            props
+            parentprops.dispatch(reset('signUp'));
+            parentprops.onSuccess("Form Submited");
+            parentprops
                 .history
                 .push("/");
         })
         .catch(error => {
-            console.log('error: ',error);
-            props.onError("Failed to submit the form");
+            parentprops.onError("Failed to submit the form");
         })
 }

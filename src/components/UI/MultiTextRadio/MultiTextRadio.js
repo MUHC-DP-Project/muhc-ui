@@ -26,7 +26,6 @@ function MultiTextRadio(props) {
         setValue] = useState('');
     const [listOfElem,
         setListOfElem] = useState([]);
-    const [blur, setblur] = useState(false)
     function handleChange(value,fields){
         if(!listOfElem.includes(value)){
             fields.push(value);
