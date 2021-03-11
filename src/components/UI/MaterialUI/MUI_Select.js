@@ -11,23 +11,24 @@ function MUI_Select({
         touched,
         error
     },
+    select_style,
     menu_list,
     ...custom
 }) {
     return (
-        <FormControl error={touched && error} variant="outlined">
+        
+        <FormControl style={select_style} error={touched && error} variant="outlined">
             <InputLabel>{label}</InputLabel>
             <Select            
                 {...input}
                 {...custom}
                 >
                 {menu_list.map(item => {
-                    return item.charAt(0) === "*"
-                        ? <ListSubheader key={label+item}>{item.slice(1)}</ListSubheader>
-                        : <MenuItem key={label+item} value={item}>{item}</MenuItem>
+                    return item.value.charAt(0) === "*"
+                        ? <ListSubheader key={item.id}>{item.value.slice(1)}</ListSubheader>
+                        : <MenuItem key={item.id} value={item.value}>{item.value}</MenuItem>
                 })}
             </Select>
-            {/* {renderFromHelper({touched, error})} */}
         </FormControl>
     )
 }

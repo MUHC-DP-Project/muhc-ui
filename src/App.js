@@ -4,6 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 
 //pages
 import Home from './components/Home/Home';
+import SignUp from './containers/SignUp/SignUP';
+import CreateProject from './containers/CreateProject/CreateProject';
 
 export class App extends Component {
   render() {
@@ -11,8 +13,10 @@ export class App extends Component {
       <Switch>
         <Layout>       
             <Route path="/" exact component={Home}/> 
-                    
+            <Route path="/signup" exact component={SignUp}/> 
+            <Route path="/createProject" exact component={CreateProject}/>              
         </Layout>
+       
         </Switch>
       
     )

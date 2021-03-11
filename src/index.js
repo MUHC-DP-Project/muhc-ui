@@ -7,9 +7,10 @@ import {Provider} from 'react-redux';
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {reducer as reduxFormReducer} from 'redux-form';
-
+import errorHandlerReducer from './store/reducers/errorHandler';
 const rootReducer = combineReducers({
     //add orther reducers
+    errorHandler:errorHandlerReducer,
     form: reduxFormReducer
 });
 
