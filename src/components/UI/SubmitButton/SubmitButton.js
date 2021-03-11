@@ -7,8 +7,7 @@ function SubmitButton(props) {
     const submitHandler=props.submitHandler;
     const invalid=props.disabled;
     const allValues=props.allValues;
-    const parentProps=props.parentProps;
-    console.log("submit props",props);
+    const parentProps=props.parentProps;   
     return (
         <Button
             onClick={() => {
@@ -19,11 +18,12 @@ function SubmitButton(props) {
             color="primary"
             className="button"
             >Submit</Button>
+            
     )
 }
-const mapStateToProps=state=>{
+const mapStateToProps=(state,ownProps)=>{
     return{
-        allValues:getFormValues('signUp')(state)
+        allValues:getFormValues(ownProps.formName)(state),
     }
 }
 export default connect(mapStateToProps)(SubmitButton)

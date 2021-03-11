@@ -19,6 +19,7 @@ class Input extends Component {
     shouldComponentUpdate(nextProps) {
         return this.props.value !== nextProps.value;
     }
+   
     required = value => value ? undefined : 'Required';
     renderInput = () => {
         let inputElement = null;

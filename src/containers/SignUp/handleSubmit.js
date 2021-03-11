@@ -1,4 +1,4 @@
-import axios from '../../axios-pbrn'; //
+import {userAxios} from '../../axios-pbrn'; //
 import {reset} from 'redux-form'
 export default function handleSubmit(parentprops,allValues) {
     const json_object=allValues;
@@ -37,7 +37,7 @@ export default function handleSubmit(parentprops,allValues) {
     delete copied_json_object.roleSelect;
 
 
-    return axios
+    return userAxios
         .post('/users', copied_json_object)
         .then(response => {
             parentprops.dispatch(reset('signUp'));

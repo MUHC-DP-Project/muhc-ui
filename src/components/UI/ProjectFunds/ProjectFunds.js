@@ -20,7 +20,7 @@ function ProjectFunds(props) {
                 textAlign: "center"
             },
             label: "Has this project been funded already",
-            name: "project_fund_select",
+            name: "projectFund",
             inputProps: {
                 name: "inputProps_project_fund_select",
                 id: uuidv4()
@@ -39,7 +39,7 @@ function ProjectFunds(props) {
                 textAlign: "center"
             },
             label: "Funding sought",
-            name: "project_sought_fund_select",
+            name: "projectSought",
             inputProps: {
                 name: "inputProps_project_sought_fund_select",
                 id: uuidv4()
@@ -49,7 +49,7 @@ function ProjectFunds(props) {
     }
 
     const text_props = {
-        name: 'agency_name',
+        name: 'agencyName',
         multiline: false,
         style: {
             width: 250
@@ -79,7 +79,7 @@ function ProjectFunds(props) {
 
 const selector = formValueSelector('createProject');//can be refactored with useState in the future
 const mapStatesToObject = state => ({
-    isFund: selector(state, 'project_fund_select'),
-    isSought: selector(state, 'project_sought_fund_select')
+    isFund: selector(state, 'projectFund'),
+    isSought: selector(state, 'projectSought')
 })
 export default connect(mapStatesToObject)(ProjectFunds);

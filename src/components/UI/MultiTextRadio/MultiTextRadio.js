@@ -9,7 +9,10 @@ import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
 import {Field, FieldArray,change} from 'redux-form';
 import MUI_TextField from '../MaterialUI/MUI_TextField';
 import MUI_RadioButton from '../MaterialUI/MUI_RadioButton';
-import MUI_Select from '../MaterialUI/MUI_Select'
+import MUI_Select from '../MaterialUI/MUI_Select';
+
+
+import {v4 as uuidv4} from 'uuid';
 function MultiTextRadio(props) {
     const list = props.list;
     const radio_list = props.radio_list;
@@ -28,7 +31,14 @@ function MultiTextRadio(props) {
         setListOfElem] = useState([]);
     function handleChange(value,fields){
         if(!listOfElem.includes(value)){
-            fields.push(value);
+            fields.push(
+               { 
+                select:value,
+                text:'',
+                radio:null,
+                id:uuidv4()
+            }
+            );
             setValue(value);
             setListOfElem(listOfElem.concat(value))
         }
@@ -37,10 +47,18 @@ function MultiTextRadio(props) {
 
     function handleRemove(item,index,fields){
         fields.remove(index);
-        setListOfElem(listOfElem.filter(elem=>elem!==item));
+        setListOfElem(listOfElem.filter(elem=>elem!==item.select));
     }
+
+    function handleRadioChange(event,item,index,fields){
+        const tmp={...item};
+        tmp.radio=event.target.value;
+        fields.remove(index);
+        setListOfElem(listOfElem.filter(elem=>elem!==item.select));
+        fields.insert(index,tmp);
+    }
+
     const createElement = ({ fields}) => {
-        
         return (<div>
             <Field
                         component={MUI_Select}
@@ -59,7 +77,7 @@ function MultiTextRadio(props) {
                 direction="row"
                 justify="flex-start"
                 alignItems="center"
-                spacing={3} key={item.name}>
+                spacing={3} key={item.id}>
                         <Grid
                             item
                             sm={radio_list != null
@@ -69,8 +87,8 @@ function MultiTextRadio(props) {
                                 placeholder=""
                                 rows={rows}
                                 component={MUI_TextField}
-                                name={item}
-                                label={text_label+item}
+                                name={component_name+"_text_"+item.select}
+                                label={text_label+item.select}
                                 style={style_text}
                                 validate={props.validate}
                                 multiline
@@ -80,9 +98,10 @@ function MultiTextRadio(props) {
                         
                         <Field
                             component={MUI_RadioButton}
-                            name={"radio"+item}
+                            name={component_name+"_radio_"+item.select}
                             radio_list={radio_list}
                             label={radio_label}
+                            onChange={event=>handleRadioChange(event,item,index,fields)}
                             validate={props.validate}
                             />
                         </Grid>}
@@ -133,6 +152,4 @@ function MultiTextRadio(props) {
     )
 }
 
-export default React.memo(MultiTextRadio, (props, nextProps) => {
-    return true;
-});
+export default MultiTextRadio;

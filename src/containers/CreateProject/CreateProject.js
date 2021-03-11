@@ -12,21 +12,23 @@ import {v4 as uuidv4} from 'uuid';
 import {connect} from 'react-redux';
 import {reduxForm} from 'redux-form';
 import SubmitButton from '../../components/UI/SubmitButton/SubmitButton';
+
 //pages
-import Profile from './Profile/Profile';
-import ResearchAndInterest from './Research&Interest/Research_and_interest';
-import Submit from './Submit/Submit';
+import Participants from './Participants/Participants';
+import ResearchAndMethodology from './ResearchAndMethodology/ResearchAndMethodology';
+import Project from './Project/Project';
 
 //CSS
-import './SignUp.css';
-import handleSubmit from './handleSubmit';
+import './CreateProject.css';
 
 import * as actions from '../../store/actions/index';
-function SignUP(props) {
-    const step_component_list = [ < Profile />, < ResearchAndInterest />, < Submit />
+import handleSubmit from './handleSubmit';
+
+function CreateProject(props) {
+    const step_component_list = [ < Participants />, < Project />, < ResearchAndMethodology />
     ]; //array of component
-    const step_name_list = ["Profile", "Research and interest", "Submit"];
-    const form_title = "Sign Up";
+    const step_name_list = ["Participants", "Project", "Research and methodology"];
+    const form_title = "Create Project";
 
     const [active_step,
         setActive_step] = useState(0);
@@ -57,7 +59,7 @@ function SignUP(props) {
                 </Stepper>
 
                 <React.Fragment>
-                    {<form> <React.Fragment>
+                    {< form > <React.Fragment>
                         <Grid container directio="column">
                             {getStepContent(active_step)}
                         </Grid>
@@ -73,7 +75,7 @@ function SignUP(props) {
                                         submitHandler={handleSubmit}
                                         disabled={invalid}
                                         parentProps={props}
-                                        formName='signUp'
+                                        formName='createProject'
                                         />
                                 : <Button
                                     disabled={invalid}
@@ -84,6 +86,7 @@ function SignUP(props) {
                                     style={{
                                     marginLeft: 15
                                 }}>Next</Button>}
+                                
 
                         </div>
                     </React.Fragment> </form>}
@@ -93,8 +96,6 @@ function SignUP(props) {
     )
 
 }
-
-
 const mapDispatchToProps = dispatch => {
     return {
         onSuccess: (msg) => dispatch(actions.displaySuccessMessage(msg)),
@@ -102,7 +103,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 export default connect(null, mapDispatchToProps)(reduxForm({
-    form: 'signUp', // a unique identifier for this form
+    form: 'createProject', // a unique identifier for this form
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true
-})(SignUP))
+})(CreateProject))

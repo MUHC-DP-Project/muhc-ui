@@ -1,6 +1,12 @@
 import axios from 'axios';
-const instance=axios.create({
-    baseURL:process.env.REACT_APP_SERVER_URL
+
+
+const projectAxios = axios.create({
+    baseURL: process.env.REACT_APP_PROJECT_SERVER_URL 
 });
 
-export default instance;
+const userAxios = axios.create({
+    baseURL: process.env.REACT_APP_USER_SERVER_URL
+});
+
+export {projectAxios,userAxios};
