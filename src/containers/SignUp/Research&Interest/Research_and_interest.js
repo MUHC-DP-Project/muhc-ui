@@ -8,7 +8,7 @@ function Research_and_interest() {
             professional_occupation_title: {
                 elementType: "title",
                 elementConfig: {
-                    value: "Professional occupation",
+                    value: "Professional category",
                     style: {
                         marginTop: 20
                     },
