@@ -22,6 +22,9 @@ table {
   .header{
       display: inline-flex;
   }
+  .headerTextSearch{
+      width: 150px;
+  }
 
   /* Global Filter */
   .globalFilterIcon{
@@ -31,6 +34,7 @@ table {
     margin: 15px !important;
     background-color: white;
     border-radius: 5px;
+    width:330px;
   }
   .globalFilter{
       background-color: #222831;
@@ -39,8 +43,8 @@ table {
       border-bottom-right-radius: 0px;
   }
 
-/* Footer */
-.footer{
-    margin-top: 15px;
-}
+  .title{
+    margin-left: 15px !important;
+    color: white;
+  }
 

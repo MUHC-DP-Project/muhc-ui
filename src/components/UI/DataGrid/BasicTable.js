@@ -11,15 +11,10 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-
-
 import TablePagination from '@material-ui/core/TablePagination';
 
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import LastPageIcon from '@material-ui/icons/LastPage';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-function BasicTable() {
+
+function BasicTable({title,button}) {
 
     const columns = useMemo(() => COLUMNS, [])
     const data = useMemo(() => MOCK_DATA, [])
@@ -32,15 +27,9 @@ function BasicTable() {
       getTableProps,
       getTableBodyProps,
       headerGroups,
-      footerGroups,
       page,
-      nextPage,
-      previousPage,
-      canNextPage,
-      canPreviousPage,
       pageOptions,
       gotoPage,
-      pageCount,
       setPageSize,
       state,
       prepareRow,
@@ -63,7 +52,7 @@ function BasicTable() {
     return (
        <div>
       <>
-        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} title={title} button={button}/>
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (
@@ -109,7 +98,6 @@ function BasicTable() {
               )
             })}
           </tbody>
-
         </table>
 
         <Grid
@@ -117,7 +105,7 @@ function BasicTable() {
         direction="row"
         justify="flex-end"
         alignItems="center" 
-        className="footer">
+        >
         <TablePagination
             component="div"
             count={Number(pageSize*pageOptions.length)}

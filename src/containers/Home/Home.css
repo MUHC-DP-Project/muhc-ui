@@ -1,0 +1,9 @@
+.button{
+    margin-right: 15px!important;
+    background-color: #2193b0!important;
+    color: white!important;   
+    width: auto!important;
+  }
+.button:hover{
+    background-color: #61b7d1 !important;
+}
