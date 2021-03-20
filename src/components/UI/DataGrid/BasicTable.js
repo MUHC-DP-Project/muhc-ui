@@ -1,10 +1,24 @@
-import React, {useMemo} from 'react';
+import React, {useMemo,useState} from 'react';
 import {useTable,useSortBy,useGlobalFilter,useFilters,usePagination} from 'react-table';
 import MOCK_DATA from './MOCK_DATA.json';
 import {COLUMNS} from './columns';
 import './BasicTable.css';
 import GlobalFilter from './GlobalFilter';
 import ColumnFilter from './ColumnFilter';
+import Grid from '@material-ui/core/Grid';
+
+//icons
+import IconButton from '@material-ui/core/IconButton';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+
+
+import TablePagination from '@material-ui/core/TablePagination';
+
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 function BasicTable() {
 
     const columns = useMemo(() => COLUMNS, [])
@@ -27,6 +41,7 @@ function BasicTable() {
       pageOptions,
       gotoPage,
       pageCount,
+      setPageSize,
       state,
       prepareRow,
       setGlobalFilter,
@@ -39,8 +54,12 @@ function BasicTable() {
     useGlobalFilter,
     useSortBy,
     usePagination)
-    const {pageIndex,globalFilter}=state;
+    const {pageIndex,globalFilter,pageSize}=state;
 
+    const handleChangePage = (event, newPage) => {
+        gotoPage(newPage);
+      };
+    
     return (
        <div>
       <>
@@ -50,16 +69,29 @@ function BasicTable() {
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column => (
-                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  <div>{column.canFilter?column.render('Filter'):null}</div>
-                  <span>
+                    <th {...column.getHeaderProps()} >
+                  <Grid 
+                  container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"                   
+                    >
+                  <Grid item {...column.getSortByToggleProps()}>{column.render('Header')}                                               
+                    <span>
                     {column.isSorted
-                      ? column.isSortedDesc
-                        ? ' 🔽'
-                        : ' 🔼'
-                      : ''}
-                  </span>
+                        ? column.isSortedDesc
+                        ? <IconButton aria-label="sort desc" size="small">
+                            <ArrowDownwardIcon fontSize="small"/>
+                        </IconButton>
+                        : <IconButton aria-label="sort asc" size="small">
+                        <ArrowUpwardIcon fontSize="small"/>
+                        </IconButton>
+                        : ''}
+                    </span>
+                  </Grid> 
+            
+                  </Grid>
+                  <div>{column.canFilter?column.render('Filter'):null} </div>
                 </th>
                 ))}
               </tr>
@@ -79,20 +111,22 @@ function BasicTable() {
           </tbody>
 
         </table>
-        <div>
-        <span>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <button onClick={()=>previousPage()}  disabled={!canPreviousPage}>
-            Previous
-        </button>
-        <button onClick={()=>nextPage()} disabled={!canNextPage}>
-            Next
-        </button>
-        </div>
+
+        <Grid
+        container
+        direction="row"
+        justify="flex-end"
+        alignItems="center" 
+        className="footer">
+        <TablePagination
+            component="div"
+            count={Number(pageSize*pageOptions.length)}
+            page={pageIndex}
+            onChangePage={handleChangePage}
+            rowsPerPage={pageSize}
+            onChangeRowsPerPage={e=>setPageSize(Number(e.target.value))}
+            />                    
+      </Grid> 
       </>
        </div>
     )

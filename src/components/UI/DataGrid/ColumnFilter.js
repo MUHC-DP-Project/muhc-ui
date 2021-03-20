@@ -1,24 +1,32 @@
-import React,{useState} from 'react'
-import {useAsyncDebounce} from 'react-table'
-function ColumnFilter({ column,filter }) {
-    const { filterValue, setFilter } = column;
-    const [value, setValue] = useState(filter);
-    const onChange=useAsyncDebounce(value=>{
-        setFilter(value||undefined)
-    },1000)//300-400 ms delay
+import React, {useState} from 'react';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
+import Grow from '@material-ui/core/Grow';
+import Grid from '@material-ui/core/Grid';
+
+function ColumnFilter({column}) {
+    const {filterValue, setFilter} = column;
+    const [open, setOpen] = useState(false);
     return (
-        <span>
-        Search:{' '}
-        <input
-          value={value || ''}
-          onChange={e => 
-          {
-            setFilter(e.target.value)
-          onChange(e.target.value)
-          }
-          }
-        />
-      </span>
+        <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center" >
+            <Grid item>
+                <IconButton aria-label="sort desc" size="small" onClick={()=>setOpen(!open)}>
+                    <SearchIcon fontSize="small"/>
+                </IconButton>
+            </Grid>
+            <Grid item>
+                {open&&<Grow
+                style={{width:"150px"}}
+                in={open}
+                {...(open ? { timeout: 1000 } : {})}>
+                <input value={filterValue || ''}  onChange={e => setFilter(e.target.value)}/>
+                </Grow>}
+            </Grid>
+        </Grid>
     )
 }
 

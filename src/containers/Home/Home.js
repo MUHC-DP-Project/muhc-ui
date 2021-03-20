@@ -7,7 +7,6 @@ function Home() {
     return (
         <React.Fragment>
             <Grid container direction="row" justify="center" alignItems="center">
-            <h1>home page</h1>
             <BasicTable></BasicTable>
             </Grid>
         </React.Fragment>
