@@ -1,6 +1,5 @@
 import '../css/Login.css'
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -12,13 +11,15 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import backgroundImg from '../img/mcgillcampus.jpeg';
+import pbrnlogo from '../img/pbrnlogo.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://community.mcgill.ca/wp-content/uploads/reporter.mcgill.ca141A7710b-2-33df7a956ac48acc56548c6c61a0118f440e48b0.jpg)',
+    backgroundImage: `url(${backgroundImg})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -57,7 +58,7 @@ export default function Login() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-            <img class="pbrnlogo" src="https://www.mcgill.ca/familymed/files/familymed/channels/image/pbrn.png" width="10%" height="10%"></img>
+            <img class="pbrnlogo" src={pbrnlogo} width="10%" height="10%"></img>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
