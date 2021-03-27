@@ -2,22 +2,26 @@ table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    min-width: 1500px;
+    
   }
   
   table td, table th {
     border: 1px solid #ddd;
-    padding: 8px;  
+    padding: 8px; 
+    min-width: 200px; 
+  }
+
+  table td:nth-child(2){/*2nd child should always be the description*/
+    max-width: 500px;
   }
 
   /* table Headers */
-  
   table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
     color: black;
-    max-width: 100px;
+    
   }
   .header{
       display: inline-flex;

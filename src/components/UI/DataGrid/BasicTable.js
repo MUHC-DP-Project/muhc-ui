@@ -1,7 +1,5 @@
-import React, {useMemo,useState} from 'react';
+import React, {useMemo} from 'react';
 import {useTable,useSortBy,useGlobalFilter,useFilters,usePagination} from 'react-table';
-import MOCK_DATA from './MOCK_DATA.json';
-import {COLUMNS} from './columns';
 import './BasicTable.css';
 import GlobalFilter from './GlobalFilter';
 import ColumnFilter from './ColumnFilter';
@@ -14,7 +12,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import TablePagination from '@material-ui/core/TablePagination';
 
 
-function BasicTable({title,button}) {
+function BasicTable({title,button,COLUMNS,MOCK_DATA}) {
 
     const columns = useMemo(() => COLUMNS, [])
     const data = useMemo(() => MOCK_DATA, [])
