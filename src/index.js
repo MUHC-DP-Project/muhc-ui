@@ -8,8 +8,10 @@ import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {reducer as reduxFormReducer} from 'redux-form';
 import errorHandlerReducer from './store/reducers/errorHandler';
+import authReducer from './store/reducers/auth';
 const rootReducer = combineReducers({
     //add orther reducers
+    auth:authReducer,
     errorHandler:errorHandlerReducer,
     form: reduxFormReducer
 });

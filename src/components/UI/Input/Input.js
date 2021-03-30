@@ -80,6 +80,7 @@ class Input extends Component {
             style_select={this.props.elementConfig.style_select}
             select_name={this.props.elementConfig.select_name}
             component_name={this.props.elementConfig.name}
+            displayselectedItem={this.props.elementConfig.displayselectedItem}
             formName={this.props.formName}
             validate={this.required}
             />

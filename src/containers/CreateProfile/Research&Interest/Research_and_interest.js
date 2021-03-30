@@ -118,7 +118,7 @@ function Research_and_interest() {
             role_title: {
                 elementType: "title",
                 elementConfig: {
-                    value: "Role",
+                    value: "Current clinic role",
                     style: {
                         marginTop: 20
                     },
@@ -137,7 +137,7 @@ function Research_and_interest() {
                                 value: 'Staff Physician',
                                 id: uuidv4()
                             }, {
-                                value: 'Staff Physician',
+                                value: 'Non-Staff Physician',
                                 id: uuidv4()
                             }, {
                                 value: '*Trainee',
@@ -248,7 +248,7 @@ function Research_and_interest() {
             research_interests_title: {
                 elementType: "title",
                 elementConfig: {
-                    value: "Research interests",
+                    value: "Research interests (select as many as applied)",
                     style: {
                         marginTop: 20
                     },
@@ -556,7 +556,7 @@ function Research_and_interest() {
                 }
             }
         },
-        formName: 'signUp'
+        formName: 'createProfile'
     }
     return (
         <React.Fragment>

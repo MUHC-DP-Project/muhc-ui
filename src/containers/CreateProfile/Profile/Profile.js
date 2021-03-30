@@ -455,7 +455,7 @@ function Profile() {
                 }
             }
         },
-        formName: 'signUp'
+        formName: 'createProfile'
     }
     return (
         <React.Fragment>

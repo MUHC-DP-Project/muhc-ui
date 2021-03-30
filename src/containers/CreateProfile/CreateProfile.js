@@ -18,15 +18,15 @@ import ResearchAndInterest from './Research&Interest/Research_and_interest';
 import Submit from './Submit/Submit';
 
 //CSS
-import './SignUp.css';
+import './CreateProfile.css';
 import handleSubmit from './handleSubmit';
 
 import * as actions from '../../store/actions/index';
-function SignUP(props) {
+function CreateProfile(props) {
     const step_component_list = [ < Profile />, < ResearchAndInterest />, < Submit />
     ]; //array of component
     const step_name_list = ["Profile", "Research and interest", "Submit"];
-    const form_title = "Sign Up";
+    const form_title = "Create profile";
 
     const [active_step,
         setActive_step] = useState(0);
@@ -73,7 +73,7 @@ function SignUP(props) {
                                         submitHandler={handleSubmit}
                                         disabled={invalid}
                                         parentProps={props}
-                                        formName='signUp'
+                                        formName='createProfile'
                                         />
                                 : <Button
                                     disabled={invalid}
@@ -102,7 +102,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 export default connect(null, mapDispatchToProps)(reduxForm({
-    form: 'signUp', // a unique identifier for this form
+    form: 'createProfile', // a unique identifier for this form
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true
-})(SignUP))
+})(CreateProfile))

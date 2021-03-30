@@ -75,6 +75,7 @@ function Research_and_methodology() {
                         marginBottom: 20
                     },
                     name: "intendedMcgillLocation",
+                    displayselectedItem:true,
                     select_name: 'intendedMcgillLocation_select',
                     style_text: {
                         width: "330px"
@@ -182,108 +183,269 @@ function Research_and_methodology() {
                     grid_size: 12
                 }
             },
-            project_conception: {
-                elementType: 'input',
+            project_conception_title: {
+                elementType: "title",
                 elementConfig: {
-                    label: 'Project conception',
-                    name: 'projectConception',
+                    value: "Project Conception",
                     style: {
-                        width: 350,
-                        marginBottom: 20
+                        marginTop: 20
                     },
-                    grid_size: 6,
-                    validation: ["required","validateDate"],
+                    grid_size: 12
                 }
             },
-            project_designed: {
-                elementType: 'input',
+            project_conception_date: {
+                elementType: "calendar",
                 elementConfig: {
-                    label: 'Project designed',
-                    name: 'projectDesigned',
                     style: {
-                        width: 350,
-                        marginBottom: 20
+                        width: 300,
+                        marginTop:0
                     },
-                    grid_size: 6,
-                    validation: ["required","validateDate"],
+                    label: "Estimated Date",
+                    grid_size: 5,
+
+                    name: "projectConceptionDate",
+                    validation: ["required"],
                 }
             },
-            funding_sought_ignored_considered: {
-                elementType: 'input',
+            project_conception_radio: {
+                elementType: 'radio',
                 elementConfig: {
-                    label: 'Funding sought or ignored/considered',
-                    name: 'fundingSoughtOrIgnoredConsidered',
-                    style: {
-                        width: 350,
-                        marginBottom: 20
-                    },
+                    radio_label: 'Project Stage',
+                    name: 'projectConceptionRadio',
+                    options:["Not yet started","In-progress","Completed"],
                     grid_size: 6,
-                    validation: ["required","validateDate"],
+                    validation: ["required"],
+                }
+            },project_designed_title: {
+                elementType: "title",
+                elementConfig: {
+                    value: "Project designed",
+                    style: {
+                        marginTop: 20
+                    },
+                    grid_size: 12
                 }
             },
-            ethics_approval: {
-                elementType: 'input',
+            project_designed_date: {
+                elementType: "calendar",
                 elementConfig: {
-                    label: 'Ethics approval',
-                    name: 'ethicsApproval',
                     style: {
-                        width: 350,
-                        marginBottom: 20
+                        width: 300,
+                        marginTop:0
                     },
-                    grid_size: 6,
-                    validation: ["required","validateDate"],
+                    label: "Estimated Date",
+                    grid_size: 5,
+
+                    name: "projectDesignedDate",
+                    validation: ["required"],
                 }
             },
-            Recruitment: {
-                elementType: 'input',
+            project_designed_radio: {
+                elementType: 'radio',
                 elementConfig: {
-                    label: 'Recruitment',
-                    name: 'recruitment',
-                    style: {
-                        width: 350,
-                        marginBottom: 20
-                    },
+                    radio_label: 'Project Stage',
+                    name: 'projectDesignedRadio',
+                    options:["Not yet started","In-progress","Completed"],
                     grid_size: 6,
-                    validation: ["required","validateDate"],
+                    validation: ["required"],
+                }
+            },funding_sought_ignored_considered_title: {
+                elementType: "title",
+                elementConfig: {
+                    value: "Funding sought or ignored/considered",
+                    style: {
+                        marginTop: 20
+                    },
+                    grid_size: 12
                 }
             },
-            data_collection: {
-                elementType: 'input',
+            funding_sought_ignored_considered_date: {
+                elementType: "calendar",
                 elementConfig: {
-                    label: 'Data collection',
-                    name: 'dataCollection',
                     style: {
-                        width: 350,
-                        marginBottom: 20
+                        width: 300,
+                        marginTop:0
                     },
-                    grid_size: 6,
-                    validation: ["required","validateDate"],
+                    label: "Estimated Date",
+                    grid_size: 5,
+
+                    name: "fundingSoughtIgnoredConsideredDate",
+                    validation: ["required"],
                 }
             },
-            data_analysis: {
-                elementType: 'input',
+            funding_sought_ignored_considered_radio: {
+                elementType: 'radio',
                 elementConfig: {
-                    label: 'Data analysis',
-                    name: 'dataAnalysis',
-                    style: {
-                        width: 350,
-                        marginBottom: 20
-                    },
+                    radio_label: 'Project Stage',
+                    name: 'fundingSoughtIgnoredConsideredRadio',
+                    options:["Not yet started","In-progress","Completed"],
                     grid_size: 6,
-                    validation: ["required","validateDate"]
+                    validation: ["required"],
+                }
+            },ethics_approval_title: {
+                elementType: "title",
+                elementConfig: {
+                    value: "Ethics Approval",
+                    style: {
+                        marginTop: 20
+                    },
+                    grid_size: 12
                 }
             },
-            knowledge_translation_dissemination: {
-                elementType: 'input',
+            ethics_approval_date: {
+                elementType: "calendar",
                 elementConfig: {
-                    label: 'Knowledge translation/dissemination',
-                    name: 'knowledgeTranslationDissemination',
                     style: {
-                        width: 350,
-                        marginBottom: 20
+                        width: 300,
+                        marginTop:0
                     },
+                    label: "Estimated Date",
+                    grid_size: 5,
+
+                    name: "ethicsApprovalDate",
+                    validation: ["required"],
+                }
+            },
+            ethics_approval_radio: {
+                elementType: 'radio',
+                elementConfig: {
+                    radio_label: 'Project Stage',
+                    name: 'ethicsApprovalRadio',
+                    options:["Not yet started","In-progress","Completed"],
                     grid_size: 6,
-                    validation: ["required","validateDate"]
+                    validation: ["required"],
+                }
+            },recruitment_title: {
+                elementType: "title",
+                elementConfig: {
+                    value: "Recruitment",
+                    style: {
+                        marginTop: 20
+                    },
+                    grid_size: 12
+                }
+            },
+            recruitment_date: {
+                elementType: "calendar",
+                elementConfig: {
+                    style: {
+                        width: 300,
+                        marginTop:0
+                    },
+                    label: "Estimated Date",
+                    grid_size: 5,
+
+                    name: "recruitmentDate",
+                    validation: ["required"],
+                }
+            },
+            recruitment_radio: {
+                elementType: 'radio',
+                elementConfig: {
+                    radio_label: 'Project Stage',
+                    name: 'recruitmentRadio',
+                    options:["Not yet started","In-progress","Completed"],
+                    grid_size: 6,
+                    validation: ["required"],
+                }
+            },data_collection_title: {
+                elementType: "title",
+                elementConfig: {
+                    value: "Data Collection",
+                    style: {
+                        marginTop: 20
+                    },
+                    grid_size: 12
+                }
+            },
+            data_collection_date: {
+                elementType: "calendar",
+                elementConfig: {
+                    style: {
+                        width: 300,
+                        marginTop:0
+                    },
+                    label: "Estimated Date",
+                    grid_size: 5,
+
+                    name: "dataCollectionDate",
+                    validation: ["required"],
+                }
+            },
+            data_collection_radio: {
+                elementType: 'radio',
+                elementConfig: {
+                    radio_label: 'Project Stage',
+                    name: 'dataCollectionRadio',
+                    options:["Not yet started","In-progress","Completed"],
+                    grid_size: 6,
+                    validation: ["required"],
+                }
+            },data_analysis_title: {
+                elementType: "title",
+                elementConfig: {
+                    value: "Data Analysis",
+                    style: {
+                        marginTop: 20
+                    },
+                    grid_size: 12
+                }
+            },
+            data_analysis_date: {
+                elementType: "calendar",
+                elementConfig: {
+                    style: {
+                        width: 300,
+                        marginTop:0
+                    },
+                    label: "Estimated Date",
+                    grid_size: 5,
+
+                    name: "dataAnalysisDate",
+                    validation: ["required"],
+                }
+            },
+            data_analysis_radio: {
+                elementType: 'radio',
+                elementConfig: {
+                    radio_label: 'Project Stage',
+                    name: 'dataAnalysisRadio',
+                    options:["Not yet started","In-progress","Completed"],
+                    grid_size: 6,
+                    validation: ["required"],
+                }
+            },knowledge_translation_dissemination_title: {
+                elementType: "title",
+                elementConfig: {
+                    value: "Knowledge translation/dissemination",
+                    style: {
+                        marginTop: 20
+                    },
+                    grid_size: 12
+                }
+            },
+            knowledge_translation_dissemination_date: {
+                elementType: "calendar",
+                elementConfig: {
+                    style: {
+                        width: 300,
+                        marginTop:0
+                    },
+                    label: "Estimated Date",
+                    grid_size: 5,
+
+                    name: "knowledgeTranslationDisseminationDate",
+                    validation: ["required"],
+                }
+            },
+            knowledge_translation_dissemination_radio: {
+                elementType: 'radio',
+                elementConfig: {
+                    radio_label: 'Project Stage',
+                    name: 'knowledgeTranslationDisseminationRadio',
+                    options:["Not yet started","In-progress","Completed"],
+                    grid_size: 6,
+                    validation: ["required"],
                 }
             }
         },

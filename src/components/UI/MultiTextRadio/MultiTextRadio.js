@@ -25,6 +25,7 @@ function MultiTextRadio(props) {
     const component_name=props.component_name;
     const select_name=props.select_name;
     const formName=props.formName;
+    const displayselectedItem=props.displayselectedItem;
     const [value,
         setValue] = useState('');
     const [listOfElem,
@@ -39,7 +40,7 @@ function MultiTextRadio(props) {
                 id:uuidv4()
             }
             );
-            setValue(value);
+                setValue(value);
             setListOfElem(listOfElem.concat(value))
         }
         
@@ -57,7 +58,29 @@ function MultiTextRadio(props) {
         setListOfElem(listOfElem.filter(elem=>elem!==item.select));
         fields.insert(index,tmp);
     }
-
+    function displayItem(array){
+        return (<Grid
+            className="table"
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="flex-start">
+            <div className="sub-table">
+            {array.map((item, index) => {
+                    return (
+                        <Grid
+                            item
+                            key={uuidv4()}
+                            className="table-element">
+                            <p>{item.select}</p>
+                        </Grid>
+                    );
+                })}
+                </div>
+        </Grid>)
+    }
+    
+    
     const createElement = ({ fields}) => {
         return (<div>
             <Field
@@ -69,6 +92,7 @@ function MultiTextRadio(props) {
                         validate={props.validate}
                         name={select_name}
                         onChange={(event) => handleChange(event.target.value,fields) }/>
+            {displayselectedItem&&fields.getAll()&&displayItem(fields.getAll())}
             {fields.getAll()
             &&fields.getAll().map((item,index) => {
                 return (

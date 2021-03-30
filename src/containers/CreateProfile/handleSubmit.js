@@ -47,6 +47,7 @@ export default function handleSubmit(parentprops,allValues) {
                 .push("/");
         })
         .catch(error => {
+            console.log("error ",error.response);
             parentprops.onError("Failed to submit the form");
         })
 }
