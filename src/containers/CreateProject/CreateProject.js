@@ -104,6 +104,6 @@ const mapDispatchToProps = dispatch => {
 };
 export default connect(null, mapDispatchToProps)(reduxForm({
     form: 'createProject', // a unique identifier for this form
-    destroyOnUnmount: false,
+    destroyOnUnmount: true,
     forceUnregisterOnUnmount: true
 })(CreateProject))

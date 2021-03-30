@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Layout from './hoc/Layout/Layout';
-import {Route, Switch, withRouter} from 'react-router-dom';
+import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 //pages
@@ -11,6 +11,7 @@ import SignUp from './containers/Auth/SignUp/SignUp';
 import SignIn from './containers/Auth/SignIn/SignIn';
 import Logout from './containers/Auth/Logout/Logout';
 import Page404 from './components/Page404/Page404';
+import PostSignIn from './components/PostSignIn/PostSignIn';
 export class App extends Component {
     componentDidMount() {
         this
@@ -27,17 +28,29 @@ export class App extends Component {
             </Switch>
         )
         if (this.props.isAuthenticated) {
-            routes = (
-                <Layout>
-                    <Switch>
-                        <Route path="/createProfile" component={CreateProfile}/>
-                        <Route path="/createProject" component={CreateProject}/>
-                        <Route path="/logout" component={Logout}/>
-                        <Route path="/" exact component={Home}/>
-                        <Route component={Page404}/>
-                    </Switch>
-                </Layout>
-            )
+
+            if (!["undefined","false"].includes(localStorage.getItem('isApproved')) && !["undefined","false"].includes(localStorage.getItem('isEmailVerified'))) {
+                routes = (
+                    <Layout>
+                        <Switch>
+                            <Route path="/createprofile" component={CreateProfile}/>
+                            <Route path="/createproject" component={CreateProject}/>
+                            <Route path="/logout" component={Logout}/>
+                            <Route path="/" exact component={Home}/>
+                            <Route component={Page404}/>
+                        </Switch>
+                    </Layout>
+                )
+            } else {
+                routes = (
+                    <Layout >
+                        <Switch>
+                            <Route path="/logout" component={Logout}/>
+                            <Route component={PostSignIn}/>
+                        </Switch>
+                    </Layout>
+                )
+            }
         }
         return (
             <div>
@@ -49,7 +62,7 @@ export class App extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
     };
 };
 

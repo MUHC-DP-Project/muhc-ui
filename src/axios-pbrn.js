@@ -9,5 +9,5 @@ const userAxios = axios.create({
     baseURL: process.env.REACT_APP_USER_SERVER_URL
 });
 const token = localStorage.getItem('token');
-userAxios.defaults.headers.common['Authorization']="Bearer "+token;
+userAxios.defaults.headers.common['Authorization']=token;
 export {projectAxios,userAxios};

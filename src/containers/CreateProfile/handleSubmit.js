@@ -36,9 +36,10 @@ export default function handleSubmit(parentprops,allValues) {
     delete copied_json_object.roleTextfield;
     delete copied_json_object.roleSelect;
 
-
+    const userId=localStorage.getItem('userId');
+    console.log(copied_json_object);
     return userAxios
-        .post('/users', copied_json_object)
+        .put("/users/"+userId, copied_json_object)
         .then(response => {
             parentprops.dispatch(reset('signUp'));
             parentprops.onSuccess("Form Submited");
