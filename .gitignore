@@ -1,3 +1,4 @@
+.env
 node_modules
 tests_output
 *.log
@@ -30,3 +31,4 @@ package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.eslintcache
