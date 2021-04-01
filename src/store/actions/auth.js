@@ -1,4 +1,4 @@
-import {userAxios} from '../../axios-pbrn';
+import {userAxios,projectAxios} from '../../axios-pbrn';
 
 import * as actionTypes from './actionTypes';
 
@@ -7,6 +7,8 @@ export const authStart = () => {
 };
 
 export const authSuccess = (token, user) => {
+    // userAxios.defaults.headers.common['Authorization'] = token;
+    // projectAxios.defaults.headers.common['Authorization'] = token;
     return {type: actionTypes.AUTH_SUCCESS, tokenId: token, userId: user};
 };
 
@@ -28,7 +30,7 @@ export const auth = (authData, redirect) => {
             .post('/auth/signIn', authData)
             .then(response => {
                 console.log(response);
-                localStorage.setItem('token', "Bearer "+response.data.token);
+                localStorage.setItem('token',response.data.token);
                 localStorage.setItem('userId', response.data.user._id);
                 localStorage.setItem('isApproved', response.data.user.isApproved);
                 localStorage.setItem('isEmailVerified', response.data.user.isEmailVerified);
