@@ -5,15 +5,16 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /app
 
+ENV PORT $PORT
+
 RUN npm config set unsafe-perm true
 
-COPY package*.json .env /app/
+COPY package*.json .env serve.sh /app/
 RUN npm install\
         && npm install serve -g
 
 COPY src /app/src/
 COPY public /app/public/
 RUN npm run build
-EXPOSE 8080
 
-CMD [ "serve", "-p", "8080", "-s", "build" ]
+CMD serve -p $PORT -s build
