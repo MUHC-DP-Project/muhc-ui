@@ -3,12 +3,6 @@ import { format } from 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { userAxios } from '../../../axios-pbrn';
-import { Button } from '@material-ui/core';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,33 +49,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 function UserReport() {
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const deleteUser = (id) => {
-        userAxios.delete('http://localhost:8081/users/' + id)
-            .then(res => {
-                console.log("Successfully deleted");
-                //Add redirection
-            })
-            .catch(error => {
-                console.log("Failed to delete user");
-            })
-
-    }
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleCloseConfirm = () => {
-        setOpen(false);
-        deleteUser('60611ed20340ee1c3ee1d129')
-    }
-
     const classes = useStyles();
 
     const [data, setData] = useState([]);
@@ -145,43 +112,7 @@ function UserReport() {
 
                     </Paper>
 
-                    <div className={classes.buttonContainer}>
-                        <div>
-                            <Button variant="contained" color="secondary" onClick={handleClickOpen}>
-                                DELETE USER
-                                </Button>
-                        </div>
-                        <div>
-                            <Button variant="contained" color="secondary">
-                                MODIFY USER INFO
-                                 </Button>
-                        </div>
-                    </div>
-
-
                 </Paper>
-
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">{"Are You Sure You Want To Delete This User"}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            Deleting the user is not reversible.Make sure you actually entend to do this
-          </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                            Disagree
-          </Button>
-                        <Button onClick={handleCloseConfirm} color="primary" autoFocus>
-                            Agree
-          </Button>
-                    </DialogActions>
-                </Dialog>
             </div>
 
         )
