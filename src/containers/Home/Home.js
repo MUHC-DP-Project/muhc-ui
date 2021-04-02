@@ -25,6 +25,7 @@ function Home(props) {
         projectAxios
             .get('/projects')
             .then(response => {
+                console.log('projectdata ',response.data);
                 setMyProject(response.data);//for now i will display all the project untill we do the dependencies
                 setProjectData(response.data);
             })
@@ -71,7 +72,7 @@ function Home(props) {
                 MOCK_DATA={myProject}/>
     </Grid>
     <Grid item>
-    <BasicTable title={displayAllProject?"All Projects":"All Users"}
+    <BasicTable title={displayAllProject?"All Projects":"Connect with other researchers"}
     button={groupedButton}
     COLUMNS={PROJECT_COLUMN}
     MOCK_DATA={myProject}/>

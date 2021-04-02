@@ -41,8 +41,18 @@ export const auth = (authData, redirect) => {
                     : redirect.replace('/postsignin');
             })
             .catch(err => {
-                console.log(err.response.data.message);
-                dispatch(authFail(err.response.data.message));
+                let error_msg='';
+                switch (err.response.data.status) {
+                    case 422:
+                        error_msg="Missing parameters"
+                        break;
+                    case 500:
+                        error_msg="Email or Password are invalid"
+                        break;
+                    default:
+                        break;
+                }
+                dispatch(authFail(error_msg));
             });
     };
 };

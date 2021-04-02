@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -10,6 +10,7 @@ import './ForgotPassword.css';
 import handleSubmit from './handleSubmit';
 import Paper from '@material-ui/core/Paper';
 function ForgotPassword(props) {
+    const [error, setError] = useState(null)
     const json_obj = {
         FPform:{
             email: {
@@ -40,6 +41,9 @@ function ForgotPassword(props) {
                     <Typography>
                         Please enter your email to receive a new password
                     </Typography>
+                    {error&&<Typography className="FP_error">
+                                {error}
+                            </Typography>}
                     <form className="FP_form">
                         <Grid container spacing={2}>
                             <SimpleMultipageForm
@@ -55,7 +59,7 @@ function ForgotPassword(props) {
                             disabled={invalid}
                             onClick={(event) => {
                             event.preventDefault();
-                            handleSubmit(props, props.allValues);
+                            handleSubmit(props, props.allValues,setError);
                         }}>
                             Send New Password
                         </Button>

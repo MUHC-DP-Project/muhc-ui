@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
@@ -25,7 +25,7 @@ function Copyright() {
 }
 
 function SignUp(props) {
-
+    const [error, setError] = useState(null)
     const json_obj = {
         signUpform: {
             first_name: {
@@ -107,6 +107,9 @@ function SignUp(props) {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
+                    {error&&<Typography className="sigup_error">
+                                {error}
+                            </Typography>}
                     <form className="signup_form">
                         <Grid container spacing={2}>
                             <SimpleMultipageForm
@@ -122,7 +125,7 @@ function SignUp(props) {
                             disabled={invalid}
                             onClick={(event) => {
                             event.preventDefault();
-                            handleSubmit(props, props.allValues);
+                            handleSubmit(props, props.allValues,setError);
                         }}>
                             Sign Up
                         </Button>

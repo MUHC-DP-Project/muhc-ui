@@ -1,6 +1,6 @@
 import {userAxios} from '../../../axios-pbrn'; //
 import {reset} from 'redux-form';
-export default function handleSubmit(parentprops,allValues) {
+export default function handleSubmit(parentprops,allValues,setError) {
     console.log("form signup, ",allValues);
     return userAxios
         .post('/auth/signUp', allValues)
@@ -12,6 +12,6 @@ export default function handleSubmit(parentprops,allValues) {
                 .push("/signIn");
         })
         .catch(error => {
-            console.log("error ",error.response);
+            setError(error.response.data.message)
         })
 }

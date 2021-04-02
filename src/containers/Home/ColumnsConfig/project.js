@@ -6,7 +6,15 @@ export const PROJECT_COLUMN = [
         accessor: 'officialProjectTitle'
     }, {
         Header: 'Description',
-        accessor: 'projectDescription'
+        accessor: 'projectDescription',
+        disableSortBy: true
+    }, {
+        Header: 'Keywords',
+        accessor: 'keywords',
+        Cell: ({value}) => {
+            return value+', '
+        },
+        disableSortBy: true
     }, {
         Header: 'Project Start',
         accessor: 'startDateProject',
@@ -14,14 +22,8 @@ export const PROJECT_COLUMN = [
             return format(new Date(value), 'dd/MM/yyyy')
         }
     }, {
-        Header: 'Project End',
-        accessor: 'endDateProject',
-        Cell: ({value}) => {
-            return format(new Date(value), 'dd/MM/yyyy')
-        }
-    }, {
-        Header: 'Study Size',
-        accessor: 'studySize'
+        Header: 'Project Conception',
+        accessor: 'projectConception.projectStage'
     }
     ,{
         Header:'Action',
@@ -29,6 +31,7 @@ export const PROJECT_COLUMN = [
         Cell: ({value}) => {
             return <ButtonList privilege="author"/>
         },
-        disableFilters:true
+        disableFilters:true,
+        sortable: false,
     }
 ];

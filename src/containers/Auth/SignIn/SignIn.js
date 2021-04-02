@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -71,7 +71,10 @@ function SignIn(props) {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className="signin_form" noValidate>
+                    {props.formError&&<Typography className="sigin_error">
+                        {props.formError}
+                    </Typography>}
+                    <form className="signin_form" >
 
                         <SimpleMultipageForm
                             json_obj={json_obj.signInform}
@@ -84,8 +87,8 @@ function SignIn(props) {
                             className="signin_button"
                             onClick={event=>
                             {
-                              event.preventDefault();                        
-                              props.onAuth(props.authData,props.history);
+                            event.preventDefault();                        
+                            props.onAuth(props.authData,props.history);
                             }
                             }
                             >
@@ -93,7 +96,7 @@ function SignIn(props) {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Link href="/forgotpassword" variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>
@@ -115,7 +118,8 @@ function SignIn(props) {
 
 const mapStateToProps = (state) => {
     return {
-      authData: getFormValues('signIn')(state)
+      authData: getFormValues('signIn')(state),
+      formError:state.auth.error
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -30,3 +30,6 @@
     margin: 24px 0 16px !important;
     width: 100%;
 }
+.sigin_error{
+    color: red;
+}

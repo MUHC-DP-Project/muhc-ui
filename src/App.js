@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 //pages
 import Home from './containers/Home/Home';
+import Manage from './containers/Manage/Manage';
 import CreateProfile from './containers/CreateProfile/CreateProfile';
 import CreateProject from './containers/CreateProject/CreateProject';
 import SignUp from './containers/Auth/SignUp/SignUp';
@@ -16,6 +17,7 @@ import Page404 from './components/Page404/Page404';
 import PostSignIn from './components/PostSignIn/PostSignIn';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import './App.css'
 export class App extends Component {
     componentDidMount() {
         this
@@ -41,6 +43,7 @@ export class App extends Component {
                             <Route path="/createprofile" component={CreateProfile}/>
                             <Route path="/createproject" component={CreateProject}/>
                             <Route path="/changepassword" component={ChangePassword}/>
+                            <Route path="/manage" component={Manage}/>
                             <Route path="/logout" component={Logout}/>
                             <Route path="/" exact component={Home}/>
                             <Route component={Page404}/>
@@ -62,7 +65,7 @@ export class App extends Component {
             <CircularProgress color="inherit"/>
         </Backdrop>
         return (
-            <div>
+            <div className="main">
                 {this.props.isLoading?backDrop:routes}
             </div>
         )
