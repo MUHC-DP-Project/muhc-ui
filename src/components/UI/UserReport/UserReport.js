@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { format } from 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { userAxios } from '../../../axios-pbrn';
@@ -108,7 +109,7 @@ function UserReport() {
                     <Paper elevation={3} ><b>Verification Notes: </b> {data.verificationNotes} </Paper>
                     <Paper elevation={3} > <b>Approval Status: </b>{data.isApproved} </Paper>
                     <Paper elevation={3} > <b>Verification Status: </b> {data.isEmailVerified} </Paper>
-                    <Paper elevation={3} > <b>Date of Creation: </b>{data.createdAt} </Paper>
+                    <Paper elevation={3} > <b>Date of Creation: </b>{format(new Date(data.createdAt), 'dd/MM/yyyy')} </Paper>
                     <Paper elevation={3} > <b>Credentials </b>{data.credentialsQualifications} </Paper>
                     <Paper elevation={3} > <b>Gender: </b>{data.gender} </Paper>
                     <Paper elevation={3} > <b>Level Of Research: </b>{data.levelOfResearch} </Paper>
