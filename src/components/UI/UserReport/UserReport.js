@@ -107,8 +107,8 @@ function UserReport() {
                     <h1 className={classes.title}>{data.firstName + " " + data.lastName}</h1>
                     <Paper elevation={3} > <b>Email: </b> {data.email} </Paper>
                     <Paper elevation={3} ><b>Verification Notes: </b> {data.verificationNotes} </Paper>
-                    <Paper elevation={3} > <b>Approval Status: </b>{data.isApproved.toString()} </Paper>
-                    <Paper elevation={3} > <b>Verification Status: </b> {data.isEmailVerified.toString()} </Paper>
+                    <Paper elevation={3} > <b>Approval Status: </b>{data.isApproved != undefined && data.isApproved.toString()} </Paper>
+                    <Paper elevation={3} > <b>Verification Status: </b> {data.isEmailVerified != undefined && data.isEmailVerified.toString()} </Paper>
                     <Paper elevation={3} > <b>Date of Creation: </b>{data.createdAt != undefined && format(new Date(data.createdAt), 'dd/MM/yyyy')} </Paper>
                     <Paper elevation={3} > <b>Credentials </b>{data.credentialsQualifications} </Paper>
                     <Paper elevation={3} > <b>Gender: </b>{data.gender} </Paper>
