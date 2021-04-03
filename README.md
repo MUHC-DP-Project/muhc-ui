@@ -13,3 +13,5 @@ For information about the technology stack used in this repository please refer 
 - clone the repository
 - `npm install`  to install all dependencies
 - `npm start` to run the React App
+
+trigger
