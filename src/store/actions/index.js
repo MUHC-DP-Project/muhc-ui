@@ -6,3 +6,6 @@ export {
     setAuthRedirectPath,
     authCheckState
 } from './auth';
+export {
+    loadData
+} from './manage';

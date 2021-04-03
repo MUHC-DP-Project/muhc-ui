@@ -15,7 +15,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 function BasicTable({title,button,COLUMNS,MOCK_DATA}) {
 
     const columns = useMemo(() => COLUMNS, [])
-    const data = useMemo(() => MOCK_DATA, [])
+    const data = useMemo(() => MOCK_DATA, [MOCK_DATA])
     const defaultColumn=useMemo(() => {
         return {
             Filter:ColumnFilter

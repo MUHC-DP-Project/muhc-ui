@@ -21,7 +21,7 @@ const APPROVED_USER_COLUMN = [
             return format(new Date(value), 'dd/MM/yyyy')
         }
     }, {
-        Header: 'Action',
+        Header: 'Role',
         accessor: '_id',
         Cell: ({value}) => {
             return <ApprovedUserButton userId={value}/>
@@ -50,7 +50,7 @@ const NEW_USER_COLUMN = [
             return format(new Date(value), 'dd/MM/yyyy')
         }
     }, {
-        Header: 'Role',
+        Header: 'Action',
         accessor: '_id',
         Cell: ({value}) => {
             return <NewUserButton userId={value}/>

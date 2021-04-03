@@ -9,11 +9,13 @@ import thunk from 'redux-thunk';
 import {reducer as reduxFormReducer} from 'redux-form';
 import errorHandlerReducer from './store/reducers/errorHandler';
 import authReducer from './store/reducers/auth';
+import managePageReducer from './store/reducers/manage';
 const rootReducer = combineReducers({
     //add orther reducers
     auth:authReducer,
     errorHandler:errorHandlerReducer,
-    form: reduxFormReducer
+    form: reduxFormReducer,
+    manage:managePageReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

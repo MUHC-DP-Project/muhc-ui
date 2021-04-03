@@ -6,14 +6,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import BasicTable from '../../components/UI/DataGrid/BasicTable';
 import {APPROVED_USER_COLUMN,NEW_USER_COLUMN} from './ColumnsConfig/user';
 import Grid from '@material-ui/core/Grid';
-
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
 function Manage(props) {
-    const [newUserData,
-        setNewUserData] = useState(null);
-    const [approvedUserData, setApprovedUserData] = useState(null);
-    const [loading, setLoading] = useState(true)
-    const [refresh,
-        setRefresh] = useState(0)
+
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         //will need another axios call for myProject
         userAxios
@@ -22,21 +19,20 @@ function Manage(props) {
                 console.log("userdata ", response.data);
                 const userData=response.data;
                 const [approvedUserList,  newUserList] = userData.reduce(([ approvedUser,newUser], element) => (element.isApproved ? [[...approvedUser, element], newUser] : [approvedUser, [...newUser, element]]), [[], []]);
-                setNewUserData(newUserList);
-                setApprovedUserData(approvedUserList);
+                props.loadData(newUserList,approvedUserList);
                 setLoading(false);
             })
             .catch(error => {
                 console.log("Failed to fetch data: ", error.response);
             });
-    }, [refresh])
-    const refreshButton = <Button
-        variant="contained"
-        size="large"
-        className="button"
-        onClick={() => setRefresh(refresh + 1)}>
-        Refresh
-    </Button>;
+    }, [])
+    // const refreshButton = <Button
+    //     variant="contained"
+    //     size="large"
+    //     className="button"
+    //     onClick={() => setRefresh(refresh + 1)}>
+    //     Refresh
+    // </Button>;
     const backDrop = <Backdrop className="backDrop" open={loading}>
         <CircularProgress color="inherit"/>
     </Backdrop>
@@ -53,16 +49,16 @@ function Manage(props) {
         <Grid item>
         <BasicTable
             title="New users"
-            button={refreshButton}
+            // button={refreshButton}
             COLUMNS={NEW_USER_COLUMN}
-            MOCK_DATA={newUserData}/>
+            MOCK_DATA={props.newUserData}/>
         </Grid>
         <Grid item>
         <BasicTable
             title="Approved users"
-            button={refreshButton}
+            // button={refreshButton}
             COLUMNS={APPROVED_USER_COLUMN}
-            MOCK_DATA={approvedUserData}/>
+            MOCK_DATA={props.approvedUserData}/>
         </Grid>
     </Grid>
 
@@ -75,4 +71,17 @@ function Manage(props) {
     )
 }
 
-export default Manage
+const mapStateToProps = state => {
+    return {
+        newUserData: state.manage.newUserData,
+        approvedUserData: state.manage.approvedUserData
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loadData: (newUserData,approvedUserData) => dispatch(actions.loadData(newUserData,approvedUserData))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Manage)
