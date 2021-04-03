@@ -9,7 +9,7 @@ ENV PORT $PORT
 
 RUN npm config set unsafe-perm true
 
-COPY package*.json .env serve.sh /app/
+COPY package*.json serve.sh /app/
 RUN npm install\
         && npm install serve -g
 
