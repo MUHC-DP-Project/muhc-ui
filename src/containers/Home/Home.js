@@ -11,6 +11,7 @@ import {userAxios,projectAxios} from '../../axios-pbrn';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {PROJECT_COLUMN} from './ColumnsConfig/project';
+import {USER_COLUMN} from './ColumnsConfig/user';
 
 import './Home.css';
 function Home(props) {
@@ -43,7 +44,7 @@ function Home(props) {
         });
     }, [])
 
-    const backDrop = <Backdrop className="backDrop" open={!myProject&&!projectData&&!userData}>
+    const backDrop = <Backdrop className="backDrop" open={!myProject || !projectData || !userData}>
         <CircularProgress color="inherit"/>
     </Backdrop>
     const createProjectButton = <Button
@@ -58,6 +59,7 @@ function Home(props) {
     <Button onClick={()=>setDisplayAllProject(false)}>Users</Button>
     <Button onClick={()=>setDisplayAllProject(true)}>Projects</Button>
   </ButtonGroup>
+
     const homePage=<Grid
     container
     direction="column"
@@ -74,13 +76,13 @@ function Home(props) {
     <Grid item>
     <BasicTable title={displayAllProject?"All Projects":"Connect with other researchers"}
     button={groupedButton}
-    COLUMNS={PROJECT_COLUMN}
-    MOCK_DATA={myProject}/>
+    COLUMNS={displayAllProject?PROJECT_COLUMN:USER_COLUMN}
+    MOCK_DATA={displayAllProject?projectData:userData}/>
     </Grid>
 </Grid>
     return (
         <React.Fragment>
-        {!myProject&&!projectData&&!userData?backDrop:homePage}
+        {!myProject || !projectData || !userData?backDrop:homePage}
         </React.Fragment>
     )
 }

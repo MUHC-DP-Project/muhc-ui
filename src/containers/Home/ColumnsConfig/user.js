@@ -1,34 +1,37 @@
 import {format} from 'date-fns';
-import ButtonList from '../../../components/UI/DataGrid/ActionCell/Personal/ButtonList'
+import {Link} from 'react-router-dom';
 export const USER_COLUMN = [
     {
-        Header: 'Official title',
-        accessor: 'officialProjectTitle'
+        Header: 'First Name',
+        accessor: 'firstName'
     }, {
-        Header: 'Description',
-        accessor: 'projectDescription'
+        Header: 'Last Name',
+        accessor: 'lastName'
     }, {
-        Header: 'Project Start',
-        accessor: 'startDateProject',
+        Header: 'Email',
+        accessor: 'email'
+    }, {
+        Header: 'Verification Note',
+        accessor: 'verificationNotes'
+    }, {
+        Header: 'Sign Up Date',
+        accessor: 'createdAt',
         Cell: ({value}) => {
             return format(new Date(value), 'dd/MM/yyyy')
         }
     }, {
-        Header: 'Project End',
-        accessor: 'endDateProject',
+        Header: 'Action',
+        accessor: '_id',
         Cell: ({value}) => {
-            return format(new Date(value), 'dd/MM/yyyy')
-        }
-    }, {
-        Header: 'Study Size',
-        accessor: 'studySize'
-    }
-    ,{
-        Header:'Action',
-        accessor:'_id',
-        Cell: ({value}) => {
-            return <ButtonList privilege="viewer"/>
+            return <Link
+                to={{
+                pathname: '/',
+                state: {
+                    Id: value
+                }
+            }}>View</Link>
         },
-        disableFilters:true
+        disableFilters: true,
+        disableSortBy:true
     }
 ];

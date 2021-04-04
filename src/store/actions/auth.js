@@ -20,6 +20,7 @@ export const logout = () => {
     localStorage.removeItem('userId');
     localStorage.removeItem('isApproved');
     localStorage.removeItem('isEmailVerified');
+    localStorage.removeItem('email');
     return {type: actionTypes.AUTH_LOGOUT};
 };
 
@@ -34,6 +35,7 @@ export const auth = (authData, redirect) => {
                 localStorage.setItem('userId', response.data.user._id);
                 localStorage.setItem('isApproved', response.data.user.isApproved);
                 localStorage.setItem('isEmailVerified', response.data.user.isEmailVerified);
+                localStorage.setItem('email',response.data.user.email);
                 dispatch(authSuccess(response.data.token, response.data.user._id));
                 console.log("combination", response.data.user.isApproved && response.data.user.isEmailVerified);
                 response.data.user.isApproved && response.data.user.isEmailVerified

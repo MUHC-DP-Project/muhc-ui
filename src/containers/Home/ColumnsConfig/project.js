@@ -1,5 +1,5 @@
 import {format} from 'date-fns';
-import ButtonList from '../../../components/UI/DataGrid/ActionCell/Personal/ButtonList'
+import {Link} from 'react-router-dom';
 export const PROJECT_COLUMN = [
     {
         Header: 'Official title',
@@ -29,9 +29,19 @@ export const PROJECT_COLUMN = [
         Header:'Action',
         accessor:'_id',
         Cell: ({value}) => {
-            return <ButtonList privilege="author"/>
+            return <Link
+                style={{
+                    textDecoration:"none",
+                    color:"blue"
+                }}
+                to={{
+                pathname: '/',
+                state: {
+                    Id: value
+                }
+            }}>View</Link>
         },
-        disableFilters:true,
-        sortable: false,
+        disableFilters: true,
+        disableSortBy:true
     }
 ];

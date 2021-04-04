@@ -1,4 +1,4 @@
-import {projectAxios} from '../../axios-pbrn'; 
+import {projectAxios,userAxios} from '../../axios-pbrn'; 
 import {reset} from 'redux-form'
 
 
@@ -54,11 +54,28 @@ export default function handleSubmit(parentprops,allValues) {
     return projectAxios
         .post('/projects', final_json_object)
         .then(response => {
-            parentprops.dispatch(reset('createProject'));
-            parentprops.onSuccess("Form Submited");
-            parentprops
-                .history
-                .replace("/");
+            const userEmail=localStorage.getItem('email');
+            const bodyRequest={
+                PIListOfProjects:final_json_object.PIListOfProjects,
+                CoIListOfProjects:final_json_object.CoIListOfProjects,
+                ColListOfProjects:final_json_object.ColListOfProjects
+            }
+            console.log('bodyqurest',bodyRequest);
+            console.log('response',response.data);
+            const projectId=response.data._id;
+            userAxios.
+            put('/users/connectToProjects/'+projectId+'/'+userEmail,bodyRequest)
+            .then(response=>{
+                parentprops.dispatch(reset('createProject'));
+                parentprops.onSuccess("Form Submited");
+                parentprops
+                    .history
+                    .replace("/");
+            })
+            .catch(error => {
+                console.log(error.response);
+                parentprops.onError("Failed to submit the form");
+            })           
         })
         .catch(error => {
             console.log(error.response);

@@ -11,9 +11,11 @@ function Participants() {
         .then(response=>{           
             const rawData=response.data;          
             rawData.forEach(element => {
-                filteredData.push(
-                    element.email
-                )
+                if(element.isApproved){
+                    filteredData.push(
+                        element.email
+                    )  
+                }
             });
         })
         .catch(error => {
@@ -36,7 +38,7 @@ function Participants() {
                 elementType: 'autocomplete_table',
                 elementConfig: {
                     options: filteredData,
-                    autocomplete_table_name: "principalInvestigators",
+                    autocomplete_table_name: "PIListOfProjects",
                     grid_size: 12
                 }
             },
@@ -54,7 +56,7 @@ function Participants() {
                 elementType: 'autocomplete_table',
                 elementConfig: {
                     options: filteredData,
-                    autocomplete_table_name: "coInvestigators",
+                    autocomplete_table_name: "CoIListOfProjects",
                     grid_size: 12
                 }
             },
@@ -72,57 +74,10 @@ function Participants() {
                 elementType: 'autocomplete_table',
                 elementConfig: {
                     options: filteredData,
-                    autocomplete_table_name: "collaborators",
+                    autocomplete_table_name: "ColListOfProjects",
                     grid_size: 12
                 }
-            },
-            
-
-            // principal_investigator: {
-            //     elementType: 'user_list',
-            //     elementConfig: {
-            //         title: "Principal Investigator/s",
-            //         style_title: {
-            //             marginTop: 20,
-            //             marginBottom: 20
-            //         },
-            //         style: {
-            //             width: 350
-            //         },
-            //         symbol: "PI_",
-            //         grid_size: 12
-            //     }
-            // },
-            // co_investigator: {
-            //     elementType: 'user_list',
-            //     elementConfig: {
-            //         title: "Co-Investigator/s",
-            //         style_title: {
-            //             marginTop: 20,
-            //             marginBottom: 20
-            //         },
-            //         style: {
-            //             width: 350
-            //         },
-            //         symbol: "CoI_",
-            //         grid_size: 12
-            //     }
-            // },
-            // collaborators: {
-            //     elementType: 'user_list',
-            //     elementConfig: {
-            //         title: "Collaborators",
-            //         style_title: {
-            //             marginTop: 20,
-            //             marginBottom: 20
-            //         },
-            //         style: {
-            //             width: 350
-            //         },
-            //         symbol: "Col_",
-            //         grid_size: 12
-            //     }
-            // },
+            },   
             study_size_title: {
                 elementType: "title",
                 elementConfig: {
