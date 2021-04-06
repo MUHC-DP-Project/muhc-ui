@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
@@ -12,6 +12,7 @@ import {v4 as uuidv4} from 'uuid';
 import {connect} from 'react-redux';
 import {reduxForm} from 'redux-form';
 import SubmitButton from '../../components/UI/SubmitButton/SubmitButton';
+import {userAxios} from '../../axios-pbrn';
 //pages
 import Profile from './Profile/Profile';
 import ResearchAndInterest from './Research&Interest/Research_and_interest';
@@ -23,11 +24,23 @@ import handleSubmit from './handleSubmit';
 
 import * as actions from '../../store/actions/index';
 function CreateProfile(props) {
+
     const step_component_list = [ < Profile />, < ResearchAndInterest />, < Submit />
     ]; //array of component
     const step_name_list = ["Profile", "Research and interest", "Submit"];
     const form_title = "Create profile";
-
+    const userId=localStorage.getItem('userId');
+    const {invalid} = props;
+    useEffect(() => {
+        userAxios
+        .get('/users/'+userId)
+        .then(response=>{
+            props.loadData(response.data)
+            console.log(response.data);
+        })
+        .catch(error=>console.log(error.response))
+    }, []);
+    
     const [active_step,
         setActive_step] = useState(0);
 
@@ -41,7 +54,7 @@ function CreateProfile(props) {
     function handleNext() {
         setActive_step(active_step + 1);
     }
-    const {invalid} = props;
+    
     return (
         <Grid container direction="row" justify="center" alignItems="center">
             <Paper elevation={10} className="paper">
@@ -94,14 +107,21 @@ function CreateProfile(props) {
 
 }
 
+const mapStateToProps= state=>{
+    return{
+        initialValues:state.formLoader.data
+    }
+};
 
 const mapDispatchToProps = dispatch => {
     return {
         onSuccess: (msg) => dispatch(actions.displaySuccessMessage(msg)),
-        onError: (msg) => dispatch(actions.displayErrorMessage(msg))
+        onError: (msg) => dispatch(actions.displayErrorMessage(msg)),
+        loadData:(data) => dispatch(actions.load(data)),
     };
 };
-export default connect(null, mapDispatchToProps)(reduxForm({
+
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
     form: 'createProfile', // a unique identifier for this form
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true

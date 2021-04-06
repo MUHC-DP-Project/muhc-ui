@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
@@ -12,7 +12,8 @@ import {v4 as uuidv4} from 'uuid';
 import {connect} from 'react-redux';
 import {reduxForm} from 'redux-form';
 import SubmitButton from '../../components/UI/SubmitButton/SubmitButton';
-
+import {projectAxios} from '../../axios-pbrn';
+import formMapper from './formMapper';
 //pages
 import Participants from './Participants/Participants';
 import ResearchAndMethodology from './ResearchAndMethodology/ResearchAndMethodology';
@@ -29,7 +30,17 @@ function CreateProject(props) {
     ]; //array of component
     const step_name_list = ["Participants", "Project", "Research and methodology"];
     const form_title = "Create Project";
-
+    useEffect(() => {
+        if (props.location.state) { const projectId=props.location.state.Id;
+        projectAxios
+        .get('/projects/'+projectId)
+        .then(response=>{
+            props.loadData(formMapper(response.data))
+            console.log('formapper',formMapper(response.data));
+        })
+        .catch(error=>console.log(error))}
+       
+    }, []);
     const [active_step,
         setActive_step] = useState(0);
 
@@ -96,13 +107,20 @@ function CreateProject(props) {
     )
 
 }
+
+const mapStateToProps= state=>{
+    return{
+        initialValues:state.formLoader.data
+    }
+};
 const mapDispatchToProps = dispatch => {
     return {
         onSuccess: (msg) => dispatch(actions.displaySuccessMessage(msg)),
-        onError: (msg) => dispatch(actions.displayErrorMessage(msg))
+        onError: (msg) => dispatch(actions.displayErrorMessage(msg)),
+        loadData:(data) => dispatch(actions.load(data)),
     };
 };
-export default connect(null, mapDispatchToProps)(reduxForm({
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
     form: 'createProject', // a unique identifier for this form
     destroyOnUnmount: true,
     forceUnregisterOnUnmount: true

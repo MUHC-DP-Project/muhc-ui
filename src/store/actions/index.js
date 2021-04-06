@@ -9,3 +9,6 @@ export {
 export {
     loadData
 } from './manage';
+export {
+    load
+}from './loader';

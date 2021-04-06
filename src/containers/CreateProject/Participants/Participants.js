@@ -38,7 +38,7 @@ function Participants() {
                 elementType: 'autocomplete_table',
                 elementConfig: {
                     options: filteredData,
-                    autocomplete_table_name: "PIListOfProjects",
+                    autocomplete_table_name: "principalInvestigators",
                     grid_size: 12
                 }
             },
@@ -56,7 +56,7 @@ function Participants() {
                 elementType: 'autocomplete_table',
                 elementConfig: {
                     options: filteredData,
-                    autocomplete_table_name: "CoIListOfProjects",
+                    autocomplete_table_name: "coInvestigators",
                     grid_size: 12
                 }
             },
@@ -74,7 +74,7 @@ function Participants() {
                 elementType: 'autocomplete_table',
                 elementConfig: {
                     options: filteredData,
-                    autocomplete_table_name: "ColListOfProjects",
+                    autocomplete_table_name: "collaborators",
                     grid_size: 12
                 }
             },   

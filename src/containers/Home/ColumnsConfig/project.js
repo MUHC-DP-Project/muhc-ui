@@ -35,7 +35,7 @@ export const PROJECT_COLUMN = [
                     color:"blue"
                 }}
                 to={{
-                pathname: '/',
+                pathname: '/projectreport',
                 state: {
                     Id: value
                 }

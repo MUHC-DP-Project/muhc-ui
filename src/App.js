@@ -12,6 +12,8 @@ import SignUp from './containers/Auth/SignUp/SignUp';
 import SignIn from './containers/Auth/SignIn/SignIn';
 import ForgotPassword from './containers/Auth/ForgotPassword/ForgotPassword';
 import ChangePassword from './containers/Auth/ChangePassword/ChangePassword';
+import UserReport from './containers/Report/User/Report';
+import ProjectReport from './containers/Report/Project/Report';
 import Logout from './containers/Auth/Logout/Logout';
 import Page404 from './components/Page404/Page404';
 import PostSignIn from './components/PostSignIn/PostSignIn';
@@ -45,6 +47,8 @@ export class App extends Component {
                             <Route path="/changepassword" component={ChangePassword}/>
                             <Route path="/manage" component={Manage}/>
                             <Route path="/logout" component={Logout}/>
+                            <Route path="/userreport" component={UserReport}/>
+                            <Route path="/projectreport" component={ProjectReport}/>
                             <Route path="/" exact component={Home}/>
                             <Route component={Page404}/>
                         </Switch>

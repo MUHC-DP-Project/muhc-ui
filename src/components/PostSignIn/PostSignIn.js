@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 
 import './PostSignIn.css';
 function PostSignIn(props) {
-    console.log(props);
+    const isApproved=localStorage.getItem('isApproved');
+    const isEmailVerified=localStorage.getItem('isEmailVerified');
     return (
         <Grid container direction="column" justify="center" alignItems="center">
             <Paper elevation={10} className="postsignin_paper">
@@ -27,12 +28,12 @@ function PostSignIn(props) {
                     </Grid>
                     <Grid item>
                         <ul>
-                            {!props.isApproved && <li>
+                            {isApproved==="false" && <li>
                                 <Typography inline variant="h6">Account is not approved yet !</Typography>
                             </li>
 }
 
-                            {!props.isEmailVerified && <li>
+                            {isEmailVerified==="false" && <li>
                                 <Typography inline variant="h6">You have not confirmed the email !</Typography>
                             </li>}
                         </ul>

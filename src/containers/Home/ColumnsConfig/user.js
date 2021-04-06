@@ -11,27 +11,47 @@ export const USER_COLUMN = [
         Header: 'Email',
         accessor: 'email'
     }, {
-        Header: 'Verification Note',
-        accessor: 'verificationNotes'
-    }, {
-        Header: 'Sign Up Date',
-        accessor: 'createdAt',
+        Header: 'Role',
+        accessor: 'role',
         Cell: ({value}) => {
-            return format(new Date(value), 'dd/MM/yyyy')
+            return !value
+                ? "N/A"
+                : value
+        }
+    }, {
+        Header: 'Research Interest',
+        accessor: 'researchInterests',
+        Cell: ({value}) => {
+            return value.length === 0
+                ? "N/A"
+                : value + ', '
+        },
+        disableSortBy: true
+    }, {
+        Header: 'Profession',
+        accessor: 'professionalOccupation',
+        Cell: ({value}) => {
+            return !value
+                ? "N/A"
+                : value
         }
     }, {
         Header: 'Action',
         accessor: '_id',
         Cell: ({value}) => {
             return <Link
+            style={{
+                    textDecoration:"none",
+                    color:"blue"
+                }}
                 to={{
-                pathname: '/',
+                pathname: '/userreport',
                 state: {
                     Id: value
                 }
             }}>View</Link>
         },
         disableFilters: true,
-        disableSortBy:true
+        disableSortBy: true
     }
 ];

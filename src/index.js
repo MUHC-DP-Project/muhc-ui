@@ -10,12 +10,14 @@ import {reducer as reduxFormReducer} from 'redux-form';
 import errorHandlerReducer from './store/reducers/errorHandler';
 import authReducer from './store/reducers/auth';
 import managePageReducer from './store/reducers/manage';
+import loadFormReducer from './store/reducers/loader';
 const rootReducer = combineReducers({
     //add orther reducers
     auth:authReducer,
     errorHandler:errorHandlerReducer,
     form: reduxFormReducer,
-    manage:managePageReducer
+    manage:managePageReducer,
+    formLoader:loadFormReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

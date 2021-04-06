@@ -20,15 +20,41 @@ function Home(props) {
         setMyProject] = useState(undefined);
     const [userData, setUserData] = useState(undefined);
     const [projectData, setProjectData] = useState(undefined);
-    const [displayAllProject, setDisplayAllProject] = useState(true)
+    const [displayAllProject, setDisplayAllProject] = useState(true);
+
     useEffect(() => {
         //will need another axios call for myProject
         projectAxios
             .get('/projects')
             .then(response => {
                 console.log('projectdata ',response.data);
-                setMyProject(response.data);//for now i will display all the project untill we do the dependencies
+                const listOfPR=response.data;
                 setProjectData(response.data);
+                const userId=localStorage.getItem('userId');
+                console.log(userId);
+                userAxios
+                .get('/users/'+userId)
+                .then(response=>{
+                    const user=response.data;
+                    let finalList=[];
+                    let allInvolvedProjectId=[];
+                    allInvolvedProjectId.push(...user.CoIListOfProjects)
+                    allInvolvedProjectId.push(...user.ColListOfProjects);
+                    allInvolvedProjectId.push(...user.PIListOfProjects);
+                    allInvolvedProjectId.push(...user.userListOfProjects);
+                    // allInvolvedProjectId=allInvolvedProjectId.flat()
+                    listOfPR.forEach(element => {
+                        if(allInvolvedProjectId.includes(element._id)){
+                            finalList.push(element); 
+                        }
+                    });
+                    setMyProject(finalList);
+                    console.log("a user ",user);
+        
+                })
+                .catch(error => {
+                    console.log("Failed to fetch data: ", error.response);
+                });
             })
             .catch(error => {
                 console.log("Failed to fetch data: ", error.response);
@@ -42,6 +68,7 @@ function Home(props) {
         .catch(error => {
             console.log("Failed to fetch data: ", error.response);
         });
+
     }, [])
 
     const backDrop = <Backdrop className="backDrop" open={!myProject || !projectData || !userData}>
