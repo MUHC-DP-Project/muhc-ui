@@ -5,7 +5,6 @@ export default function handleSubmit(parentprops,allValues) {
     const copied_json_object = {
         ...json_object
     }
-
     copied_json_object.principalUniversityAffiliation = copied_json_object.principalUniversityAffiliationSelect === "Other"
         ? copied_json_object.principalUniversityAffiliationTextfield
         : copied_json_object.principalUniversityAffiliationSelect;
@@ -25,9 +24,9 @@ export default function handleSubmit(parentprops,allValues) {
     delete copied_json_object.secondaryClinicSelect;
 
     copied_json_object.professionalOccupation = copied_json_object.professionalOccupationSelect === "Other"
-        ? copied_json_object.profesionalOccupationTextfield
+        ? copied_json_object.professionalOccupationTextfield
         : copied_json_object.professionalOccupationSelect;
-    delete copied_json_object.profesionalOccupationTextfield;
+    delete copied_json_object.professionalOccupationTextfield;
     delete copied_json_object.professionalOccupationSelect;
 
     copied_json_object.role = copied_json_object.roleSelect === "Other"

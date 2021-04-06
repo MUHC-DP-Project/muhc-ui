@@ -4,7 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 
 function HandleMultiTextRadio(jsonObject,key){
     let tmpJsonObject={...jsonObject};
-    let array=[...tmpJsonObject[key]];
+    let array=tmpJsonObject[key];
     array.forEach(element => {
         tmpJsonObject[key+'_text_'+element.select]=element.text;  
         if(key==="intendedMcgillLocation"){
@@ -12,7 +12,6 @@ function HandleMultiTextRadio(jsonObject,key){
         }
         tmpJsonObject[key+'_select']=element.select;
     });    
-    delete tmpJsonObject[key];
     return tmpJsonObject;
     }
 

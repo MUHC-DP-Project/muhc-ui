@@ -126,7 +126,7 @@ function Report(props) {
     }
     function editReport(){
         const projectId = props.location.state.Id;
-        props.history.push({
+        props.history.replace({
             pathname:'/createProject',
             state:{
                 Id:projectId
@@ -195,10 +195,13 @@ function Report(props) {
                                 : " " + projectData.scientificPeerReviewText
                         } </Typography>}
                         <Typography >
-                            <b>Has this study received IRB/REB approval?:</b>{!projectData.briefProjectTitle
+                            <b>Has this study received IRB/REB approval?:</b>{!projectData.studyIRBREBSelect
                                 ? " N/A"
-                                : " " + projectData.briefProjectTitle}</Typography>
-
+                                : " " + projectData.studyIRBREBSelect}</Typography>
+                       {projectData.studyIRBREBSelect&&projectData.studyIRBREBSelect!=="Exempt" &&<Typography >
+                             <b>{projectData.studyIRBREBText==="Yes"?"Name of the approving committee :":"What support, if any would you like from PBRN :"}</b>{!projectData.studyIRBREBSelect
+                                ? " N/A"
+                                : " " + projectData.studyIRBREBText}</Typography>}
                         <Typography
                             variant="h5"
                             style={{

@@ -3,8 +3,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import MUI_Select from '../MaterialUI/MUI_Select'
 import MUI_TextField from '../MaterialUI/MUI_TextField';
+import {Field, formValueSelector} from 'redux-form';
+import {connect} from 'react-redux';
 
-import {Field} from 'redux-form';
 import './SelectText.css';
 function SelectText(props) {
     const select_list = props.select_list;
@@ -13,9 +14,14 @@ function SelectText(props) {
     const extra_text = props.extra_text;
     const select_validate=props.select_validate;
     const validators=props.validators;
-    const [select, setSelect] = useState(null);
+    const [select, setSelect] = useState(props.selectedItem);
     const mapValidator=list=>{
             return validators(list);
+    }
+    if(text_props){console.log('bool',text_props!=null && select!=null && text_props
+        .options
+        .find(elem => elem.condition === select)!=null);
+    console.log(select);
     }
     return (
         <React.Fragment>
@@ -69,4 +75,9 @@ function SelectText(props) {
 
 
 
-export default SelectText
+const mapStatesToProps = (state,ownProps) => {
+    return{
+    selectedItem: formValueSelector(ownProps.formName)(state, ownProps.select_props.name)
+}
+}
+export default connect(mapStatesToProps) (SelectText)

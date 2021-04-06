@@ -32,7 +32,7 @@ function handleMilestones(jsonObject){
     return tmpJsonObject;
 }
 
-export default function handleSubmit(parentprops,allValues) {
+export default function handleSubmit(parentprops,allValues,submitType) {
     const json_object=allValues;
     let final_json_object = {
         ...json_object
@@ -50,10 +50,9 @@ export default function handleSubmit(parentprops,allValues) {
     delete final_json_object.study_participants_text_field;
     delete final_json_object.keywords_text_field;
     console.log("Form submited ",final_json_object);
-
-    return projectAxios
-        .post('/projects', final_json_object)
-        .then(response => {
+    console.log(submitType);
+    const handler=submitType.type==="POST"? projectAxios.post('/projects', final_json_object):projectAxios.put('/projects/'+submitType.id, final_json_object)
+    handler.then(response => {
             const userEmail=localStorage.getItem('email');
             const bodyRequest={
                 PIListOfProjects:final_json_object.principalInvestigators,

@@ -7,11 +7,12 @@ function SubmitButton(props) {
     const submitHandler=props.submitHandler;
     const invalid=props.disabled;
     const allValues=props.allValues;
-    const parentProps=props.parentProps;   
+    const parentProps=props.parentProps;  
+    const submitType=props.submitType; 
     return (
         <Button
             onClick={() => {
-                submitHandler(parentProps,allValues);
+                submitHandler(parentProps,allValues,submitType);
             }}
             disabled={invalid}
             variant="contained"

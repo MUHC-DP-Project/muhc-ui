@@ -7,8 +7,6 @@ export const authStart = () => {
 };
 
 export const authSuccess = (token, user) => {
-    // userAxios.defaults.headers.common['Authorization'] = token;
-    // projectAxios.defaults.headers.common['Authorization'] = token;
     return {type: actionTypes.AUTH_SUCCESS, tokenId: token, userId: user};
 };
 

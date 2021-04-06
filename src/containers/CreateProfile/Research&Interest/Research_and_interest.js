@@ -56,7 +56,7 @@ function Research_and_interest() {
                         validation: ["required"],
                     },
                     text_elem: {
-                        name: "profesionalOccupationTextfield",
+                        name: "professionalOccupationTextfield",
                         options: [
                             {
                                 condition: null,
