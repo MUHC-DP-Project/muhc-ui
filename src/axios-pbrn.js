@@ -2,11 +2,11 @@ import axios from 'axios';
 
 
 const projectAxios = axios.create({
-    baseURL: process.env.REACT_APP_PROJECT_SERVER_URL 
+    baseURL: 'https://pbrn-projects.herokuapp.com/' 
 });
 
 const userAxios = axios.create({
-    baseURL: process.env.REACT_APP_USER_SERVER_URL
+    baseURL: 'https://pbrn-users.herokuapp.com/'
 });
 
 userAxios.interceptors.request.use(function (config) {
