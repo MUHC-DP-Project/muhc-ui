@@ -1,80 +1,83 @@
-import {projectAxios} from '../../axios-pbrn'; //
+import {projectAxios,userAxios} from '../../axios-pbrn'; 
 import {reset} from 'redux-form'
 
-function handleListOfUser(jsonObject,extension,key){//PI_
-    const obj={...jsonObject};
-    const fullNames=[];
-    const firstNames=[];
-    const lastNames=[];
-    for(let Name in obj){
-        if( Name.includes(extension+"fName_")){
-            const id=Name.replace(extension+"fName_",'');
-            firstNames.push({
-                id:id,
-                value:obj[Name]
-            })
-            delete obj[Name];
-        }
-        else if (Name.includes(extension+"lName_")){
-            const id=Name.replace(extension+"lName_",'');
-            lastNames.push({
-                id:id,
-                value:obj[Name]
-            });
-            delete obj[Name];
-        }
-    }
-
-    firstNames.forEach(fn => {
-        const lastName=lastNames.find(ln=>ln.id===fn.id);
-        if(lastName!==undefined){
-            fullNames.push(fn.value+' '+lastName.value)
-        }
-    });
-
-    obj[key]=fullNames;
-    return obj;
-}
 
 function HandleMultiTextRadio(jsonObject,key){
 let tmpJsonObject={...jsonObject};
 let array=tmpJsonObject[key];
 array.forEach(element => {
-    element.text=tmpJsonObject[key+'_text_'+element.select];
-    delete tmpJsonObject[key+'_text_'+element.select];
-    
+    element.text=tmpJsonObject[key+'_text_'+element.select];  
+    delete tmpJsonObject[key+'_text_'+element.select];  
+    delete tmpJsonObject[key+'_radio_'+element.select];
+    delete element.id;
+    if(key==="intendedNonMcgillLocation" || key==="researchAndMethodology"){
+        delete element.radio;
+    }
 });
 delete tmpJsonObject[key+'_select']
 return tmpJsonObject;
 }
-export default function handleSubmit(parentprops,allValues) {
+
+function handleMilestones(jsonObject){
+    let tmpJsonObject={...jsonObject};
+    const anticipatedMilestones=["projectConception","projectDesigned","fundingSoughtIgnoredConsidered","ethicsApproval","recruitment","dataCollection","dataAnalysis","knowledgeTranslationDissemination"];
+    anticipatedMilestones.map(element=>{
+        tmpJsonObject[element]={
+            estimatedDate:tmpJsonObject[element+'Date'],
+            projectStage:tmpJsonObject[element+'Radio']
+        }
+        delete tmpJsonObject[element+'Date'];
+        delete tmpJsonObject[element+'Radio'];
+    })
+    return tmpJsonObject;
+}
+
+export default function handleSubmit(parentprops,allValues,submitType) {
     const json_object=allValues;
     let final_json_object = {
         ...json_object
     }
-
-    final_json_object=handleListOfUser(final_json_object,"PI_",'PIListOfUsers');
-    final_json_object=handleListOfUser(final_json_object,"CoI_",'CoIListOfUsers');
-    final_json_object=handleListOfUser(final_json_object,"Col_",'ColListOfUsers');
-
     final_json_object=HandleMultiTextRadio(final_json_object,"intendedMcgillLocation");  
     final_json_object=HandleMultiTextRadio(final_json_object,"intendedNonMcgillLocation"); 
     final_json_object=HandleMultiTextRadio(final_json_object,"researchAndMethodology"); 
-
+    final_json_object=handleMilestones(final_json_object);
     if(final_json_object.projectFund=== 'Project has not been fund' && final_json_object.projectSought==='Funding will not be sought'){
         final_json_object.agencyName='Empty';
     }
-
-    return projectAxios
-        .post('/projects', final_json_object)
-        .then(response => {
-            parentprops.dispatch(reset('createProject'));
-            parentprops.onSuccess("Form Submited");
-            parentprops
-                .history
-                .push("/");
+    if(final_json_object.studyIRBREBSelect==="Exempt"){
+        final_json_object.studyIRBREBText='N/A';
+    }
+    delete final_json_object.study_participants_text_field;
+    delete final_json_object.keywords_text_field;
+    console.log("Form submited ",final_json_object);
+    console.log(submitType);
+    const handler=submitType.type==="POST"? projectAxios.post('/projects', final_json_object):projectAxios.put('/projects/'+submitType.id, final_json_object)
+    handler.then(response => {
+            const userEmail=localStorage.getItem('email');
+            const bodyRequest={
+                PIListOfProjects:final_json_object.principalInvestigators,
+                CoIListOfProjects:final_json_object.coInvestigators,
+                ColListOfProjects:final_json_object.collaborators
+            }
+            console.log('bodyqurest',bodyRequest);
+            console.log('response',response.data);
+            const projectId=response.data._id;
+            userAxios.
+            put('/users/connectToProjects/'+projectId+'/'+userEmail,bodyRequest)
+            .then(response=>{
+                parentprops.dispatch(reset('createProject'));
+                parentprops.onSuccess("Form Submited");
+                parentprops
+                    .history
+                    .replace("/");
+            })
+            .catch(error => {
+                console.log(error.response);
+                parentprops.onError("Failed to submit the form");
+            })           
         })
         .catch(error => {
+            console.log(error.response);
             parentprops.onError("Failed to submit the form");
         })
 }

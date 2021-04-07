@@ -51,7 +51,8 @@ class Input extends Component {
                     text_props={this.props.elementConfig.text_elem}  
                     extra_text={this.props.elementConfig.extra_text}
                     select_validate={validators(this.props.elementConfig.select_elem.validation)}   
-                    validators={validators}   
+                    validators={validators}  
+                    formName={this.props.formName} 
                     />
                 break;
             case('autocomplete_table'):
@@ -80,6 +81,7 @@ class Input extends Component {
             style_select={this.props.elementConfig.style_select}
             select_name={this.props.elementConfig.select_name}
             component_name={this.props.elementConfig.name}
+            displayselectedItem={this.props.elementConfig.displayselectedItem}
             formName={this.props.formName}
             validate={this.required}
             />

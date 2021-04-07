@@ -25,6 +25,7 @@
     "react-route": "^1.0.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-table": "^7.6.3",
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
     "redux-form-website-template": "^1.0.21",
@@ -42,7 +43,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "nightwatch",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "./serve.sh"
   },
   "eslintConfig": {
     "extends": [

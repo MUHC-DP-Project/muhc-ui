@@ -49,7 +49,7 @@ function Submit() {
             motivation_for_joining_title: {
                 elementType: "title",
                 elementConfig: {
-                    value: "Motivation for joining this network",
+                    value: "Motivation for joining this network (select as many as applied)",
                     style: {
                         marginTop: 20
                     },
@@ -80,7 +80,7 @@ function Submit() {
             found_about_us_title: {
                 elementType: "title",
                 elementConfig: {
-                    value: "How did you find about the PBRN database",
+                    value: "How did you find about the PBRN database (select as many as applied)",
                     style: {
                         marginTop: 20
                     },
@@ -108,7 +108,7 @@ function Submit() {
                 }
             }
         },
-        formName: 'signUp'
+        formName: 'createProfile'
     }
     return (
         <React.Fragment>
