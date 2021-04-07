@@ -130,7 +130,6 @@ export default function MiniDrawer(props) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-
     return (
         <div className={classes.root}>
             <CssBaseline/>
@@ -178,8 +177,9 @@ export default function MiniDrawer(props) {
                 <List>
                     <Avatar/>
                     <Divider/>
-                    {NavItems.map((item) => (
-                        <Link key={uuidv4()} to={item.path} className={classes.navItemLink} >
+                    {NavItems.map((item) => {
+                    if((!["undefined","false"].includes(localStorage.getItem('isApproved')) && !["undefined","false"].includes(localStorage.getItem('isEmailVerified')))||item.content==="Logout"){
+                        return <Link key={uuidv4()} to={item.path} className={classes.navItemLink} >
                             <ListItem button key={uuidv4()} className={classes.navItemElem}>
 
                                 <ListItemIcon>{item.icon}</ListItemIcon>
@@ -187,7 +187,9 @@ export default function MiniDrawer(props) {
 
                             </ListItem>
                         </Link>
-                    ))}
+                            }
+                        })
+                    }
                 </List>
             </StyledDrawer>
 

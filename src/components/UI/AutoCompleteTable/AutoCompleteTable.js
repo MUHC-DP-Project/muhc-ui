@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from '@material-ui/core/IconButton';
 import {v4 as uuidv4} from 'uuid';
+import Typography from '@material-ui/core/Typography';
 
 import {Field, FieldArray,change} from 'redux-form';
 import MUI_TextField from '../MaterialUI/MUI_TextField';
@@ -15,15 +16,13 @@ function AutoCompleteTable(props) {
     const autocomplete_table_name=props.autocomplete_table_name;
     const inputEl = useRef(null);
     const formName=props.formName;
-
     const [optionList,
         setOptionList] = React.useState([]);
     
 
     function handleChange(value, fields) {
         if (!optionList.includes(value) && value !== null && value!==undefined && value.trim() !== "") {
-            fields.push(value);
-           
+            fields.push(value);      
             setOptionList(optionList.concat(value))
         }
 
@@ -59,7 +58,7 @@ function AutoCompleteTable(props) {
                             renderInput={(params) => <TextField {...params}  placeholder="Select an option" variant="outlined"/>}/>
                     </Grid>
                     <Grid item>
-                    <Field
+                    {text_field_name&&<Field
                         name={text_field_name} 
                         component={MUI_TextField}
                         label="Other" 
@@ -69,7 +68,7 @@ function AutoCompleteTable(props) {
                     <AddCircleOutlineIcon/>
                 </IconButton>
         }}
-                        />
+                        />}
                     </Grid>
                 </Grid>
                 
@@ -114,7 +113,8 @@ function AutoCompleteTable(props) {
     
     return (
         <React.Fragment >
-            <FieldArray name={autocomplete_table_name} validate={required} component={createElement}/>          
+            <FieldArray name={autocomplete_table_name} validate={required} component={createElement}/> 
+            <Typography variant="h8" inline><b>*Click on the selected item to delete it from the table</b></Typography>       
         </React.Fragment>
     )
 }

@@ -5,7 +5,6 @@ export default function handleSubmit(parentprops,allValues) {
     const copied_json_object = {
         ...json_object
     }
-
     copied_json_object.principalUniversityAffiliation = copied_json_object.principalUniversityAffiliationSelect === "Other"
         ? copied_json_object.principalUniversityAffiliationTextfield
         : copied_json_object.principalUniversityAffiliationSelect;
@@ -25,9 +24,9 @@ export default function handleSubmit(parentprops,allValues) {
     delete copied_json_object.secondaryClinicSelect;
 
     copied_json_object.professionalOccupation = copied_json_object.professionalOccupationSelect === "Other"
-        ? copied_json_object.profesionalOccupationTextfield
+        ? copied_json_object.professionalOccupationTextfield
         : copied_json_object.professionalOccupationSelect;
-    delete copied_json_object.profesionalOccupationTextfield;
+    delete copied_json_object.professionalOccupationTextfield;
     delete copied_json_object.professionalOccupationSelect;
 
     copied_json_object.role = copied_json_object.roleSelect === "Other"
@@ -36,9 +35,10 @@ export default function handleSubmit(parentprops,allValues) {
     delete copied_json_object.roleTextfield;
     delete copied_json_object.roleSelect;
 
-
+    const userId=localStorage.getItem('userId');
+    console.log(copied_json_object);
     return userAxios
-        .post('/users', copied_json_object)
+        .put("/users/"+userId, copied_json_object)
         .then(response => {
             parentprops.dispatch(reset('signUp'));
             parentprops.onSuccess("Form Submited");
@@ -47,6 +47,7 @@ export default function handleSubmit(parentprops,allValues) {
                 .push("/");
         })
         .catch(error => {
+            console.log("error ",error.response);
             parentprops.onError("Failed to submit the form");
         })
 }

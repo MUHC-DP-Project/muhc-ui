@@ -1,55 +1,83 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {v4 as uuidv4} from 'uuid';
 import SimpleMultipageForm from '../../../components/UI/SimpleMultipageForm/SimpleMultipageForm';
+import {userAxios} from '../../../axios-pbrn';
 function Participants() {
 
+    let filteredData=[];
+    useEffect(() => {
+        userAxios
+        .get('/users')
+        .then(response=>{           
+            const rawData=response.data;          
+            rawData.forEach(element => {
+                if(element.isApproved){
+                    filteredData.push(
+                        element.email
+                    )  
+                }
+            });
+        })
+        .catch(error => {
+            console.log("Failed to fetch data: ", error.response);
+        });
+    }, []);
     const json_obj = {
         participant_form: {
-            principal_investigator: {
-                elementType: 'user_list',
+            principal_investigator_title: {
+                elementType: "title",
                 elementConfig: {
-                    title: "Principal Investigator/s",
-                    style_title: {
-                        marginTop: 20,
-                        marginBottom: 20
-                    },
+                    value: "Principal Investigator/s (select as many as applied)",
                     style: {
-                        width: 350
+                        marginTop: 20
                     },
-                    symbol: "PI_",
+                    grid_size: 12
+                }
+            },
+            principal_investigator: {
+                elementType: 'autocomplete_table',
+                elementConfig: {
+                    options: filteredData,
+                    autocomplete_table_name: "principalInvestigators",
+                    grid_size: 12
+                }
+            },
+            co_investigator_title: {
+                elementType: "title",
+                elementConfig: {
+                    value: "Co-Investigator/s(select as many as applied)",
+                    style: {
+                        marginTop: 20
+                    },
                     grid_size: 12
                 }
             },
             co_investigator: {
-                elementType: 'user_list',
+                elementType: 'autocomplete_table',
                 elementConfig: {
-                    title: "Co-Investigator/s",
-                    style_title: {
-                        marginTop: 20,
-                        marginBottom: 20
-                    },
+                    options: filteredData,
+                    autocomplete_table_name: "coInvestigators",
+                    grid_size: 12
+                }
+            },
+            collaborators_title: {
+                elementType: "title",
+                elementConfig: {
+                    value: "Collaborators (select as many as applied)",
                     style: {
-                        width: 350
+                        marginTop: 20
                     },
-                    symbol: "CoI_",
                     grid_size: 12
                 }
             },
             collaborators: {
-                elementType: 'user_list',
+                elementType: 'autocomplete_table',
                 elementConfig: {
-                    title: "Collaborators",
-                    style_title: {
-                        marginTop: 20,
-                        marginBottom: 20
-                    },
-                    style: {
-                        width: 350
-                    },
-                    symbol: "Col_",
+                    options: filteredData,
+                    autocomplete_table_name: "collaborators",
                     grid_size: 12
                 }
-            },
+            },   
             study_size_title: {
                 elementType: "title",
                 elementConfig: {
@@ -108,7 +136,7 @@ function Participants() {
             study_participants_title: {
                 elementType: "title",
                 elementConfig: {
-                    value: "Study participants",
+                    value: "Study participants (select as many as applied)",
                     style: {
                         marginTop: 20
                     },

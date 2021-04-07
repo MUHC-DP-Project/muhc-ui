@@ -184,7 +184,8 @@ function Profile() {
                         ],
                         style: {
                             width: 370
-                        }
+                        },
+                        value:null
                     },
                     grid_size: 12
                 }
@@ -253,7 +254,7 @@ function Profile() {
                             width: "400px",
                             textAlign: "center"
                         },
-                        
+                        value:null
                     },
                     grid_size: 12
                 }
@@ -351,7 +352,8 @@ function Profile() {
                         style: {
                             width: "400px",
                             textAlign: "center"
-                        }
+                        },
+                        value:null
                     },
                     grid_size: 12
                 }
@@ -449,13 +451,14 @@ function Profile() {
                         style: {
                             width: "400px",
                             textAlign: "center"
-                        }
+                        },
+                        value:null
                     },
                     grid_size: 12
                 }
             }
         },
-        formName: 'signUp'
+        formName: 'createProfile'
     }
     return (
         <React.Fragment>
