@@ -16,6 +16,7 @@ function AutoCompleteTable(props) {
     const autocomplete_table_name=props.autocomplete_table_name;
     const inputEl = useRef(null);
     const formName=props.formName;
+    const isRequired=props.isRequired;
     const [optionList,
         setOptionList] = React.useState([]);
     
@@ -113,7 +114,7 @@ function AutoCompleteTable(props) {
     
     return (
         <React.Fragment >
-            <FieldArray name={autocomplete_table_name} validate={required} component={createElement}/> 
+            <FieldArray name={autocomplete_table_name} validate={isRequired?required:null} component={createElement}/> 
             <Typography variant="h8" inline><b>*Click on the selected item to delete it from the table</b></Typography>       
         </React.Fragment>
     )

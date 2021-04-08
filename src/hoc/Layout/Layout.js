@@ -18,7 +18,7 @@ import {Link} from 'react-router-dom';
 import NavItems from './NavItems';
 import styled from "styled-components";
 import Avatar from '../../components/UI/Avatar/Avatar';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import WithErrorHandler from '../withErrorHandler/WithErrorHandler';
 const drawerWidth = 240;
 
@@ -98,16 +98,16 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         padding: theme.spacing(3)
     },
-    navItemLink:{
-        textDecoration:"none",
-        color:"#fff"      
-        
+    navItemLink: {
+        textDecoration: "none",
+        color: "#fff"
+
     },
-    navItemElem:{
-        marginTop:"10px",
+    navItemElem: {
+        marginTop: "10px",
         '&:hover': {
             backgroundColor: '#1a83ff'
-          }
+        }
     }
 
 }));
@@ -134,7 +134,6 @@ export default function MiniDrawer(props) {
         <div className={classes.root}>
             <CssBaseline/>
 
-
             <AppBar
                 position="fixed"
                 style={{
@@ -157,46 +156,55 @@ export default function MiniDrawer(props) {
                 </Toolbar>
             </AppBar>
 
-
             <StyledDrawer
-                variant="permanent"               
+                variant="permanent"
                 classes={{
                 paper: clsx({
                     [classes.drawerOpen]: open,
                     [classes.drawerClose]: !open
                 })
             }}>
-                <div className={classes.toolbar} >
+                <div className={classes.toolbar}>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'rtl'
-                            ? <ChevronRightIcon style={{ color: '#fff' }}/>
-                            : <ChevronLeftIcon style={{ color: '#fff' }}/>}
+                            ? <ChevronRightIcon
+                                    style={{
+                                    color: '#fff'
+                                }}/>
+                            : <ChevronLeftIcon
+                                style={{
+                                color: '#fff'
+                            }}/>}
                     </IconButton>
                 </div>
                 <Divider/>
                 <List>
                     <Avatar/>
-                    <Divider/>
-                    {NavItems.map((item) => {
-                    if((!["undefined","false"].includes(localStorage.getItem('isApproved')) && !["undefined","false"].includes(localStorage.getItem('isEmailVerified')))||item.content==="Logout"){
-                        return <Link key={uuidv4()} to={item.path} className={classes.navItemLink} >
-                            <ListItem button key={uuidv4()} className={classes.navItemElem}>
+                    <Divider/> {NavItems.map((item) => {
+                        if ((!["undefined", "false"].includes(localStorage.getItem('isApproved')) && !["undefined", "false"].includes(localStorage.getItem('isEmailVerified'))) || item.content === "Logout") {
+                            if (item.content === "Manage" && localStorage.getItem('userRole') !== "Admin") {
+                                return ;
+                            } else {
+                                return <Link key={uuidv4()} to={item.path} className={classes.navItemLink}>
+                                    <ListItem button key={uuidv4()} className={classes.navItemElem}>
 
-                                <ListItemIcon>{item.icon}</ListItemIcon>
-                                <ListItemText primary={item.content}/>
+                                        <ListItemIcon>{item.icon}</ListItemIcon>
+                                        <ListItemText primary={item.content}/>
 
-                            </ListItem>
-                        </Link>
+                                    </ListItem>
+                                </Link>
                             }
-                        })
-                    }
+
+                        }
+                    })
+}
                 </List>
             </StyledDrawer>
 
             <main className={classes.content}>
                 <div className={classes.toolbar}/> {props.children}
             </main>
-            <WithErrorHandler/>  
+            <WithErrorHandler/>
         </div>
     );
 }

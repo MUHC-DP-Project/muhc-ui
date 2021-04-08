@@ -30,7 +30,7 @@ function CreateProject(props) {
     const step_component_list = [ < Participants />, < Project />, < ResearchAndMethodology />
     ]; //array of component
     const step_name_list = ["Participants", "Project", "Research and methodology"];
-    const form_title = "Create Project";
+    const form_title = "Project";
     const [submitType, setSubmitType] = useState({
         type:'POST',
         Id:null

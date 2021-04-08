@@ -10,10 +10,14 @@ import {format} from 'date-fns';
 import './Report.css';
 import Button from '@material-ui/core/Button';
 import AlertDialog from '../../../components/UI/Dialogue/Dialogue';
+import { blue } from '@material-ui/core/colors';
 function Report(props) {
     const [projectData,
-        setProjectData] = useState(undefined)
-    const [isUserProject, setIsUserProject] = useState(false)
+        setProjectData] = useState(undefined);
+    const [isUserProject, setIsUserProject] = useState(false);
+    const [principalInvesigators, setPrincipalInvesigators] = useState([]);
+    const [collaborators, setCollaborators] = useState([]);
+    const [coInvestigators, setCoInvestigators] = useState([]);
     useEffect(() => {
         if (!props.location.state) {
             props
@@ -26,7 +30,31 @@ function Report(props) {
             .get('/projects/' + projectId)
             .then(response => {
                 console.log("projectdata ", response.data);
-                setProjectData(response.data)
+                setProjectData(response.data);
+                if(response.data.coInvestigators.length>0){
+                    userAxios
+                    .post('/users/findidsbyemail',{
+                        emails:response.data.coInvestigators
+                    }).then(response=>{
+                        setCoInvestigators(response.data)
+                    }).catch(error=>console.log(error.response))
+                }
+                if(response.data.collaborators.length>0){
+                    userAxios
+                    .post('/users/findidsbyemail',{
+                        emails:response.data.collaborators
+                    }).then(response=>{
+                        setCollaborators(response.data)
+                    }).catch(error=>console.log(error.response))
+                }
+                if(response.data.principalInvestigators.length>0){
+                    userAxios
+                    .post('/users/findidsbyemail',{
+                        emails:response.data.principalInvestigators
+                    }).then(response=>{
+                        setPrincipalInvesigators(response.data)
+                    }).catch(error=>console.log(error.response))
+                }
             })
             .catch(error => {
                 props
@@ -40,7 +68,7 @@ function Report(props) {
                 console.log("userdata ", response.data);
                 const userProjects=response.data.userListOfProjects;
                 setIsUserProject(userProjects.includes(projectId));
-            })
+            });
     }, []);
 
     const backDrop = <Backdrop className="backDrop" open={!projectData}>
@@ -57,21 +85,25 @@ function Report(props) {
             })}
         </ul>
     }
-    function printListLink(array) {
-        if (!array || array.length === 0) 
+    function printListLink(arrayName,arrayId) {
+        if ((!arrayName || arrayName.length === 0) && (!arrayId || arrayId.length === 0) &&  arrayId.length === arrayName.length) 
             return " N/A";
         return <ul style={{
             margin: 0
         }}>
-            {array.map((element, index) => {
+            {arrayName.map((element, index) => {
                 return <li>
                     <Link
+                        style={{
+                            color:"blue",
+                            textDecoration:"none"
+                        }}
                         to={{
-                        pathname: '/projectreport',
+                        pathname: '/userreport',
                         state: {
-                            Id: element
+                            Id: arrayId[index]
                         }
-                    }}>Project {index + 1}</Link>
+                    }}>{element}</Link>
                 </li>
             })}
         </ul>
@@ -127,7 +159,7 @@ function Report(props) {
     function editReport(){
         const projectId = props.location.state.Id;
         props.history.replace({
-            pathname:'/createProject',
+            pathname:'/project',
             state:{
                 Id:projectId
             }
@@ -216,11 +248,11 @@ function Report(props) {
                                 ? " N/A"
                                 : " " + projectData.studySize}</Typography>
                         <Typography >
-                            <b>Principal Investigator/s:</b>{printListText(projectData.PIListOfProjects)}</Typography>
+                            <b>Principal Investigator/s:</b>{printListLink(projectData.principalInvestigators,principalInvesigators)}</Typography>
                         <Typography >
-                            <b>Co-Investigator/s:</b>{printListText(projectData.CoIListOfProjects)}</Typography>
+                            <b>Co-Investigator/s:</b>{printListLink(projectData.coInvestigators,coInvestigators)}</Typography> 
                         <Typography >
-                            <b>Collaborators:</b>{printListText(projectData.ColListOfProjects)}</Typography>
+                            <b>Collaborators:</b>{printListLink(projectData.collaborators,collaborators)}</Typography>
                         <Typography >
                             <b>Study participants:</b>{printListText(projectData.studyParticipants)}</Typography>
                         <Typography

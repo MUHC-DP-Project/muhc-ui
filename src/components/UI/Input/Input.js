@@ -60,6 +60,7 @@ class Input extends Component {
                     options={this.props.elementConfig.options}
                     text_field_name={this.props.elementConfig.text_field_name}
                     autocomplete_table_name={this.props.elementConfig.autocomplete_table_name}
+                    isRequired={this.props.elementConfig.required}
                     formName={this.props.formName}
                     />
                 break;

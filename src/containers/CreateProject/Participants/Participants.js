@@ -9,9 +9,10 @@ function Participants() {
         userAxios
         .get('/users')
         .then(response=>{           
-            const rawData=response.data;          
+            const rawData=response.data;       
+            const emailUser=localStorage.getItem('email');   
             rawData.forEach(element => {
-                if(element.isApproved){
+                if(element.isApproved && element.email!==emailUser){
                     filteredData.push(
                         element.email
                     )  
@@ -39,6 +40,7 @@ function Participants() {
                 elementConfig: {
                     options: filteredData,
                     autocomplete_table_name: "principalInvestigators",
+                    required:false,
                     grid_size: 12
                 }
             },
@@ -57,6 +59,7 @@ function Participants() {
                 elementConfig: {
                     options: filteredData,
                     autocomplete_table_name: "coInvestigators",
+                    required:false,
                     grid_size: 12
                 }
             },
@@ -75,6 +78,7 @@ function Participants() {
                 elementConfig: {
                     options: filteredData,
                     autocomplete_table_name: "collaborators",
+                    required:false,
                     grid_size: 12
                 }
             },   
@@ -147,23 +151,17 @@ function Participants() {
                 elementType: 'autocomplete_table',
                 elementConfig: {
                     options: [
-
                         "Physicians",
-
                         "Residents",
-
                         "Medical students",
-
                         "Allied health professionals",
-
                         "Allied Health students",
-
                         "Administrative or technical staff",
-
                         "Director/Managers"
                     ],
                     autocomplete_table_name: "studyParticipants",
                     text_field_name: "study_participants_text_field",
+                    required:true,
                     grid_size: 12
                 }
             }

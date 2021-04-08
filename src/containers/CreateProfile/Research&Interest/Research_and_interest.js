@@ -259,8 +259,7 @@ function Research_and_interest() {
                 elementType: 'autocomplete_table',
                 elementConfig: {
                     options: [
-
-                        
+                 
                              "Access to care",
                             
                         
@@ -552,6 +551,7 @@ function Research_and_interest() {
                     ],
                     autocomplete_table_name: "researchInterests",
                     text_field_name: 'research_interests_text_field',
+                    required:true,
                     grid_size: 12
                 }
             }

@@ -55,9 +55,9 @@ export default function handleSubmit(parentprops,allValues,submitType) {
     handler.then(response => {
             const userEmail=localStorage.getItem('email');
             const bodyRequest={
-                PIListOfProjects:final_json_object.principalInvestigators,
-                CoIListOfProjects:final_json_object.coInvestigators,
-                ColListOfProjects:final_json_object.collaborators
+                PIListOfProjects:!final_json_object.principalInvestigators? []:final_json_object.principalInvestigators,
+                CoIListOfProjects:!final_json_object.principalInvestigators? []:final_json_object.coInvestigators,
+                ColListOfProjects:!final_json_object.principalInvestigators? []:final_json_object.collaborators,
             }
             console.log('bodyqurest',bodyRequest);
             console.log('response',response.data);
