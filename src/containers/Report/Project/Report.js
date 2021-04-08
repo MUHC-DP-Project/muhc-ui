@@ -248,11 +248,13 @@ function Report(props) {
                                 ? " N/A"
                                 : " " + projectData.studySize}</Typography>
                         <Typography >
+
                             <b>Principal Investigator/s:</b>{printListLink(projectData.principalInvestigators,principalInvesigators)}</Typography>
                         <Typography >
                             <b>Co-Investigator/s:</b>{printListLink(projectData.coInvestigators,coInvestigators)}</Typography> 
                         <Typography >
                             <b>Collaborators:</b>{printListLink(projectData.collaborators,collaborators)}</Typography>
+
                         <Typography >
                             <b>Study participants:</b>{printListText(projectData.studyParticipants)}</Typography>
                         <Typography
