@@ -9,9 +9,10 @@ function Participants() {
         userAxios
         .get('/users')
         .then(response=>{           
-            const rawData=response.data;          
+            const rawData=response.data;       
+            const emailUser=localStorage.getItem('email');   
             rawData.forEach(element => {
-                if(element.isApproved){
+                if(element.isApproved && element.email!==emailUser){
                     filteredData.push(
                         element.email
                     )  
