@@ -212,6 +212,7 @@ function Project() {
                     ],
                     autocomplete_table_name: "keywords",
                     text_field_name: 'keywords_text_field',
+                    required:true,
                     grid_size: 12
                 }
             },

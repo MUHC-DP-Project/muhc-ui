@@ -53,20 +53,21 @@ function Home(props) {
         
                 })
                 .catch(error => {
-                    console.log("Failed to fetch data: ", error.response);
+                    setMyProject([]);
                 });
             })
             .catch(error => {
-                console.log("Failed to fetch data: ", error.response);
+                setProjectData([]);
+                setMyProject([]);
             });
         userAxios
         .get('/users')
         .then(response=>{
             console.log("userdata ",response.data);
-            setUserData(response.data)
+            setUserData(response.data);
         })
         .catch(error => {
-            console.log("Failed to fetch data: ", error.response);
+            setUserData([]);
         });
 
     }, [])
@@ -77,9 +78,9 @@ function Home(props) {
     const createProjectButton = <Button
         variant="contained"
         size="large"
-        className="button"
+        className="homeButton"
         startIcon={< AddCircleOutlineIcon />}
-        onClick={() => props.history.push("/createProject")}>
+        onClick={() => props.history.push("/project")}>
         New Project
     </Button>;
     const groupedButton=<ButtonGroup variant="text" className="groupedButton" aria-label="display all projects/users button group">

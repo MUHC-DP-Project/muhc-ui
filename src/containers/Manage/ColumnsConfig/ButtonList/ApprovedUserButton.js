@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-function ApprovedUserButton() {
+import {userAxios} from '../../../../axios-pbrn';
+function ApprovedUserButton(props) {
     const [anchorEl,
         setAnchorEl] = React.useState(null);
 
@@ -14,6 +15,16 @@ function ApprovedUserButton() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    
+    const handleAssignPrivilege= (role,id)=>{
+        userAxios
+        .post('/users/setPrivileges',{
+            userRole:role,
+            userId:id
+        }).then(response=>console.log(response.data))
+        .catch(error=>{console.log(error.response)})
+    }
+    
     return (
         <div>
             <IconButton aria-label="edit" size="small" onClick={handleClick}>
@@ -25,9 +36,9 @@ function ApprovedUserButton() {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}>
-                <MenuItem onClick={handleClose}>User</MenuItem>
-                <MenuItem onClick={handleClose}>Clinic Manager</MenuItem>
-                <MenuItem onClick={handleClose}>Admin</MenuItem>
+                <MenuItem onClick={()=>handleAssignPrivilege("User",props.userId)}>User</MenuItem>
+                <MenuItem onClick={()=>handleAssignPrivilege("ClinicManager",props.userId)}>Clinic Manager</MenuItem>
+                <MenuItem onClick={()=>handleAssignPrivilege("Admin",props.userId)}>Admin</MenuItem>
             </Menu>
         </div>
     )

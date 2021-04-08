@@ -74,6 +74,7 @@ function Submit() {
                     ],
                     autocomplete_table_name: "motivationForJoining",
                     text_field_name: 'motivation_for_joining_text_field',
+                    required:true,
                     grid_size: 12
                 }
             },
@@ -103,6 +104,7 @@ function Submit() {
                        
                     ],
                     autocomplete_table_name: "foundAboutUs",
+                    required:true,
                     text_field_name: 'found_about_us_text_field',
                     grid_size: 12
                 }

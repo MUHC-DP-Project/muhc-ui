@@ -11,7 +11,7 @@ const navItems = [
         icon: <HomeIcon style={{ color: '#fff',fontSize:"25px" }}  />
     }, {
         content: "Create Project",
-        path: "/createProject",
+        path: "/project",
         icon: <AssignmentIcon style={{ color: '#fff',fontSize:"25px" }}/>
     }, {
         content: "Manage",
@@ -19,7 +19,7 @@ const navItems = [
         icon: <GroupIcon style={{ color: '#fff',fontSize:"25px" }}/>
     }, {
         content: "Edit Profile",
-        path: "/createProject",
+        path: "/profile",
         icon: <PersonIcon style={{ color: '#fff',fontSize:"25px" }}/>
     }, {
         content: "Change Password",

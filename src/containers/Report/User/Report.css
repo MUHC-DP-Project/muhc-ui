@@ -5,3 +5,8 @@
     padding: 40px 50px;
 }
 
+.userReportContainer p{
+    word-wrap: break-word;
+}
+
+
