@@ -7,6 +7,11 @@ export const PROJECT_COLUMN = [
     }, {
         Header: 'Description',
         accessor: 'projectDescription',
+        Cell: ({value}) => {
+            if(value.length>100)
+            return value.substring(0,100)+'...';
+            else return value;
+        },
         disableSortBy: true
     }, {
         Header: 'Keywords',

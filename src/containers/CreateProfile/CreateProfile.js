@@ -30,7 +30,7 @@ function CreateProfile(props) {
     const step_component_list = [ < Profile />, < ResearchAndInterest />, < Submit />
     ]; //array of component
     const step_name_list = ["Profile", "Research and interest", "Submit"];
-    const form_title = "Create profile";
+    const form_title = "Profile";
     const userId=localStorage.getItem('userId');
     const {invalid} = props;
     const [loading, setLoading] = useState(true);

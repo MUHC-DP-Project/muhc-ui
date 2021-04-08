@@ -11,7 +11,7 @@ import {v4 as uuidv4} from 'uuid';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {connect} from 'react-redux';
-import {reduxForm,reset} from 'redux-form';
+import {reduxForm} from 'redux-form';
 import SubmitButton from '../../components/UI/SubmitButton/SubmitButton';
 import {projectAxios} from '../../axios-pbrn';
 import formMapper from './formMapper';
@@ -30,7 +30,7 @@ function CreateProject(props) {
     const step_component_list = [ < Participants />, < Project />, < ResearchAndMethodology />
     ]; //array of component
     const step_name_list = ["Participants", "Project", "Research and methodology"];
-    const form_title = "Create Project";
+    const form_title = "Project";
     const [submitType, setSubmitType] = useState({
         type:'POST',
         Id:null

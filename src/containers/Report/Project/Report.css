@@ -4,4 +4,6 @@
 .projectReportContainer{
     padding: 40px 50px;
 }
-
+.projectReportContainer p{
+    word-wrap: break-word;
+}

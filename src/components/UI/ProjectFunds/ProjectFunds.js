@@ -13,7 +13,7 @@ function ProjectFunds(props) {
     const select_props_1 = {
         select_elem: {
             menu_list: [
-                {value:"Project has been fund",id:uuidv4()}, {value:"Project has not been fund",id:uuidv4()}
+                {value:"Project has been funded",id:uuidv4()}, {value:"Project has not been funded",id:uuidv4()}
             ],
             style: {
                 width: "240px",
@@ -64,13 +64,13 @@ function ProjectFunds(props) {
                     <Field component={MUI_Select} {...select_props_1.select_elem} validate={props.validate}/>
                 </Grid>
                 <Grid item sm={4} className="spacing">
-                    {(props.isFund !== "Project has not been fund" || props.isFund==null)
+                    {(props.isFund !== "Project has not been funded" || props.isFund==null)
                         ? <Field component={MUI_TextField} {...text_props} validate={props.validate} placeholder={props.isFund==null?"Select an option":'Agency Name'} disabled={props.isFund==null}/>
                         : <Field component={MUI_Select}  {...select_props_2.select_elem} validate={props.validate}/>
                 }
                 </Grid>
                 <Grid item sm={4}>
-                    {(props.isSought === "Funding will be sought" && props.isFund === "Project has not been fund") &&  <Field component={MUI_TextField} {...text_props} placeholder={props.isFund==null?"Select an option":'Intended source of funding'} disabled={props.isFund==null} validate={props.validate}/>}
+                    {(props.isSought === "Funding will be sought" && props.isFund === "Project has not been funded") &&  <Field component={MUI_TextField} {...text_props} placeholder={props.isFund==null?"Select an option":'Intended source of funding'} disabled={props.isFund==null} validate={props.validate}/>}
                 </Grid>
             </Grid>
         </React.Fragment>

@@ -2,18 +2,20 @@ table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    min-width: 1500px;
+    width: 1500px;
     position: static;
   }
   
   table td, table th {
     border: 1px solid #ddd;
     padding: 8px; 
-    min-width: 200px; 
+    max-width: 200px;
+    min-width: 100px;
+    word-wrap: break-word;
   }
 
   table td:nth-child(2){/*2nd child should always be the description*/
-    max-width: 500px;
+    max-width: 200px;
   }
 
   /* table Headers */

@@ -18,7 +18,10 @@ function MUI_Select({
     return (
         
         <FormControl style={select_style} error={touched && error} variant="outlined">
-            <InputLabel>{label}</InputLabel>
+            <InputLabel style={{
+                backgroundColor:"white",
+                fontSize:12
+                }}>{label}</InputLabel>
             <Select            
                 {...input}
                 {...custom}

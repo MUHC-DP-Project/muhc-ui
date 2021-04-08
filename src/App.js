@@ -42,8 +42,8 @@ export class App extends Component {
                 routes = (
                     <Layout>
                         <Switch>
-                            <Route path="/createprofile" component={CreateProfile}/>
-                            <Route path="/createproject" component={CreateProject}/>
+                            <Route path="/profile" component={CreateProfile}/>
+                            <Route path="/project" component={CreateProject}/>
                             <Route path="/changepassword" component={ChangePassword}/>
                             <Route path="/manage" component={Manage}/>
                             <Route path="/logout" component={Logout}/>
