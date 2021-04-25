@@ -1,19 +1,44 @@
 import React, {useState} from 'react'
+
+//@Material-UI
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import {connect} from 'react-redux';
-import {reduxForm, getFormValues} from 'redux-form';
-import './ChangePassword.css';
-import handleSubmit from './handleSubmit';
 import Paper from '@material-ui/core/Paper';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
+import {makeStyles} from '@material-ui/core/styles';
+
+//@Redux
+import {connect} from 'react-redux';
+import {reduxForm, getFormValues} from 'redux-form';
+
+
+//@HandleSubmit
+import handleSubmit from './handleSubmit';
+
+const useStyles = makeStyles({
+    paper: {
+        padding:'20px',
+        width: '400px',
+    },
+    form: {
+        width: '100%',
+        marginTop: '24px'
+    },
+    button: {
+        width: '200px'
+    },
+    error: {
+        color: 'red'
+    }
+});
 
 function ChangePassword(props) {
+    const classes = useStyles();
+    const {invalid} = props;
     const [viewOldPassword,
         setViewOldPassword] = useState(false);
     const [viewNewPassword,
@@ -25,8 +50,8 @@ function ChangePassword(props) {
     const [error, setError] = useState(null);
     return (
         <Grid container direction="row" justify="center" alignItems="center">
-            <Paper elevation={10} className="CP_paper">
-                <form>
+            <Paper elevation={10} className={classes.paper}>
+                <form className={classes.form}>
                     <Grid
                         container
                         direction="column"
@@ -37,7 +62,7 @@ function ChangePassword(props) {
                             <Typography variant="h5">
                                 Reset Password
                             </Typography>
-                            {error&&<Typography className="CP_error">
+                            {error&&<Typography className={classes.error}>
                                 {error}
                             </Typography>}
                         </Grid>
@@ -76,7 +101,7 @@ function ChangePassword(props) {
                         </Grid>
                         <Grid item>
                             <Button
-                                className="CP_button"
+                                className={classes.button}
                                 type="submit"
                                 variant="contained"
                                 color="primary"

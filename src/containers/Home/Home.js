@@ -1,118 +1,122 @@
 import React, {useState, useEffect} from 'react';
+
+//@Material-UI
 import Grid from '@material-ui/core/Grid';
 import BasicTable from '../../components/UI/DataGrid/BasicTable';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-
-
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import {makeStyles} from '@material-ui/core/styles';
+
+//@UI components
+import Backdrop from '../../components/UI/BackDrop/Backdrop';
+
+//@React-Router
 import {withRouter} from 'react-router';
-import {userAxios,projectAxios} from '../../axios-pbrn';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+
+//@Redux
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
+
+//@Columns Config
 import {PROJECT_COLUMN} from './ColumnsConfig/project';
 import {USER_COLUMN} from './ColumnsConfig/user';
 
-import './Home.css';
+const useStyles = makeStyles({
+    button: {
+        marginRight: '15px',
+        backgroundColor: '#2193b0',
+        color: 'white',
+        width: 'auto',
+        '&:hover': {
+            backgroundColor: '#61b7d1'
+        }
+    },
+    groupedButton: {
+        marginRight: '15px',
+        '& button': {
+            color: 'white'
+        }
+    }
+});
+
 function Home(props) {
-
-    const [myProject,
-        setMyProject] = useState(undefined);
-    const [userData, setUserData] = useState(undefined);
-    const [projectData, setProjectData] = useState(undefined);
-    const [displayAllProject, setDisplayAllProject] = useState(true);
-
+    const classes = useStyles();
+    const [displayProject,
+        setDisplayProject] = useState(true);
     useEffect(() => {
-        //will need another axios call for myProject
-        projectAxios
-            .get('/projects')
-            .then(response => {
-                console.log('projectdata ',response.data);
-                const listOfPR=response.data;
-                setProjectData(response.data);
-                const userId=localStorage.getItem('userId');
-                console.log(userId);
-                userAxios
-                .get('/users/'+userId)
-                .then(response=>{
-                    const user=response.data;
-                    let finalList=[];
-                    let allInvolvedProjectId=[];
-                    allInvolvedProjectId.push(...user.CoIListOfProjects)
-                    allInvolvedProjectId.push(...user.ColListOfProjects);
-                    allInvolvedProjectId.push(...user.PIListOfProjects);
-                    allInvolvedProjectId.push(...user.userListOfProjects);
-                    // allInvolvedProjectId=allInvolvedProjectId.flat()
-                    listOfPR.forEach(element => {
-                        if(allInvolvedProjectId.includes(element._id)){
-                            finalList.push(element); 
-                        }
-                    });
-                    setMyProject(finalList);
-                    console.log("a user ",user);
-        
-                })
-                .catch(error => {
-                    setMyProject([]);
-                });
-            })
-            .catch(error => {
-                setProjectData([]);
-                setMyProject([]);
-            });
-        userAxios
-        .get('/users')
-        .then(response=>{
-            console.log("userdata ",response.data);
-            setUserData(response.data);
-        })
-        .catch(error => {
-            setUserData([]);
-        });
-
+        props.fetchData();
     }, [])
 
-    const backDrop = <Backdrop className="backDrop" open={!myProject || !projectData || !userData}>
-        <CircularProgress color="inherit"/>
-    </Backdrop>
+    const backDrop = <Backdrop
+        condition={!props.myProjectData || !props.projectData || !props.userData}/>
     const createProjectButton = <Button
         variant="contained"
         size="large"
-        className="homeButton"
+        className={classes.button}
         startIcon={< AddCircleOutlineIcon />}
         onClick={() => props.history.push("/project")}>
         New Project
     </Button>;
-    const groupedButton=<ButtonGroup variant="text" className="groupedButton" aria-label="display all projects/users button group">
-    <Button onClick={()=>setDisplayAllProject(false)}>Users</Button>
-    <Button onClick={()=>setDisplayAllProject(true)}>Projects</Button>
-  </ButtonGroup>
+    const groupedButton = <ButtonGroup variant="text" className={classes.groupedButton}>
+        <Button
+            onClick={() => setDisplayProject(false)}
+            style={!displayProject
+            ? {
+                textDecoration: 'underline'
+            }
+            : null}>Users</Button>
+        <Button
+            onClick={() => setDisplayProject(true)}
+            style={displayProject
+            ? {
+                textDecoration: 'underline'
+            }
+            : null}>Projects</Button>
+    </ButtonGroup>
 
-    const homePage=<Grid
-    container
-    direction="column"
-    justify="center"
-    alignItems="center"
-    spacing={10}>
-    <Grid item>
-        <BasicTable
+    const homePage = <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        spacing={10}>
+        <Grid item>
+            <BasicTable
                 title="My Projects"
                 button={createProjectButton}
                 COLUMNS={PROJECT_COLUMN}
-                MOCK_DATA={myProject}/>
+                MOCK_DATA={props.myProjectData}/>
+        </Grid>
+        <Grid item>
+            <BasicTable
+                title={displayProject
+                ? "All Projects"
+                : "Connect with other researchers"}
+                button={groupedButton}
+                COLUMNS={displayProject
+                ? PROJECT_COLUMN
+                : USER_COLUMN}
+                MOCK_DATA={displayProject
+                ? props.projectData
+                : props.userData}/>
+        </Grid>
     </Grid>
-    <Grid item>
-    <BasicTable title={displayAllProject?"All Projects":"Connect with other researchers"}
-    button={groupedButton}
-    COLUMNS={displayAllProject?PROJECT_COLUMN:USER_COLUMN}
-    MOCK_DATA={displayAllProject?projectData:userData}/>
-    </Grid>
-</Grid>
     return (
         <React.Fragment>
-        {!myProject || !projectData || !userData?backDrop:homePage}
+            {!props.myProjectData || !props.projectData || !props.userData
+                ? backDrop
+                : homePage}
         </React.Fragment>
     )
 }
 
-export default withRouter(Home);
+const mapStateToProps = (state) => {
+    return {myProjectData: state.home.myProjectData, projectData: state.home.projectData, userData: state.home.userData}
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchData: () => dispatch(actions.fetchData())
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

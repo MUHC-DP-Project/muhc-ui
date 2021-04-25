@@ -4,9 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import './PostSignIn.css';
-function PostSignIn(props) {
-    const isApproved=localStorage.getItem('isApproved');
-    const isEmailVerified=localStorage.getItem('isEmailVerified');
+function PostSignIn() {
+    const isApproved = localStorage.getItem('isApproved');
+    const isEmailVerified = localStorage.getItem('isEmailVerified');
     return (
         <Grid container direction="column" justify="center" alignItems="center">
             <Paper elevation={10} className="postsignin_paper">
@@ -28,16 +28,15 @@ function PostSignIn(props) {
                     </Grid>
                     <Grid item>
                         <ul>
-                            {isApproved==="false" && <li>
+                            {isApproved === "false" && <li>
                                 <Typography inline variant="h6">Account is not approved yet !</Typography>
-                            </li>
-}
-
-                            {isEmailVerified==="false" && <li>
+                            </li>}
+                            {isEmailVerified === "false" && <li>
                                 <Typography inline variant="h6">You have not confirmed the email !</Typography>
                             </li>}
                         </ul>
-                        <Typography inline variant="h6">If you think this is an error, please email: <b>pbrn.fammed@mcgill.ca</b>!</Typography>
+                        <Typography inline variant="h6">If you think this is an error, please email:
+                            <b>pbrn.fammed@mcgill.ca</b>!</Typography>
                     </Grid>
                 </Grid>
             </Paper>

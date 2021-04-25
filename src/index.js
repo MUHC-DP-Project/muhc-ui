@@ -11,13 +11,17 @@ import errorHandlerReducer from './store/reducers/errorHandler';
 import authReducer from './store/reducers/auth';
 import managePageReducer from './store/reducers/manage';
 import loadFormReducer from './store/reducers/loader';
+import signUpReducer from './store/reducers/signUp';
+import homeReducer from './store/reducers/home';
 const rootReducer = combineReducers({
     //add orther reducers
     auth:authReducer,
     errorHandler:errorHandlerReducer,
+    signUp:signUpReducer,
     form: reduxFormReducer,
     manage:managePageReducer,
-    formLoader:loadFormReducer
+    formLoader:loadFormReducer,
+    home:homeReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import Button from '@material-ui/core/Button';
 import {userAxios} from '../../axios-pbrn';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -12,7 +11,6 @@ function Manage(props) {
 
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        //will need another axios call for myProject
         userAxios
             .get('/users')
             .then(response => {
@@ -26,13 +24,6 @@ function Manage(props) {
                 console.log("Failed to fetch data: ", error.response);
             });
     }, [])
-    // const refreshButton = <Button
-    //     variant="contained"
-    //     size="large"
-    //     className="button"
-    //     onClick={() => setRefresh(refresh + 1)}>
-    //     Refresh
-    // </Button>;
     const backDrop = <Backdrop className="backDrop" open={loading}>
         <CircularProgress color="inherit"/>
     </Backdrop>
@@ -49,14 +40,12 @@ function Manage(props) {
         <Grid item>
         <BasicTable
             title="New users"
-            // button={refreshButton}
             COLUMNS={NEW_USER_COLUMN}
             MOCK_DATA={props.newUserData}/>
         </Grid>
         <Grid item>
         <BasicTable
             title="Approved users"
-            // button={refreshButton}
             COLUMNS={APPROVED_USER_COLUMN}
             MOCK_DATA={props.approvedUserData}/>
         </Grid>

@@ -6,15 +6,15 @@ import * as actions from './store/actions/index';
 //pages
 import Home from './containers/Home/Home';
 import Manage from './containers/Manage/Manage';
-import CreateProfile from './containers/CreateProfile/CreateProfile';
-import CreateProject from './containers/CreateProject/CreateProject';
-import SignUp from './containers/Auth/SignUp/SignUp';
-import SignIn from './containers/Auth/SignIn/SignIn';
-import ForgotPassword from './containers/Auth/ForgotPassword/ForgotPassword';
-import ChangePassword from './containers/Auth/ChangePassword/ChangePassword';
+import CreateProfile from './containers/Profile/CreateProfile';
+import CreateProject from './containers/Project/CreateProject';
+import SignUp from './containers/Authentication/SignUp/SignUp';
+import SignIn from './containers/Authentication/SignIn/SignIn';
+import ForgotPassword from './containers/Authentication/ForgotPassword/ForgotPassword';
+import ChangePassword from './containers/Authentication/ChangePassword/ChangePassword';
 import UserReport from './containers/Report/User/Report';
 import ProjectReport from './containers/Report/Project/Report';
-import Logout from './containers/Auth/Logout/Logout';
+import Logout from './containers/Authentication/Logout/Logout';
 import Page404 from './components/Page404/Page404';
 import PostSignIn from './components/PostSignIn/PostSignIn';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -27,7 +27,6 @@ export class App extends Component {
             .onTryAutoSignup();
     }
     render() {
-        console.log("is auth", this.props.isAuthenticated);
         let routes = (
             <Switch>
                 <Route path="/signup" component={SignUp}/>

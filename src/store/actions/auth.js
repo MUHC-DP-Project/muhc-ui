@@ -1,4 +1,4 @@
-import {userAxios,projectAxios} from '../../axios-pbrn';
+import {userAxios} from '../../axios-pbrn';
 
 import * as actionTypes from './actionTypes';
 
