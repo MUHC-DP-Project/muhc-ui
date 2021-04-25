@@ -2,21 +2,33 @@ import React from 'react'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import {makeStyles} from '@material-ui/core/styles';
 
-import './PostSignIn.css';
+const useStyles = makeStyles({
+    paper: {
+        marginTop:'64px',
+        width:'700px',
+        height:'300px'
+    },
+    container: {
+        margin:'20px'
+    }
+});
+
 function PostSignIn() {
     const isApproved = localStorage.getItem('isApproved');
     const isEmailVerified = localStorage.getItem('isEmailVerified');
+    const classes = useStyles();
     return (
         <Grid container direction="column" justify="center" alignItems="center">
-            <Paper elevation={10} className="postsignin_paper">
+            <Paper elevation={10} className={classes.paper}>
 
                 <Grid
                     container
                     direction="column"
                     justify="center"
                     alignItems="center"
-                    className="postsignin_content"
+                    className={classes.container}
                     spacing={3}>
                     <Grid item>
                         <Typography variant="h3">Access Denied</Typography>

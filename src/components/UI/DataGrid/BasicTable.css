@@ -33,25 +33,3 @@ table {
       width: 150px;
   }
 
-  /* Global Filter */
-  .globalFilterIcon{
-      margin-right: 10px;
-  }
-  .globalFilterText{
-    margin: 15px !important;
-    background-color: white;
-    border-radius: 5px;
-    width:330px;
-  }
-  .globalFilter{
-      background-color: #222831;
-      border-radius: 5px;
-      border-bottom-left-radius: 0px;
-      border-bottom-right-radius: 0px;
-  }
-
-  .title{
-    margin-left: 15px !important;
-    color: white;
-  }
-

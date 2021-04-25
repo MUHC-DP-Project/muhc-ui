@@ -19,7 +19,6 @@ import {NEW_USER_COLUMN} from './ColumnsConfig/newUsers';
 
 function Manage(props) {
 
-    const [loading, setLoading] = useState(true);
     useEffect(() => {
         props.fetchData();
     }, [])

@@ -1,20 +1,25 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+
+//@Material-UI
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-//custom Input
 import SelectText from '../SelectText/SelectText';
 import AutoCompleteTable from '../AutoCompleteTable/AutoCompleteTable';
 import ListOfUsers from '../ListOfUsers/ListOfUsers';
 import ProjectFunds from '../ProjectFunds/ProjectFunds';
 import MultiTextRadio from '../MultiTextRadio/MultiTextRadio';
 import Calendar from '../Calendar/Calendar';
-import { Field } from 'redux-form';
+
 //MUI
 import MUI_TextField from '../MaterialUI/MUI_TextField';
 import MUI_RadioButton from '../MaterialUI/MUI_RadioButton';
 
-//validator
+//@Redux
+import { Field } from 'redux-form';
+
+//@Validator
 import validators from './validators';
+
 class Input extends Component {
     shouldComponentUpdate(nextProps) {
         return this.props.value !== nextProps.value;

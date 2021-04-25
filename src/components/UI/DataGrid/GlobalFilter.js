@@ -1,15 +1,42 @@
 import React, {useState} from 'react';
-import {useAsyncDebounce} from 'react-table';
+
+//@Material-UI
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import './BasicTable.css';
-function GlobalFilter(props) {
+import {makeStyles} from '@material-ui/core/styles';
+
+//@React-table
+import {useAsyncDebounce} from 'react-table';
+
+const useStyles = makeStyles({
+    icon: {
+        marginRight: '10px'
+    },
+    textfield: {
+        margin: '15px',
+        backgroundColor: 'white',
+        borderRadius: '5px',
+        width: '330px'
+    },
+    container: {
+        backgroundColor: '#222831',
+        borderRadius: '5px',
+        borderBottomLeftRadius: '0px',
+        borderBottomRightRadius: '0px'
+    },
+    title: {
+        marginLeft: '15px',
+        color: 'white'
+    }
+});
+function GlobalFilter({filter, title, setFilter, button}) {
+    const classes = useStyles();
     const [value,
-        setValue] = useState(props.filter)
+        setValue] = useState(filter)
     const onChange = useAsyncDebounce(value => {
-        props.setFilter(value || undefined)
+        setFilter(value || undefined)
     }, 300)
     return (
         <Grid
@@ -17,28 +44,28 @@ function GlobalFilter(props) {
             direction="row"
             justify="space-between"
             alignItems="center"
-            className="globalFilter">
+            className={classes.container}>
             <Grid item>
-              <Typography className="title" variant="h4">{props.title}</Typography>
+                <Typography className={classes.title} variant="h4">{title}</Typography>
             </Grid>
             <Grid item>
                 <TextField
                     placeholder="Search"
                     variant="outlined"
-                    className="globalFilterText"
+                    className={classes.textfield}
                     size="small"
                     value={value || ''}
-                    onChange={e => {
-                    setValue(e.target.value);
-                    onChange(e.target.value);
+                    onChange={event => {
+                    setValue(event.target.value);
+                    onChange(event.target.value);
                 }}
                     InputProps={{
-                    startAdornment: <SearchIcon className="globalFilterIcon"/>
+                    startAdornment: <SearchIcon className={classes.icon}/>
                 }}/>
             </Grid>
-            {props.button&&<Grid item>
-              {props.button}
-            </Grid>}
+            {button &&<Grid item > {
+                button
+            }</Grid>}
         </Grid>
     )
 }
