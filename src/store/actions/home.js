@@ -12,14 +12,14 @@ export const homeDataFail = (type,data) => {
     return {type: type, data: data}
 }
 
-export const fetchData = () => {
+export const homeFetchData = () => {
     return dispatch => {
         dispatch(homePageStart());
         projectAxios
             .get('/projects')
             .then(response => {
                 const userId = localStorage.getItem('userId');
-                const listOfPR=response.data;
+                const allProjects=response.data;
                 dispatch(homeDataSuccess(actionTypes.HOME_PROJECT_DATA_SUCCESS, response.data));
                 userAxios
                     .get(`/users/${userId}`)
@@ -31,7 +31,7 @@ export const fetchData = () => {
                         allInvolvedProjectId.push(...myUser.ColListOfProjects);
                         allInvolvedProjectId.push(...myUser.PIListOfProjects);
                         allInvolvedProjectId.push(...myUser.userListOfProjects);
-                        listOfPR.forEach(element => {
+                        allProjects.forEach(element => {
                             if (allInvolvedProjectId.includes(element._id)) {
                                 finalList.push(element);
                             }

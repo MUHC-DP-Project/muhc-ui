@@ -18,7 +18,7 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 
-//@Columns Config
+//@ColumnsConfig
 import {PROJECT_COLUMN} from './ColumnsConfig/project';
 import {USER_COLUMN} from './ColumnsConfig/user';
 
@@ -116,7 +116,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        fetchData: () => dispatch(actions.fetchData())
+        fetchData: () => dispatch(actions.homeFetchData())
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

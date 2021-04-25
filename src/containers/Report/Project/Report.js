@@ -10,7 +10,6 @@ import {format} from 'date-fns';
 import './Report.css';
 import Button from '@material-ui/core/Button';
 import AlertDialog from '../../../components/UI/Dialogue/Dialogue';
-import { blue } from '@material-ui/core/colors';
 function Report(props) {
     const [projectData,
         setProjectData] = useState(undefined);

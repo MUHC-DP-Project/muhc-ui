@@ -6,26 +6,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import {userAxios} from '../../../../axios-pbrn';
 import {connect} from 'react-redux';
 import * as actions from '../../../../store/actions/index';
-function approveUser(userId){
-    userAxios
-    .get('/auth/localApproveUser/'+userId)
-    .then(res=>{
-        console.log("approve SUCCESS",res);
-    })
-    .catch(error=>{
-        console.log("approve FAIL",error.response);
-    })
-}
-function unapproveUser(userId){
-    userAxios
-    .delete('/users/'+userId)
-    .then(res=>{
-        console.log("approve SUCCESS",res);
-    })
-    .catch(error=>{
-        console.log("approve FAIL",error.response);
-    })
-}
+
 function ButtonList(props) {
     const userId=props.userId;
 
@@ -38,21 +19,14 @@ function ButtonList(props) {
             spacing={1}>
             <Grid item>
                 <IconButton aria-label="Approve" size="small" onClick={()=>{
-                    approveUser(userId);
-                    const tmpNewUserData=[...props.newUserData];
-                    const tmpApprovedUserData=[...props.approvedUserData];
-                    const userObject=tmpNewUserData.find(element=>element._id===userId)
-                    console.log(tmpNewUserData[0]._id);
-                    props.loadData(tmpNewUserData.filter(element=>element._id!==userId),tmpApprovedUserData.concat(userObject))
+                    props.approveUser(userId,props.newUserData,props.approvedUserData);
                     }}>
                     <CheckIcon/>
                 </IconButton>
             </Grid>
             <Grid item>
                 <IconButton aria-label="Refuse" size="small" onClick={()=>{
-                    unapproveUser(userId);
-                    const tmpNewUserData=[...props.newUserData];
-                    props.loadData(tmpNewUserData.filter(element=>element._id!==userId),props.approvedUserData);
+                    props.unapproveUser(userId,props.newUserData);
                     }}>
                     <ClearIcon/>
                 </IconButton>
@@ -70,8 +44,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadData: (newUserData,approvedUserData) => dispatch(actions.loadData(newUserData,approvedUserData))
+        approveUser: (userId,newUserData,approvedUserData) => dispatch(actions.approveUser(userId,newUserData,approvedUserData)),
+        unapproveUser: (userId,newUserData)=>dispatch(actions.unapproveUser(userId,newUserData))
     };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ButtonList)

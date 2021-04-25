@@ -1,30 +1,29 @@
 import React, {useState, useEffect} from 'react'
+
+//@Material-UI
 import {userAxios} from '../../axios-pbrn';
-import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import BasicTable from '../../components/UI/DataGrid/BasicTable';
-import {APPROVED_USER_COLUMN,NEW_USER_COLUMN} from './ColumnsConfig/user';
 import Grid from '@material-ui/core/Grid';
+
+//@UI components
+import Backdrop from '../../components/UI/BackDrop/Backdrop';
+
+//@Redux
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
+
+//@ColumnsConfig
+import {APPROVED_USER_COLUMN} from './ColumnsConfig/approvedUsers';
+import {NEW_USER_COLUMN} from './ColumnsConfig/newUsers';
+
 function Manage(props) {
 
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        userAxios
-            .get('/users')
-            .then(response => {
-                console.log("userdata ", response.data);
-                const userData=response.data;
-                const [approvedUserList,  newUserList] = userData.reduce(([ approvedUser,newUser], element) => (element.isApproved ? [[...approvedUser, element], newUser] : [approvedUser, [...newUser, element]]), [[], []]);
-                props.loadData(newUserList,approvedUserList);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.log("Failed to fetch data: ", error.response);
-            });
+        props.fetchData();
     }, [])
-    const backDrop = <Backdrop className="backDrop" open={loading}>
+    const backDrop = <Backdrop className="backDrop" open={!props.newUserData&&!props.approvedUserData}>
         <CircularProgress color="inherit"/>
     </Backdrop>
     const managePage = <Grid
@@ -53,7 +52,7 @@ function Manage(props) {
 
     return (
         <div>
-            {loading
+            {!props.newUserData&&!props.approvedUserData
                 ? backDrop
                 : managePage}
         </div>
@@ -69,7 +68,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadData: (newUserData,approvedUserData) => dispatch(actions.loadData(newUserData,approvedUserData))
+        fetchData: () => dispatch(actions.manageFetchData())
     };
 };
 
