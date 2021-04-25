@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SelectText from '../SelectText/SelectText';
 import AutoCompleteTable from '../AutoCompleteTable/AutoCompleteTable';
-import ListOfUsers from '../ListOfUsers/ListOfUsers';
 import ProjectFunds from '../ProjectFunds/ProjectFunds';
 import MultiTextRadio from '../MultiTextRadio/MultiTextRadio';
 import Calendar from '../Calendar/Calendar';
@@ -69,9 +68,6 @@ class Input extends Component {
                     formName={this.props.formName}
                     />
                 break;
-            case('user_list'):
-            inputElement=<ListOfUsers field_props={{...this.props.elementConfig}} title={this.props.elementConfig.title} validate={this.required}/>
-            break;
             case('project_fund'):
             inputElement=<ProjectFunds id={this.props.id} output_changed={this.props.changed} validate={this.required}/>
             break;
