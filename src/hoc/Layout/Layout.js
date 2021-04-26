@@ -183,7 +183,7 @@ export default function MiniDrawer(props) {
                     <Divider/> {NavItems.map((item) => {
                         if ((!["undefined", "false"].includes(localStorage.getItem('isApproved')) && !["undefined", "false"].includes(localStorage.getItem('isEmailVerified'))) || item.content === "Logout") {
                             if (item.content === "Manage" && localStorage.getItem('userRole') !== "Admin") {
-                                return ;
+                                return null;
                             } else {
                                 return <Link key={uuidv4()} to={item.path} className={classes.navItemLink}>
                                     <ListItem button key={uuidv4()} className={classes.navItemElem}>

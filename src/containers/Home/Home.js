@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 //@Material-UI
 import Grid from '@material-ui/core/Grid';
-import BasicTable from '../../components/UI/DataGrid/BasicTable';
+import BasicTable from '../../components/UI/Datagrid/Datagrid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';

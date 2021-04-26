@@ -1,10 +1,10 @@
 import React from 'react'
 import {v4 as uuidv4} from 'uuid';
-import SimpleMultipageForm from '../../../components/UI/SimpleMultipageForm/SimpleMultipageForm';
+import InputMapper from '../../../components/UI/InputMapper/InputMapper';
 
 function Project() {
-    const json_obj = {
-        project_form: {
+    const formObject = {
+        projectForm: {
             project_section_title: {
                 elementType: "title",
                 elementConfig: {
@@ -357,9 +357,9 @@ function Project() {
 
     return (
         <React.Fragment>
-            <SimpleMultipageForm
-                json_obj={json_obj.project_form}
-                formName={json_obj.formName}/>
+            <InputMapper
+                formObject={formObject.projectForm}
+                formName={formObject.formName}/>
         </React.Fragment>
     )
 }

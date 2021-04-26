@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import {makeStyles} from '@material-ui/core/styles';
 
 //@UI component
-import FormMapper from '../../../components/UI/SimpleMultipageForm/SimpleMultipageForm';
+import InputMapper from '../../../components/UI/InputMapper/InputMapper';
 
 //@CSS
 import './SignUp.css';
@@ -82,8 +82,8 @@ function SignUp(props) {
                             </Typography>}
                     <form className={classes.form}>
                         <Grid container spacing={2}>
-                            <FormMapper
-                                json_obj={formObject.signUpform}
+                            <InputMapper
+                                formObject={formObject.signUpform}
                                 formName={formObject.formName}/>
                         </Grid>
                         <Button

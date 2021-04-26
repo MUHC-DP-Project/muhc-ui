@@ -7,7 +7,7 @@ import Grow from '@material-ui/core/Grow';
 import Grid from '@material-ui/core/Grid';
 
 //@CSS
-import './BasicTable.css';
+import './Datagrid.css';
 
 function ColumnFilter({column}) {
     const {filterValue, setFilterValue} = column;

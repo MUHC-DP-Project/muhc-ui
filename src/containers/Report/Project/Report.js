@@ -1,16 +1,36 @@
 import React, {useState, useEffect} from 'react';
+//@React-Router
 import {Link} from 'react-router-dom';
+
+//@Material-UI
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import {userAxios, projectAxios} from '../../../axios-pbrn';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import {format} from 'date-fns';
-import './Report.css';
 import Button from '@material-ui/core/Button';
 import AlertDialog from '../../../components/UI/Dialogue/Dialogue';
+import {makeStyles} from '@material-ui/core/styles';
+
+//@Axios
+import {userAxios, projectAxios} from '../../../axios-pbrn';
+
+//@UI components
+import Backdrop from '../../../components/UI/BackDrop/Backdrop';
+
+
+const useStyles = makeStyles({
+    paper: {
+        width:'1000px'
+    },
+    container:{
+        padding:'40px 50px',
+        '& p':{
+            wordWrap:'break-word'
+        }
+    }
+});
 function Report(props) {
+    const classes = useStyles();
     const [projectData,
         setProjectData] = useState(undefined);
     const [isUserProject, setIsUserProject] = useState(false);
@@ -24,11 +44,9 @@ function Report(props) {
                 .replace('/page404')
         }
         const projectId = props.location.state.Id;
-        console.log(projectId);
         projectAxios
-            .get('/projects/' + projectId)
+            .get(`/projects/${projectId}`)
             .then(response => {
-                console.log("projectdata ", response.data);
                 setProjectData(response.data);
                 if(response.data.coInvestigators.length>0){
                     userAxios
@@ -62,17 +80,14 @@ function Report(props) {
             });
         const userId = localStorage.getItem("userId");
         userAxios
-            .get('/users/' + userId)
+            .get(`/users/${userId}`)
             .then(response => {
-                console.log("userdata ", response.data);
                 const userProjects=response.data.userListOfProjects;
                 setIsUserProject(userProjects.includes(projectId));
             });
     }, []);
 
-    const backDrop = <Backdrop className="backDrop" open={!projectData}>
-        <CircularProgress color="inherit"/>
-    </Backdrop>
+    const backDrop = <Backdrop className="backDrop" condition={!projectData}/>
     function printListText(array) {
         if (!array || array.length === 0) 
             return " N/A";
@@ -167,8 +182,8 @@ function Report(props) {
     return (
         <Grid container direction="row" justify="center" alignItems="center">{!projectData
                 ? backDrop
-                : <Paper elevation={10} className="projectReportPaper">
-                    <div className="projectReportContainer">
+                : <Paper elevation={10} className={classes.paper}>
+                    <div className={classes.container}>
                         <Typography variant="h3">{!projectData.officialProjectTitle
                                 ? "No Title"
                                 : projectData

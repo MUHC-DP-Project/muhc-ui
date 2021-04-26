@@ -9,7 +9,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
 //@Components
-import FormMapper from '../../../components/UI/SimpleMultipageForm/SimpleMultipageForm';
+import InputMapper from '../../../components/UI/InputMapper/InputMapper';
 
 //@Redux
 import {connect} from 'react-redux';
@@ -73,7 +73,7 @@ function ForgotPassword(props) {
                     </Typography>}
                     <form className={classes.form}>
                         <Grid container spacing={2}>
-                            <FormMapper json_obj={formObject.forgotPasswordForm} formName={formObject.formName}/>
+                            <InputMapper formObject={formObject.forgotPasswordForm} formName={formObject.formName}/>
                         </Grid>
                         <Button
                             className={classes.button}

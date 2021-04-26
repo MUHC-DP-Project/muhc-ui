@@ -1,12 +1,12 @@
 import React from 'react'
 import Input from '../Input/Input';
-function SimpleMultipageForm(props) {
+
+function InputMapper(props) {
     
-    const json_obj=props.json_obj;
-    const formName=props.formName;
+    const {formObject,formName}=props;
     const formElementsArray = [];
-    for (let key in json_obj) {
-        formElementsArray.push({id: key, config: json_obj[key]});
+    for (let key in formObject) {
+        formElementsArray.push({id: key, config: formObject[key]});
     }
     return (
         <React.Fragment>
@@ -22,4 +22,4 @@ function SimpleMultipageForm(props) {
     )
 }
 
-export default SimpleMultipageForm
+export default InputMapper

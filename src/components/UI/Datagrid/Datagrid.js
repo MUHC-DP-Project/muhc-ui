@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {useTable,useSortBy,useGlobalFilter,useFilters,usePagination} from 'react-table';
-import './BasicTable.css';
+import './Datagrid.css';
 import GlobalFilter from './GlobalFilter';
 import ColumnFilter from './ColumnFilter';
 import Grid from '@material-ui/core/Grid';

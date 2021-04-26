@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import Typography from '@material-ui/core/Typography';
-import FormMapper from '../../../components/UI/SimpleMultipageForm/SimpleMultipageForm';
+import InputMapper from '../../../components/UI/InputMapper/InputMapper';
 import {makeStyles} from '@material-ui/core/styles';
 
 //@Redux
@@ -80,8 +80,8 @@ function SignIn(props) {
                     </Typography>}
                     <form className={classes.form}>
 
-                        <FormMapper
-                            json_obj={formObject.signInForm}
+                        <InputMapper
+                            formObject={formObject.signInForm}
                             formName={formObject.formName}/>
                         <Button
                             type="submit"

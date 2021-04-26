@@ -68,6 +68,7 @@ class Input extends Component {
                     formName={this.props.formName}
                     />
                 break;
+
             case('project_fund'):
             inputElement=<ProjectFunds id={this.props.id} output_changed={this.props.changed} validate={this.required}/>
             break;

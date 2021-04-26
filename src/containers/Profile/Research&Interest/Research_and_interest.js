@@ -1,10 +1,10 @@
 import React from 'react';
 import {v4 as uuidv4} from 'uuid';
-import SimpleMultipageForm from '../../../components/UI/SimpleMultipageForm/SimpleMultipageForm';
+import InputMapper from '../../../components/UI/InputMapper/InputMapper';
 
 function Research_and_interest() {
-    const json_obj = {
-        research_and_interest_form: {
+    const formObject = {
+        researchInterest: {
             professional_occupation_title: {
                 elementType: "title",
                 elementConfig: {
@@ -560,9 +560,9 @@ function Research_and_interest() {
     }
     return (
         <React.Fragment>
-            <SimpleMultipageForm
-                json_obj={json_obj.research_and_interest_form}
-                formName={json_obj.formName}/>
+            <InputMapper
+                formObject={formObject.researchInterest}
+                formName={formObject.formName}/>
         </React.Fragment>
     )
 }

@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import Layout from './hoc/Layout/Layout';
-import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
-//pages
+
+
+//@Pages
 import Home from './containers/Home/Home';
 import Manage from './containers/Manage/Manage';
-import CreateProfile from './containers/Profile/CreateProfile';
-import CreateProject from './containers/Project/CreateProject';
+import Profile from './containers/Profile/Profile';
+import Project from './containers/Project/Project';
 import SignUp from './containers/Authentication/SignUp/SignUp';
 import SignIn from './containers/Authentication/SignIn/SignIn';
 import ForgotPassword from './containers/Authentication/ForgotPassword/ForgotPassword';
@@ -17,8 +19,9 @@ import ProjectReport from './containers/Report/Project/Report';
 import Logout from './containers/Authentication/Logout/Logout';
 import Page404 from './components/Page404/Page404';
 import PostSignIn from './components/PostSignIn/PostSignIn';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+
+//@UI Components
+import Backdrop from './components/UI/BackDrop/Backdrop';
 import './App.css'
 export class App extends Component {
     componentDidMount() {
@@ -41,8 +44,8 @@ export class App extends Component {
                 routes = (
                     <Layout>
                         <Switch>
-                            <Route path="/profile" component={CreateProfile}/>
-                            <Route path="/project" component={CreateProject}/>
+                            <Route path="/profile" component={Profile}/>
+                            <Route path="/project" component={Project}/>
                             <Route path="/changepassword" component={ChangePassword}/>
                             <Route path="/manage" component={Manage}/>
                             <Route path="/logout" component={Logout}/>
@@ -64,9 +67,8 @@ export class App extends Component {
                 )
             }
         }
-        const backDrop = <Backdrop className="backDrop" open={this.props.isLoading}>
-            <CircularProgress color="inherit"/>
-        </Backdrop>
+        const backDrop = <Backdrop condtion={this.props.isLoading}/>
+           
         return (
             <div className="main">
                 {this.props.isLoading?backDrop:routes}

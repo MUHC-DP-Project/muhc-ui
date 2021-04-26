@@ -8,7 +8,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 //@Axios
 import {userAxios} from '../../../axios-pbrn';
-import './Avatar.css';
+
 
 const useStyles = makeStyles({
     avatar: {

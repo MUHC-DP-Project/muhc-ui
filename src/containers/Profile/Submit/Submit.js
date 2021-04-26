@@ -1,10 +1,10 @@
 import React from 'react';
 import {v4 as uuidv4} from 'uuid';
-import SimpleMultipageForm from '../../../components/UI/SimpleMultipageForm/SimpleMultipageForm';
+import InputMapper from '../../../components/UI/InputMapper/InputMapper';
 function Submit() {
 
-    const json_obj = {
-        submit_form: {
+    const formObject = {
+        submitForm: {
             level_of_research_title: {
                 elementType: "title",
                 elementConfig: {
@@ -114,9 +114,9 @@ function Submit() {
     }
     return (
         <React.Fragment>
-            <SimpleMultipageForm
-                json_obj={json_obj.submit_form}
-                formName={json_obj.formName}/>
+            <InputMapper
+                formObject={formObject.submitForm}
+                formName={formObject.formName}/>
         </React.Fragment>
     )
 }

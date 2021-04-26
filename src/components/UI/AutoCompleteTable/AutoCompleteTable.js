@@ -1,15 +1,21 @@
 import React,{useRef} from 'react';
+
+//@Material-UI
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import './AutoCompleteTable.css';
 import Grid from '@material-ui/core/Grid';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from '@material-ui/core/IconButton';
 import {v4 as uuidv4} from 'uuid';
 import Typography from '@material-ui/core/Typography';
 
+//@Redux
 import {Field, FieldArray,change} from 'redux-form';
+
+//@UI component
 import MUI_TextField from '../MaterialUI/MUI_TextField';
+import './AutoCompleteTable.css';
+
 function AutoCompleteTable(props) {
     const options = props.options;
     const text_field_name=props.text_field_name;

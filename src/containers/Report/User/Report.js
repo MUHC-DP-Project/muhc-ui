@@ -1,14 +1,34 @@
 import React, {useState, useEffect} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+//@React-Router
+import {Link} from 'react-router-dom';
+
+//@Material-UI
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import {userAxios,projectAxios} from '../../../axios-pbrn';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import {format} from 'date-fns';
-import './Report.css'
+import {makeStyles} from '@material-ui/core/styles';
+
+//@Axios
+import {userAxios, projectAxios} from '../../../axios-pbrn';
+
+//@UI components
+import Backdrop from '../../../components/UI/BackDrop/Backdrop';
+
+
+const useStyles = makeStyles({
+    paper: {
+        width:'1000px'
+    },
+    container:{
+        padding:'40px 50px',
+        '& p':{
+            wordWrap:'break-word'
+        }
+    }
+});
 function Report(props) {
+    const classes = useStyles();
     const [userData,
         setUserData] = useState(undefined);
     const [myProjects, setMyProjects] = useState(undefined);
@@ -22,11 +42,9 @@ function Report(props) {
                 .replace('/page404')
         }
         const userId = props.location.state.Id;
-        console.log('userId',userId);
         userAxios
-            .get('/users/' + userId)
+            .get(`/users/${userId}`)
             .then(response => {
-                console.log("userdata ", response.data);
                 if(response.data.CoIListOfProjects.length>0){
                     projectAxios
                     .post('/projects/getProjects',{
@@ -76,12 +94,7 @@ function Report(props) {
                     .replace('/page404')
             });
     }, [])
-
-    //[...new Set([...response.data.CoIListOfProjects,...response.data.ColListOfProjects]
-    //,...response.data.userListOfProjects,...response.data.PIListOfProjects)]
-    const backDrop = <Backdrop className="backDrop" open={!userData || !myProjects || !collaboratedProjects || !coInvestigatedProjects || !InvestigatedProjects }>
-        <CircularProgress color="inherit"/>
-    </Backdrop>
+    const backDrop = <Backdrop condition={!userData || !myProjects || !collaboratedProjects || !coInvestigatedProjects || !InvestigatedProjects }/>
     function printListText(array) {
         if (!array || array.length === 0) 
         return " N/A";
@@ -94,7 +107,6 @@ function Report(props) {
         </ul>
     }
     function printListLink(array) {
-        console.log('array',array);
         if (!array || array.length === 0) 
             return " N/A";
         return <ul style={{
@@ -102,7 +114,7 @@ function Report(props) {
         }}>
             {array.map((element, index) => {
                 if(element)
-                return <li>
+                {return (<li>
                     <Link
                         style={{
                             color:"blue",
@@ -114,17 +126,17 @@ function Report(props) {
                             Id: element._id
                         }
                     }}>{element.officialProjectTitle}</Link>
-                </li>
+                </li>);}
+                else {return null;}
             })}
         </ul>
     }
-    console.log(!userData ,!myProjects ,!collaboratedProjects ,!coInvestigatedProjects ,!InvestigatedProjects);
     return (
         <div>
             {!userData ,!myProjects || !collaboratedProjects || !coInvestigatedProjects || !InvestigatedProjects ? backDrop:<Grid container direction="row" justify="center" alignItems="center">{!userData
         ? backDrop
-        : <Paper elevation={10} className="userReportPaper">
-            <div className="userReportContainer">
+        : <Paper elevation={10} className={classes.paper}>
+            <div className={classes.container}>
                 <Typography variant="h3">{`${userData
                         .firstName
                         .toUpperCase()}\u00A0\u00A0${userData

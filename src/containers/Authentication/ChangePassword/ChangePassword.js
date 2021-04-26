@@ -38,7 +38,6 @@ const useStyles = makeStyles({
 
 function ChangePassword(props) {
     const classes = useStyles();
-    const {invalid} = props;
     const [viewOldPassword,
         setViewOldPassword] = useState(false);
     const [viewNewPassword,

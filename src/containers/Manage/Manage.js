@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 
 //@Material-UI
-import {userAxios} from '../../axios-pbrn';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import BasicTable from '../../components/UI/DataGrid/BasicTable';
+import BasicTable from '../../components/UI/Datagrid/Datagrid';
 import Grid from '@material-ui/core/Grid';
 
 //@UI components

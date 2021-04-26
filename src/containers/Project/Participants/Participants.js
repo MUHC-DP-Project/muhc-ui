@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import {v4 as uuidv4} from 'uuid';
-import SimpleMultipageForm from '../../../components/UI/SimpleMultipageForm/SimpleMultipageForm';
+import InputMapper from '../../../components/UI/InputMapper/InputMapper';
 import {userAxios} from '../../../axios-pbrn';
 function Participants() {
 
@@ -19,12 +19,9 @@ function Participants() {
                 }
             });
         })
-        .catch(error => {
-            console.log("Failed to fetch data: ", error.response);
-        });
     }, []);
-    const json_obj = {
-        participant_form: {
+    const formObject = {
+        participantForm: {
             principal_investigator_title: {
                 elementType: "title",
                 elementConfig: {
@@ -172,9 +169,9 @@ function Participants() {
 
     return (
         <React.Fragment>
-            <SimpleMultipageForm
-                json_obj={json_obj.participant_form}
-                formName={json_obj.formName}/>
+            <InputMapper
+                formObject={formObject.participantForm}
+                formName={formObject.formName}/>
         </React.Fragment>
     )
 }
