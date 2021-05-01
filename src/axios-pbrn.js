@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const projectAxios = axios.create({baseURL: 'http://localhost:8080'});
+const projectAxios = axios.create({baseURL: 'https://pbrn-projects.herokuapp.com'});
 
-const userAxios = axios.create({baseURL: 'http://localhost:8081'});
+const userAxios = axios.create({baseURL: 'https://pbrn-users.herokuapp.com'});
 userAxios
     .interceptors
     .request
