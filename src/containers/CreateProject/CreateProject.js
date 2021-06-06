@@ -36,14 +36,12 @@ function CreateProject(props) {
         Id:null
     });
     const [loading, setLoading] = useState(true);
-    // console.log();
     useEffect(() => {
         if (props.location.state) { const projectId=props.location.state.Id;
         projectAxios
         .get('/projects/'+projectId)
         .then(response=>{
             props.loadData(formMapper(response.data))
-            console.log('formapper',formMapper(response.data));
             setSubmitType({
                 type:'PUT',
                 id:projectId
@@ -51,7 +49,7 @@ function CreateProject(props) {
             setLoading(false);
             props.location.state=null;
         })
-        .catch(error=>console.log(error))}
+    }
         else{
             props.loadData({createProject:{}})
             setLoading(false);            

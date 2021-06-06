@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState} from 'react'
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Menu from '@material-ui/core/Menu';
@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import {userAxios} from '../../../../axios-pbrn';
 function ApprovedUserButton(props) {
     const [anchorEl,
-        setAnchorEl] = React.useState(null);
+        setAnchorEl] = useState(null);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -21,8 +21,7 @@ function ApprovedUserButton(props) {
         .post('/users/setPrivileges',{
             userRole:role,
             userId:id
-        }).then(response=>console.log(response.data))
-        .catch(error=>{console.log(error.response)})
+        })
     }
     
     return (

@@ -36,7 +36,6 @@ export default function handleSubmit(parentprops,allValues) {
     delete copied_json_object.roleSelect;
 
     const userId=localStorage.getItem('userId');
-    console.log(copied_json_object);
     return userAxios
         .put("/users/"+userId, copied_json_object)
         .then(response => {
@@ -47,7 +46,6 @@ export default function handleSubmit(parentprops,allValues) {
                 .push("/");
         })
         .catch(error => {
-            console.log("error ",error.response);
             parentprops.onError("Failed to submit the form");
         })
 }

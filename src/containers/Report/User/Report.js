@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -22,11 +22,9 @@ function Report(props) {
                 .replace('/page404')
         }
         const userId = props.location.state.Id;
-        console.log('userId',userId);
         userAxios
             .get('/users/' + userId)
             .then(response => {
-                console.log("userdata ", response.data);
                 if(response.data.CoIListOfProjects.length>0){
                     projectAxios
                     .post('/projects/getProjects',{
@@ -77,8 +75,6 @@ function Report(props) {
             });
     }, [])
 
-    //[...new Set([...response.data.CoIListOfProjects,...response.data.ColListOfProjects]
-    //,...response.data.userListOfProjects,...response.data.PIListOfProjects)]
     const backDrop = <Backdrop className="backDrop" open={!userData || !myProjects || !collaboratedProjects || !coInvestigatedProjects || !InvestigatedProjects }>
         <CircularProgress color="inherit"/>
     </Backdrop>
@@ -94,7 +90,6 @@ function Report(props) {
         </ul>
     }
     function printListLink(array) {
-        console.log('array',array);
         if (!array || array.length === 0) 
             return " N/A";
         return <ul style={{
@@ -118,7 +113,6 @@ function Report(props) {
             })}
         </ul>
     }
-    console.log(!userData ,!myProjects ,!collaboratedProjects ,!coInvestigatedProjects ,!InvestigatedProjects);
     return (
         <div>
             {!userData ,!myProjects || !collaboratedProjects || !coInvestigatedProjects || !InvestigatedProjects ? backDrop:<Grid container direction="row" justify="center" alignItems="center">{!userData

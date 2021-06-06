@@ -1,4 +1,3 @@
-import {format} from 'date-fns';
 import {Link} from 'react-router-dom';
 export const USER_COLUMN = [
     {

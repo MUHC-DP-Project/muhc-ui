@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import {v4 as uuidv4} from 'uuid';
 import SimpleMultipageForm from '../../../components/UI/SimpleMultipageForm/SimpleMultipageForm';
 import {userAxios} from '../../../axios-pbrn';
@@ -18,9 +18,6 @@ function Participants() {
                     )  
                 }
             });
-        })
-        .catch(error => {
-            console.log("Failed to fetch data: ", error.response);
         });
     }, []);
     const json_obj = {

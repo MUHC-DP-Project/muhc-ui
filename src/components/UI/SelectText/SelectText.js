@@ -18,11 +18,7 @@ function SelectText(props) {
     const mapValidator=list=>{
             return validators(list);
     }
-    if(text_props){console.log('bool',text_props!=null && select!=null && text_props
-        .options
-        .find(elem => elem.condition === select)!=null);
-    console.log(select);
-    }
+
     return (
         <React.Fragment>
             {props&&<Grid //make sure the props loads

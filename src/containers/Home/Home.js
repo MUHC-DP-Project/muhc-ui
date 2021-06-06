@@ -27,11 +27,9 @@ function Home(props) {
         projectAxios
             .get('/projects')
             .then(response => {
-                console.log('projectdata ',response.data);
                 const listOfPR=response.data;
                 setProjectData(response.data);
                 const userId=localStorage.getItem('userId');
-                console.log(userId);
                 userAxios
                 .get('/users/'+userId)
                 .then(response=>{
@@ -49,7 +47,6 @@ function Home(props) {
                         }
                     });
                     setMyProject(finalList);
-                    console.log("a user ",user);
         
                 })
                 .catch(error => {
@@ -63,7 +60,6 @@ function Home(props) {
         userAxios
         .get('/users')
         .then(response=>{
-            console.log("userdata ",response.data);
             setUserData(response.data);
         })
         .catch(error => {

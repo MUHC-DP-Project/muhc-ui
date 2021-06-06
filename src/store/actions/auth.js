@@ -1,4 +1,4 @@
-import {userAxios,projectAxios} from '../../axios-pbrn';
+import {userAxios} from '../../axios-pbrn';
 
 import * as actionTypes from './actionTypes';
 
@@ -29,7 +29,6 @@ export const auth = (authData, redirect) => {
         userAxios
             .post('/auth/signIn', authData)
             .then(response => {
-                console.log(response);
                 localStorage.setItem('token',response.data.token);
                 localStorage.setItem('userId', response.data.user._id);
                 localStorage.setItem('isApproved', response.data.user.isApproved);
@@ -37,7 +36,6 @@ export const auth = (authData, redirect) => {
                 localStorage.setItem('email',response.data.user.email);
                 localStorage.setItem('userRole',response.data.user.userRole);
                 dispatch(authSuccess(response.data.token, response.data.user._id));
-                console.log("combination", response.data.user.isApproved && response.data.user.isEmailVerified);
                 response.data.user.isApproved && response.data.user.isEmailVerified
                     ? redirect.replace('/')
                     : redirect.replace('/postsignin');

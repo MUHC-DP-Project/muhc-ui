@@ -1,6 +1,4 @@
 
-import { PublicOutlined } from '@material-ui/icons';
-import {v4 as uuidv4} from 'uuid';
 
 function HandleMultiTextRadio(jsonObject,key){
     let tmpJsonObject={...jsonObject};
@@ -19,7 +17,7 @@ function handleMilestones(jsonObject){
     let tmpJsonObject={...jsonObject};
     const anticipatedMilestones=["projectConception","projectDesigned","fundingSoughtIgnoredConsidered","ethicsApproval","recruitment","dataCollection","dataAnalysis","knowledgeTranslationDissemination"];
     
-    anticipatedMilestones.map(element=>{
+    anticipatedMilestones.forEach(element=>{
         const copiedElement={...tmpJsonObject[element]}
         tmpJsonObject[element+'Date']=copiedElement.estimatedDate;
         tmpJsonObject[element+'Radio']=copiedElement.projectStage;

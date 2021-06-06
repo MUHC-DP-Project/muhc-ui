@@ -10,7 +10,6 @@ import {format} from 'date-fns';
 import './Report.css';
 import Button from '@material-ui/core/Button';
 import AlertDialog from '../../../components/UI/Dialogue/Dialogue';
-import { blue } from '@material-ui/core/colors';
 function Report(props) {
     const [projectData,
         setProjectData] = useState(undefined);
@@ -25,11 +24,9 @@ function Report(props) {
                 .replace('/page404')
         }
         const projectId = props.location.state.Id;
-        console.log(projectId);
         projectAxios
             .get('/projects/' + projectId)
             .then(response => {
-                console.log("projectdata ", response.data);
                 setProjectData(response.data);
                 if(response.data.coInvestigators.length>0){
                     userAxios
@@ -37,7 +34,7 @@ function Report(props) {
                         emails:response.data.coInvestigators
                     }).then(response=>{
                         setCoInvestigators(response.data)
-                    }).catch(error=>console.log(error.response))
+                    })
                 }
                 if(response.data.collaborators.length>0){
                     userAxios
@@ -45,7 +42,7 @@ function Report(props) {
                         emails:response.data.collaborators
                     }).then(response=>{
                         setCollaborators(response.data)
-                    }).catch(error=>console.log(error.response))
+                    })
                 }
                 if(response.data.principalInvestigators.length>0){
                     userAxios
@@ -53,7 +50,7 @@ function Report(props) {
                         emails:response.data.principalInvestigators
                     }).then(response=>{
                         setPrincipalInvesigators(response.data)
-                    }).catch(error=>console.log(error.response))
+                    })
                 }
             })
             .catch(error => {
@@ -65,7 +62,6 @@ function Report(props) {
         userAxios
             .get('/users/' + userId)
             .then(response => {
-                console.log("userdata ", response.data);
                 const userProjects=response.data.userListOfProjects;
                 setIsUserProject(userProjects.includes(projectId));
             });
@@ -154,7 +150,6 @@ function Report(props) {
         .then(response=>{
             props.history.replace('/');
         })
-        .catch(error=>console.log("could not delete the project"))
     }
     function editReport(){
         const projectId = props.location.state.Id;

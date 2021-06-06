@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Layout from './hoc/Layout/Layout';
-import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 //pages
@@ -27,7 +27,6 @@ export class App extends Component {
             .onTryAutoSignup();
     }
     render() {
-        console.log("is auth", this.props.isAuthenticated);
         let routes = (
             <Switch>
                 <Route path="/signup" component={SignUp}/>

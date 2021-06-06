@@ -35,15 +35,13 @@ function CreateProfile(props) {
     const {invalid} = props;
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        console.log("here");
         userAxios
         .get('/users/'+userId)
         .then(response=>{
             props.loadData(formMapper(response.data))
-            console.log("data",formMapper(response.data));
             setLoading(false);
         })
-        .catch(error=>{console.log(error)})
+
     }, []);
     
     const [active_step,

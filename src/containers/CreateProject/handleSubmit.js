@@ -21,7 +21,7 @@ return tmpJsonObject;
 function handleMilestones(jsonObject){
     let tmpJsonObject={...jsonObject};
     const anticipatedMilestones=["projectConception","projectDesigned","fundingSoughtIgnoredConsidered","ethicsApproval","recruitment","dataCollection","dataAnalysis","knowledgeTranslationDissemination"];
-    anticipatedMilestones.map(element=>{
+    anticipatedMilestones.forEach(element=>{
         tmpJsonObject[element]={
             estimatedDate:tmpJsonObject[element+'Date'],
             projectStage:tmpJsonObject[element+'Radio']
@@ -49,8 +49,7 @@ export default function handleSubmit(parentprops,allValues,submitType) {
     }
     delete final_json_object.study_participants_text_field;
     delete final_json_object.keywords_text_field;
-    console.log("Form submited ",final_json_object);
-    console.log(submitType);
+
     const handler=submitType.type==="POST"? projectAxios.post('/projects', final_json_object):projectAxios.put('/projects/'+submitType.id, final_json_object)
     handler.then(response => {
             const userEmail=localStorage.getItem('email');
@@ -59,8 +58,7 @@ export default function handleSubmit(parentprops,allValues,submitType) {
                 CoIListOfProjects:!final_json_object.principalInvestigators? []:final_json_object.coInvestigators,
                 ColListOfProjects:!final_json_object.principalInvestigators? []:final_json_object.collaborators,
             }
-            console.log('bodyqurest',bodyRequest);
-            console.log('response',response.data);
+
             const projectId=response.data._id;
             userAxios.
             put('/users/connectToProjects/'+projectId+'/'+userEmail,bodyRequest)
@@ -72,12 +70,10 @@ export default function handleSubmit(parentprops,allValues,submitType) {
                     .replace("/");
             })
             .catch(error => {
-                console.log(error.response);
                 parentprops.onError("Failed to submit the form");
             })           
         })
         .catch(error => {
-            console.log(error.response);
             parentprops.onError("Failed to submit the form");
         })
 }

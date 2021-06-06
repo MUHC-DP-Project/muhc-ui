@@ -10,20 +10,16 @@ function approveUser(userId){
     userAxios
     .get('/auth/localApproveUser/'+userId)
     .then(res=>{
-        console.log("approve SUCCESS",res);
     })
     .catch(error=>{
-        console.log("approve FAIL",error.response);
     })
 }
 function unapproveUser(userId){
     userAxios
     .delete('/users/'+userId)
     .then(res=>{
-        console.log("approve SUCCESS",res);
     })
     .catch(error=>{
-        console.log("approve FAIL",error.response);
     })
 }
 function ButtonList(props) {
@@ -42,7 +38,6 @@ function ButtonList(props) {
                     const tmpNewUserData=[...props.newUserData];
                     const tmpApprovedUserData=[...props.approvedUserData];
                     const userObject=tmpNewUserData.find(element=>element._id===userId)
-                    console.log(tmpNewUserData[0]._id);
                     props.loadData(tmpNewUserData.filter(element=>element._id!==userId),tmpApprovedUserData.concat(userObject))
                     }}>
                     <CheckIcon/>
